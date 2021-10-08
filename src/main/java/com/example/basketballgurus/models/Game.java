@@ -4,6 +4,8 @@ import java.sql.Date;
 
 public class Game {
 
+    private int id;
+
     private int gameId;
 
     private int awayTeamId;
@@ -12,14 +14,23 @@ public class Game {
 
     private Date startTime;
 
-    public Game(int game_id, int away_team_id, int home_team_id, Date start_time) {
-        this.gameId = game_id;
+    public Game(int id, int away_team_id, int home_team_id, Date start_time, int gameId) {
+        this.id = id;
         this.awayTeamId = away_team_id;
         this.homeTeamId = home_team_id;
         this.startTime = start_time;
+        this.gameId = gameId;
     }
 
     public Game() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getGameId() {
