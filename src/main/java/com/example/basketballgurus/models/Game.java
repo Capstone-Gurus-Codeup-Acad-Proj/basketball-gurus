@@ -1,17 +1,26 @@
 package com.example.basketballgurus.models;
 
+import javax.persistence.*;
 import java.sql.Date;
 
+@Entity
+@Table(name="game")
 public class Game {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = false)
     private int gameId;
 
+    @Column(nullable = false)
     private int awayTeamId;
 
+    @Column(nullable = false)
     private int homeTeamId;
 
+    @Column(nullable = false)
     private Date startTime;
 
     public Game(int id, int away_team_id, int home_team_id, Date start_time, int gameId) {
