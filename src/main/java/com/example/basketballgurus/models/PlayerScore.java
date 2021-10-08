@@ -4,7 +4,7 @@ public class PlayerScore {
 
     private int id;
     private int score;
-    private int game_id;
+    private int gameId;
 
     public PlayerScore() {
     }
@@ -12,7 +12,7 @@ public class PlayerScore {
     public PlayerScore(int id, int score, int game_id) {
         this.id = id;
         this.score = score;
-        this.game_id = game_id;
+        this.gameId = game_id;
     }
 
     public int getId() {
@@ -31,11 +31,11 @@ public class PlayerScore {
         this.score = score;
     }
 
-    public int getGame_id() {
-        return game_id;
+    public int getGameId() {
+        return gameId;
     }
 
-    public void setGame_id(int game_id) {
-        this.game_id = game_id;
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
     }
 }
