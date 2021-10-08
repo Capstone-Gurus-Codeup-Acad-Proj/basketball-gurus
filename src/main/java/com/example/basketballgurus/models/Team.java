@@ -1,17 +1,32 @@
 package com.example.basketballgurus.models;
 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="teams")
 public class Team {
 
+    @Id
+    @Column(nullable = false)
     private int id;
 
+    @Column(nullable = false, length = 100)
     private String fullName;
 
+    @Column(nullable = false, length = 100)
     private String city;
 
+    @Column(nullable = false, length = 100)
     private String nickname;
 
+    @Column(nullable = false, length = 50)
     private String abbr;
 
+    @Column(nullable = false, )
     private String logoUrl;
 
     public Team(int id, String fullName, String city, String nickname, String abbr, String logo_url) {
