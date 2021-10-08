@@ -1,17 +1,22 @@
 package com.example.basketballgurus.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="rosters")
 public class Roster {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @Column(nullable = false, length = 100)
     private int rosterId;
-
+    @Column(nullable = false, length = 100)
     private String team;
-
+    @Column(nullable = false, length = 100)
     private int teamId;
-
+    @Column(nullable = false, length = 100)
     private int userId;
-
+    @Column(nullable = false, length = 100)
     public int getId() {
         return id;
     }
