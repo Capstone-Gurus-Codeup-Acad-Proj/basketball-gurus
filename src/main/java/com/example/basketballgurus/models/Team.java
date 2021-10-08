@@ -1,26 +1,41 @@
 package com.example.basketballgurus.models;
 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="teams")
 public class Team {
 
+    @Id
+    @Column(nullable = false)
     private int id;
 
-    private String full_name;
+    @Column(nullable = false, length = 100)
+    private String fullName;
 
+    @Column(nullable = false, length = 100)
     private String city;
 
+    @Column(nullable = false, length = 100)
     private String nickname;
 
+    @Column(nullable = false, length = 50)
     private String abbr;
 
-    private String logo_url;
+    @Column(nullable = false, )
+    private String logoUrl;
 
-    public Team(int id, String full_name, String city, String nickname, String abbr, String logo_url) {
+    public Team(int id, String fullName, String city, String nickname, String abbr, String logo_url) {
         this.id = id;
-        this.full_name = full_name;
+        this.fullName = fullName;
         this.city = city;
         this.nickname = nickname;
         this.abbr = abbr;
-        this.logo_url = logo_url;
+        this.logoUrl = logo_url;
     }
 
     public Team() {
@@ -34,12 +49,12 @@ public class Team {
         this.id = id;
     }
 
-    public String getFull_name() {
-        return full_name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getCity() {
@@ -66,11 +81,11 @@ public class Team {
         this.abbr = abbr;
     }
 
-    public String getLogo_url() {
-        return logo_url;
+    public String getLogoUrl() {
+        return logoUrl;
     }
 
-    public void setLogo_url(String logo_url) {
-        this.logo_url = logo_url;
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 }

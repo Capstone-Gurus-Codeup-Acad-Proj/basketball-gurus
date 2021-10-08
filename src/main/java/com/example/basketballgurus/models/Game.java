@@ -1,56 +1,76 @@
 package com.example.basketballgurus.models;
 
+import javax.persistence.*;
 import java.sql.Date;
 
+@Entity
+@Table(name="game")
 public class Game {
 
-    private int game_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    private int away_team_id;
+    @Column(nullable = false)
+    private int gameId;
 
-    private int home_team_id;
+    @Column(nullable = false)
+    private int awayTeamId;
 
-    private Date start_time;
+    @Column(nullable = false)
+    private int homeTeamId;
 
-    public Game(int game_id, int away_team_id, int home_team_id, Date start_time) {
-        this.game_id = game_id;
-        this.away_team_id = away_team_id;
-        this.home_team_id = home_team_id;
-        this.start_time = start_time;
+    @Column(nullable = false)
+    private Date startTime;
+
+    public Game(int id, int away_team_id, int home_team_id, Date start_time, int gameId) {
+        this.id = id;
+        this.awayTeamId = away_team_id;
+        this.homeTeamId = home_team_id;
+        this.startTime = start_time;
+        this.gameId = gameId;
     }
 
     public Game() {
     }
 
-    public int getGame_id() {
-        return game_id;
+    public int getId() {
+        return id;
     }
 
-    public void setGame_id(int game_id) {
-        this.game_id = game_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getAway_team_id() {
-        return away_team_id;
+    public int getGameId() {
+        return gameId;
     }
 
-    public void setAway_team_id(int away_team_id) {
-        this.away_team_id = away_team_id;
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
     }
 
-    public int getHome_team_id() {
-        return home_team_id;
+    public int getAwayTeamId() {
+        return awayTeamId;
     }
 
-    public void setHome_team_id(int home_team_id) {
-        this.home_team_id = home_team_id;
+    public void setAwayTeamId(int awayTeamId) {
+        this.awayTeamId = awayTeamId;
     }
 
-    public Date getStart_time() {
-        return start_time;
+    public int getHomeTeamId() {
+        return homeTeamId;
     }
 
-    public void setStart_time(Date start_time) {
-        this.start_time = start_time;
+    public void setHomeTeamId(int homeTeamId) {
+        this.homeTeamId = homeTeamId;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 }
