@@ -1,18 +1,16 @@
 package com.example.basketballgurus.models;
 
-import java.util.Date;
-
 public class Roster {
 
     private int id;
 
-    private int roster_id;
+    private int rosterId;
 
     private String team;
 
-    private int team_id;
+    private int teamId;
 
-    private int user_id;
+    private int userId;
 
     public int getId() {
         return id;
@@ -22,12 +20,12 @@ public class Roster {
         this.id = id;
     }
 
-    public int getRoster_id() {
-        return roster_id;
+    public int getRosterId() {
+        return rosterId;
     }
 
-    public void setRoster_id(int roster_id) {
-        this.roster_id = roster_id;
+    public void setRosterId(int rosterId) {
+        this.rosterId = rosterId;
     }
 
     public String getTeam() {
@@ -38,19 +36,19 @@ public class Roster {
         this.team = team;
     }
 
-    public int getTeam_id() {
-        return team_id;
+    public int getTeamId() {
+        return teamId;
     }
 
-    public void setTeam_id(int team_id) {
-        this.team_id = team_id;
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
