@@ -4,53 +4,53 @@ import java.sql.Date;
 
 public class Game {
 
-    private int game_id;
+    private int gameId;
 
-    private int away_team_id;
+    private int awayTeamId;
 
-    private int home_team_id;
+    private int homeTeamId;
 
-    private Date start_time;
+    private Date startTime;
 
     public Game(int game_id, int away_team_id, int home_team_id, Date start_time) {
-        this.game_id = game_id;
-        this.away_team_id = away_team_id;
-        this.home_team_id = home_team_id;
-        this.start_time = start_time;
+        this.gameId = game_id;
+        this.awayTeamId = away_team_id;
+        this.homeTeamId = home_team_id;
+        this.startTime = start_time;
     }
 
     public Game() {
     }
 
-    public int getGame_id() {
-        return game_id;
+    public int getGameId() {
+        return gameId;
     }
 
-    public void setGame_id(int game_id) {
-        this.game_id = game_id;
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
     }
 
-    public int getAway_team_id() {
-        return away_team_id;
+    public int getAwayTeamId() {
+        return awayTeamId;
     }
 
-    public void setAway_team_id(int away_team_id) {
-        this.away_team_id = away_team_id;
+    public void setAwayTeamId(int awayTeamId) {
+        this.awayTeamId = awayTeamId;
     }
 
-    public int getHome_team_id() {
-        return home_team_id;
+    public int getHomeTeamId() {
+        return homeTeamId;
     }
 
-    public void setHome_team_id(int home_team_id) {
-        this.home_team_id = home_team_id;
+    public void setHomeTeamId(int homeTeamId) {
+        this.homeTeamId = homeTeamId;
     }
 
-    public Date getStart_time() {
-        return start_time;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setStart_time(Date start_time) {
-        this.start_time = start_time;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 }
