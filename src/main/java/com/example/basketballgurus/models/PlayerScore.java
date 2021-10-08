@@ -1,9 +1,16 @@
 package com.example.basketballgurus.models;
+import javax.annotation.processing.Generated;
+import javax.persistence.*;
 
+@Entity
+@Table(name="scores")
 public class PlayerScore {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false, length = 100)
     private int score;
+    @Column(nullable = false, length = 100)
     private int game_id;
 
     public PlayerScore() {
