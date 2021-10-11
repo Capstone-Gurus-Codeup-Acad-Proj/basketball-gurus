@@ -26,7 +26,7 @@ public class Team {
     @Column(nullable = false, length = 50)
     private String abbr;
 
-    @Column(nullable = false, )
+    @Column(nullable = false)
     private String logoUrl;
 
     public Team(int id, String fullName, String city, String nickname, String abbr, String logo_url) {

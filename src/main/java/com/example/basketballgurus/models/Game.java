@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name="game")
+@Table(name="weeks_games")
 public class Game {
 
     @Id
