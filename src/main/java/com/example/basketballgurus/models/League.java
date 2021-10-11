@@ -1,15 +1,24 @@
 package com.example.basketballgurus.models;
 
+import javax.persistence.*;
 import java.util.Date;
-
+@Entity
+@Table(name="leagues")
 public class League {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false)
     private int ownerId;
+    @Column()
     private Date startDate;
+    @Column()
     private Date endDate;
+    @Column(nullable = false, length = 100)
     private String leagueName;
+    @Column(nullable = false, length = 100)
     private String leagueDifficulty;
+    @Column(nullable = false, length = 100)
     private String leaguePfp;
 
 
@@ -23,9 +32,9 @@ public class League {
         this.leaguePfp = league_pfp;
     }
 
-  public League() {
+    public League() {
 
-        }
+    }
 
     public int getId() {
         return id;

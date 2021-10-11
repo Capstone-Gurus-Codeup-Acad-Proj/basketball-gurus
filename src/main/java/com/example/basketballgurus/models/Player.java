@@ -1,27 +1,50 @@
 package com.example.basketballgurus.models;
+import javax.persistence.*;
 
 import java.util.Date;
-
+@Entity
+@Table(name="players")
 public class Player {
+    @Id
+    @Column(nullable = false)
     private int id;
+    @Column(nullable = false, length = 100)
     private String firstName;
+    @Column(nullable = false, length = 100)
     private String lastName;
+    @Column(nullable = false, length = 100)
     private String teamName;
+    @Column(nullable = false)
     private int teamId;
+    @Column(nullable = false, length = 100)
     private String position;
+    @Column()
     private Date dob;
+    @Column()
     private int height;
+    @Column()
     private int weight;
+    @Column()
     private int jerseyNumber;
+    @Column()
     private int age;
+    @Column(nullable = false)
     private double point;
+    @Column(nullable = false)
     private double blocks;
+    @Column(nullable = false)
     private double assists;
+    @Column(nullable = false)
     private double rebounds;
+    @Column(nullable = false)
     private double turnOvers;
+    @Column(nullable = false)
     private float percentThrees;
+    @Column(nullable = false)
     private float percentFreethrows;
+    @Column(nullable = false)
     private String headshotUrl;
+    @Column(nullable = false)
     private int price;
 
     public Player(){
