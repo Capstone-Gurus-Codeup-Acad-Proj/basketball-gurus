@@ -9,12 +9,28 @@ public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(nullable = false)
-    private int player_id;
+    private int rosterPlayerId;
     @Column(nullable = false)
-    private int roster_id;
-    @Column()
     private Date weekDate;
+    @Column(nullable = false)
+    private Boolean wasActive;
+
+    public History(int id, int roster_player_id, Date weekDate, Boolean wasActive) {
+        this.id = id;
+        this.rosterPlayerId = roster_player_id;
+        this.weekDate = weekDate;
+        this.wasActive = wasActive;
+    }
+
+    public Boolean getWasActive() {
+        return wasActive;
+    }
+
+    public void setWasActive(Boolean wasActive) {
+        this.wasActive = wasActive;
+    }
 
     public int getId() {
         return id;
@@ -24,20 +40,12 @@ public class History {
         this.id = id;
     }
 
-    public int getPlayer_id() {
-        return player_id;
+    public int getRosterPlayerId() {
+        return rosterPlayerId;
     }
 
-    public void setPlayer_id(int player_id) {
-        this.player_id = player_id;
-    }
-
-    public int getRoster_id() {
-        return roster_id;
-    }
-
-    public void setRoster_id(int roster_id) {
-        this.roster_id = roster_id;
+    public void setRosterPlayerId(int roster_id) {
+        this.rosterPlayerId = roster_id;
     }
 
     public Date getWeekDate() {

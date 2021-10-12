@@ -9,11 +9,9 @@ public class Roster {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false, length = 100)
-    private int rosterId;
+    private String name;
     @Column(nullable = false, length = 100)
-    private String team;
-    @Column(nullable = false, length = 100)
-    private int teamId;
+    private int leagueId;
     @Column(nullable = false, length = 100)
     private int userId;
     @Column(nullable = false, length = 100)
@@ -25,28 +23,20 @@ public class Roster {
         this.id = id;
     }
 
-    public int getRosterId() {
-        return rosterId;
+    public String getName() {
+        return name;
     }
 
-    public void setRosterId(int rosterId) {
-        this.rosterId = rosterId;
+    public void setName(String team) {
+        this.name = team;
     }
 
-    public String getTeam() {
-        return team;
+    public int getLeagueId() {
+        return leagueId;
     }
 
-    public void setTeam(String team) {
-        this.team = team;
-    }
-
-    public int getTeamId() {
-        return teamId;
-    }
-
-    public void setTeamId(int teamId) {
-        this.teamId = teamId;
+    public void setLeagueId(int teamId) {
+        this.leagueId = teamId;
     }
 
     public int getUserId() {

@@ -1,17 +1,16 @@
 package com.example.basketballgurus.models;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.mysql.cj.xdevapi.Collection;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="teams")
 public class Team {
 
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false, name = "id")
     private int id;
 
     @Column(nullable = false, length = 100)
@@ -28,6 +27,10 @@ public class Team {
 
     @Column(nullable = false)
     private String logoUrl;
+
+    @OneToOne
+    private Game game;
+
 
     public Team(int id, String fullName, String city, String nickname, String abbr, String logo_url) {
         this.id = id;

@@ -1,6 +1,6 @@
 package com.example.basketballgurus.models;
-import javax.annotation.processing.Generated;
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name="scores")
@@ -8,18 +8,29 @@ public class PlayerScore {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false)
+    private int player_id;
     @Column(nullable = false, length = 100)
     private int score;
     @Column(nullable = false, length = 100)
-    private int game_id;
+    private Date gameDate;
 
     public PlayerScore() {
     }
 
-    public PlayerScore(int id, int score, int game_id) {
+    public PlayerScore(int id, int player_id, int score, Date gameDate) {
         this.id = id;
+        this.player_id = player_id;
         this.score = score;
-        this.game_id = game_id;
+        this.gameDate = gameDate;
+    }
+
+    public int getPlayer_id() {
+        return player_id;
+    }
+
+    public void setPlayer_id(int player_id) {
+        this.player_id = player_id;
     }
 
     public int getId() {
@@ -38,11 +49,11 @@ public class PlayerScore {
         this.score = score;
     }
 
-    public int getGame_id() {
-        return game_id;
+    public Date getGameDate() {
+        return gameDate;
     }
 
-    public void setGame_id(int game_id) {
-        this.game_id = game_id;
+    public void setGameDate(Date game_id) {
+        this.gameDate = game_id;
     }
 }
