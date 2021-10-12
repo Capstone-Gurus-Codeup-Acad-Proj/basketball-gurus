@@ -15,7 +15,7 @@ public class User {
     @Getter @Setter
     private int id;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     @Getter @Setter
     private String userName;
 
