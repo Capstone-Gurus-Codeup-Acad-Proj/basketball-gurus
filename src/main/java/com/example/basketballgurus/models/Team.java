@@ -2,93 +2,41 @@ package com.example.basketballgurus.models;
 
 
 import com.mysql.cj.xdevapi.Collection;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="teams")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Team {
 
     @Id
     @Column(nullable = false, name = "id")
+    @Getter @Setter
     private int id;
 
     @Column(nullable = false, length = 100)
+    @Getter @Setter
     private String fullName;
 
     @Column(nullable = false, length = 100)
+    @Getter @Setter
     private String city;
 
     @Column(nullable = false, length = 100)
+    @Getter @Setter
     private String nickname;
 
     @Column(nullable = false, length = 50)
+    @Getter @Setter
     private String abbr;
 
     @Column(nullable = false)
+    @Getter @Setter
     private String logoUrl;
 
     @OneToOne
     private Game game;
-
-
-    public Team(int id, String fullName, String city, String nickname, String abbr, String logo_url) {
-        this.id = id;
-        this.fullName = fullName;
-        this.city = city;
-        this.nickname = nickname;
-        this.abbr = abbr;
-        this.logoUrl = logo_url;
-    }
-
-    public Team() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getAbbr() {
-        return abbr;
-    }
-
-    public void setAbbr(String abbr) {
-        this.abbr = abbr;
-    }
-
-    public String getLogoUrl() {
-        return logoUrl;
-    }
-
-    public void setLogoUrl(String logoUrl) {
-        this.logoUrl = logoUrl;
-    }
 }
