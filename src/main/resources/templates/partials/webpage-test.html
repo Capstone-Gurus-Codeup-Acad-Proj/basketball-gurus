@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,6 +14,25 @@
 </head>
 
 <body>
+<div th:replace=“~{partials/navbar :: navbar}”></div>
+<nav th:fragment="navbar" class="navbar navbar-expand-sm navbar-dark bg-info fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Fantasy Basketball</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <a class="nav-link">View Leagues</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Log In</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -64,7 +83,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="feature-content">
-                        <img src="img/citybridge.jpeg" alt="Image">
+<!--                        <img src="img/citybridge.jpeg" alt="Image">-->
                         <h2 class="feature-content-title blue-text">NBA Players</h2>
                         <p class="feature-content-description">LeBron James and company<a
                                 href="http://unsplash.com" target="_parent">Unsplash</a>. Thank you for visiting our website.                             Please come again!</p>
@@ -73,7 +92,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="feature-content">
-                        <img src="img/fishing.jpeg" alt="Image">
+<!--                        <img src="img/fishing.jpeg" alt="Image">-->
                         <h2 class="feature-content-title red-text">NBA Schedule</h2>
                         <p class="feature-content-description">Games for all NBA teams for the 2021-2022
                             Season starting October 19, 2021
@@ -260,8 +279,8 @@
 </footer>
 <!-- End Footer Area -->
 
-<script src="js/jquery-1.11.2.min.js"></script>
-<script src="js/jquery.scrollUp.min.js"></script> <!-- https://github.com/markgoodyear/scrollup -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="js/jquery.singlePageNav.min.js"></script> <!-- https://github.com/ChrisWojcik/single-page-nav -->
 <script src="js/parallax.js-1.3.1/parallax.js"></script> <!-- http://pixelcog.github.io/parallax.js/ -->
 <script>
