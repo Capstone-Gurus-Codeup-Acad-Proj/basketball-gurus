@@ -15,7 +15,8 @@ public class PlayerScore {
     @Getter @Setter
     private int id;
 
-    @OneToOne
+    @ManyToOne
+    @Getter @Setter
     @JoinColumn(name = "player_id", referencedColumnName = "id")
     private Player playerId;
 

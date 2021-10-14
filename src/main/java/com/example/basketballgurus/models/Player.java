@@ -91,4 +91,8 @@ public class Player {
     @Getter @Setter
     private int price;
 
+    @Column(nullable = false)
+    @Getter @Setter
+    private int percentFieldGoals;
+
 }
