@@ -16,9 +16,10 @@ public class History {
     @Getter @Setter
     private int id;
 
-    @Column(nullable = false)
+    @OneToOne
+    @JoinColumn(name = "roster_player_id", referencedColumnName = "id")
     @Getter @Setter
-    private int rosterPlayerId;
+    private RosterPlayer rosterPlayerId;
 
     @Column(nullable = false)
     @Getter @Setter

@@ -41,13 +41,27 @@ public class User {
 
     @Column
     @Getter @Setter
-    private String banner;
+    private String bannerUrl;
 
     @Column
     @Getter @Setter
     private String bio;
+
     @Column(nullable = false)
+    @Getter @Setter
     private boolean isActive;
 
 
+    public User(User copy) {
+        id = copy.id;
+        email = copy.email;
+        userName = copy.userName;
+        password = copy.password;
+        firstName = copy.firstName;
+        lastName = copy.lastName;
+        bio = copy.bio;
+        profilePicture = copy.profilePicture;
+        banner = copy.banner;
+        isActive = copy.isActive;
+    }
 }
