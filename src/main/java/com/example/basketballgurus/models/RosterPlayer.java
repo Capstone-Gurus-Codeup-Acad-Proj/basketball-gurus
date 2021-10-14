@@ -15,13 +15,15 @@ public class RosterPlayer {
     @Getter @Setter
     private int id;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "player_id", referencedColumnName = "id")
     @Getter @Setter
-    private int playerId;
+    private Player playerId;
 
-    @Column(name = "roster_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "roster_id", referencedColumnName = "id")
     @Getter @Setter
-    private int rosterId;
+    private Roster rosterId;
 
     @Column(name = "is_active", nullable = false)
     @Getter @Setter

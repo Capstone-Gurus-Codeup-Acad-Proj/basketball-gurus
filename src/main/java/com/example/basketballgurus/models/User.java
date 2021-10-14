@@ -41,12 +41,14 @@ public class User {
 
     @Column
     @Getter @Setter
-    private String banner;
+    private String bannerUrl;
 
     @Column
     @Getter @Setter
     private String bio;
+
     @Column(nullable = false)
+    @Getter @Setter
     private boolean isActive;
 
 

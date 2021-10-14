@@ -15,9 +15,9 @@ public class PlayerScore {
     @Getter @Setter
     private int id;
 
-    @Column(nullable = false)
-    @Getter @Setter
-    private int player_id;
+    @OneToOne
+    @JoinColumn(name = "player_id", referencedColumnName = "id")
+    private Player playerId;
 
     @Column(nullable = false, length = 100)
     @Getter @Setter
