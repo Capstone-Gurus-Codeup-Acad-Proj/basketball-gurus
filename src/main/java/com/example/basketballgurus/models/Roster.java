@@ -19,13 +19,14 @@ public class Roster {
     @Getter @Setter
     private String name;
 
-    @Column(nullable = false, length = 100)
-    @Getter @Setter
-    private int leagueId;
+    @ManyToOne
+    @JoinColumn(name = "league_id", referencedColumnName = "id")
+    private League leagueId;
 
-    @Column(nullable = false, length = 100)
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @Getter @Setter
-    private int userId;
+    private User userId;
 
 
 }

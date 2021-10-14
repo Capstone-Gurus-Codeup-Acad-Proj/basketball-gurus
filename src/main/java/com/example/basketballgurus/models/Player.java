@@ -27,9 +27,9 @@ public class Player {
     @Getter @Setter
     private String teamName;
 
-    @Column(nullable = false)
-    @Getter @Setter
-    private int teamId;
+    @OneToOne
+    @JoinColumn(name = "team_id", referencedColumnName = "id")
+    private Team teamId;
 
     @Column(nullable = false, length = 100)
     @Getter @Setter

@@ -37,6 +37,4 @@ public class Team {
     @Getter @Setter
     private String logoUrl;
 
-    @OneToOne
-    private Game game;
 }
