@@ -14,9 +14,9 @@ public class Game {
     @Getter @Setter
     private int id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "game_api_id")
     @Getter @Setter
-    private int gameId;
+    private int gameApiId;
 
     @OneToOne
     @JoinColumn(name = "home_team_id", referencedColumnName = "id")
