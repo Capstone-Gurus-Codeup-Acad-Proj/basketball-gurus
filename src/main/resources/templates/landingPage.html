@@ -19,13 +19,16 @@
         flex-direction: column;
         text-align: center;
         top: 100px;
-
-
     }
     .container{
         display: flex;
         flex-direction: column;
         top: 400px;
+    }
+    ul{
+        list-style-type: none;
+        margin:0;
+        padding:0;
     }
 
 
@@ -49,7 +52,7 @@
     wanted. Player stats are updated in real time with their in game results!</p>
     <hr class="my-4">
 
-                <ul>
+                <ul class="list-style-type">
                     <li th:classappend="${module == 'Register' ? 'active' : ''}">
                         <a class="btn" th:href="@{/register}">Register</a>
                 </ul>
