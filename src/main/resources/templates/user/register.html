@@ -38,7 +38,9 @@
 
 </head>
 <body>
+<nav th:replace="partials/navbar.html :: navbar">
 
+</nav>
 
 <form th:action="@{/register}" th:method="user" th:object="${user}">
     <div class="form-group">
