@@ -1,4 +1,4 @@
-package com.example.basketballgurus.models;
+package com.example.basketballgurus.RestModels;
 
 // import com.fasterxml.jackson.databind.ObjectMapper; // version 2.11.1
 // import com.fasterxml.jackson.annotation.JsonProperty; // version 2.11.1
@@ -19,7 +19,7 @@ public class GameStatsModel {
     @Getter @Setter
     public String teamId;
     @Getter @Setter
-    public String points;
+    public int points;
     @Getter @Setter
     public String pos;
     @Getter @Setter
@@ -49,18 +49,18 @@ public class GameStatsModel {
     @Getter @Setter
     public String totReb;
     @Getter @Setter
-    public String assists;
+    public int assists;
     @Getter @Setter
     public String pFouls;
     @Getter @Setter
-    public String steals;
+    public int steals;
     @Getter @Setter
-    public String turnovers;
+    public int turnovers;
     @Getter @Setter
-    public String blocks;
+    public int blocks;
     @Getter @Setter
     public String plusMinus;
     @Getter @Setter
-    public String playerId;
+    public Long playerId;
 
 }

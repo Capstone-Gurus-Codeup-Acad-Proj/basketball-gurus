@@ -16,12 +16,14 @@ public class GameStats {
     public ArrayList<String> getStats(int gameId) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
+        Config config = new Config();
+
         try {
 
             HttpGet request = new HttpGet("https://api-nba-v1.p.rapidapi.com/statistics/players/gameId/" + gameId);
 
             // add request headers
-            request.addHeader("x-rapidapi-key", "89a8882cffmshf92bc0d749a1870p1ab611jsnc71954fcf253");
+            request.addHeader("x-rapidapi-key", config.getApiKey());
             request.addHeader("x-rapidapi-host", "api-nba-v1.p.rapidapi.com");
 
             CloseableHttpResponse response = httpClient.execute(request);

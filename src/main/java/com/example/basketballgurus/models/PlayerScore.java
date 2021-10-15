@@ -1,4 +1,5 @@
 package com.example.basketballgurus.models;
+import com.example.basketballgurus.RestModels.GameStatsModel;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,6 +28,8 @@ public class PlayerScore {
     @Column(nullable = false, length = 100)
     @Getter @Setter
     private Date gameDate;
+
+
 
 
 }

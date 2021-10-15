@@ -2,7 +2,7 @@ package com.example.basketballgurus.models;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name="weeks_games")
