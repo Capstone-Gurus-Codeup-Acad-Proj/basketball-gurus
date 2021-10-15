@@ -14,15 +14,21 @@
     }
 
     .card{
-        background-color: deepskyblue;
+        background-color: rgba(239, 113, 11, 0.91);
         display: flex;
         flex-direction: column;
         text-align: center;
-
+        top: 100px;
     }
     .container{
         display: flex;
         flex-direction: column;
+        top: 400px;
+    }
+    ul{
+        list-style-type: none;
+        margin:0;
+        padding:0;
     }
 
 
@@ -36,18 +42,21 @@
 </nav>
 
 <br>
-<div class="container ">
-    <div class="card" style="width: 40rem;">
-        <div class="card-body">
+<div class="container" style="width: 40rem">
+    <div class="card" style="width: 40rem">
+        <div class="card-body" style="width: 40rem">
             <div class="jumbotron text-center">
 
     <h1 class="display-4">Create your fantasy basketball team!</h1>
     <p class="lead">Search from the entire roster of NBA superstars and build the dream team you've always
     wanted. Player stats are updated in real time with their in game results!</p>
     <hr class="my-4">
-    <p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Register!</a>
-    </p>
+
+                <ul class="list-style-type">
+                    <li th:classappend="${module == 'Register' ? 'active' : ''}">
+                        <a class="btn" th:href="@{/register}">Register</a>
+                </ul>
+
             </div>
         </div>
     </div>
@@ -55,25 +64,27 @@
 <br>
 
 <br>
-<div class="container">
-    <div class="card" style="width: 40rem;">
-        <div class="card-body">
+
+<div class="container" style="width: 40rem">
+    <div class="card" style="width: 40rem">
+        <div class="card-body" style="width: 40rem">
             <div class="jumbotron text-center">
 
         <h1 class="display-4">Play against your family and friends!</h1>
         <p class="lead">After you make your team join a League and invite your friends and family and compete against
         each other weekly for rewards!</p>
         <hr class="my-4">
-        <p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Register!</a>
-
-        </p>
+                <ul>
+                <li th:classappend="${module == 'Register' ? 'active' : ''}">
+                    <a class="btn" th:href="@{/register}">Register</a> </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
+
 <br>
-<div class="container">
+<!--<div class="container">
     <div class="card" style="width: 40rem;">
         <div class="card-body">
             <div class="jumbotron text-center">
@@ -88,7 +99,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
