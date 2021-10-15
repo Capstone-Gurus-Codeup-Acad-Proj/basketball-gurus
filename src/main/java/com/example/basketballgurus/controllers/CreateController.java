@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 //Create Profile controller bare bones
 public class CreateController {
     @GetMapping("/create")
-    public String showCreateForm(Model model) {
+    public String createProfile(Model model) {
         model.addAttribute("user", new User());
         return "user";
     }

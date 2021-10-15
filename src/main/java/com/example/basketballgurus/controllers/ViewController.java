@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ViewController {
     @GetMapping("/view")
-    public String showCreateForm(Model model) {
-        model.addAttribute("user", new User());
-        return "user";
+    public Model viewProfile(Model model) {
+      return model;
     }
     @PostMapping("/view")
     public String create(@ModelAttribute User user) {
