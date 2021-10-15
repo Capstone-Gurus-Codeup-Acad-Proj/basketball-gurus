@@ -61,7 +61,7 @@ public class User {
         lastName = copy.lastName;
         bio = copy.bio;
         profilePicture = copy.profilePicture;
-        banner = copy.banner;
+     //   banner = copy.banner;
         isActive = copy.isActive;
     }
 }
