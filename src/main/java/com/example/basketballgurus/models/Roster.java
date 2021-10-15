@@ -1,49 +1,32 @@
 package com.example.basketballgurus.models;
 
+import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="rosters")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Roster {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter @Setter
     private int id;
+
     @Column(nullable = false, length = 100)
+    @Getter @Setter
     private String name;
-    @Column(nullable = false, length = 100)
-    private int leagueId;
-    @Column(nullable = false, length = 100)
-    private int userId;
-    @Column(nullable = false, length = 100)
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "league_id", referencedColumnName = "id")
+    private League leagueId;
 
-    public String getName() {
-        return name;
-    }
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @Getter @Setter
+    private User userId;
 
-    public void setName(String team) {
-        this.name = team;
-    }
 
-    public int getLeagueId() {
-        return leagueId;
-    }
-
-    public void setLeagueId(int teamId) {
-        this.leagueId = teamId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 }
