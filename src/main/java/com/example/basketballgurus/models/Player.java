@@ -8,6 +8,7 @@ import java.sql.Date;
 @Table(name="players")
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Player {
 
     public Player(Long id) {

@@ -5,6 +5,7 @@ import com.example.basketballgurus.RestModels.GameStatsModel;
 import com.example.basketballgurus.models.Player;
 import com.example.basketballgurus.models.PlayerScore;
 import com.example.basketballgurus.repositories.PlayerRepository;
+import com.example.basketballgurus.services.ScoreMakerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -13,163 +14,21 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-public class ScoreMaker {
-    private final PlayerRepository playerDao = new PlayerRepository() {
+@Service
+class ScoreMaker implements ScoreMakerService {
+    private final PlayerRepository playerDao;
 
-        @Override
-        public List<Player> findAll() {
-            return null;
-        }
-
-        @Override
-        public List<Player> findAll(Sort sort) {
-            return null;
-        }
-
-        @Override
-        public Page<Player> findAll(Pageable pageable) {
-            return null;
-        }
-
-        @Override
-        public List<Player> findAllById(Iterable<Long> longs) {
-            return null;
-        }
-
-        @Override
-        public long count() {
-            return 0;
-        }
-
-        @Override
-        public void deleteById(Long aLong) {
-
-        }
-
-        @Override
-        public void delete(Player entity) {
-
-        }
-
-        @Override
-        public void deleteAllById(Iterable<? extends Long> longs) {
-
-        }
-
-        @Override
-        public void deleteAll(Iterable<? extends Player> entities) {
-
-        }
-
-        @Override
-        public void deleteAll() {
-
-        }
-
-        @Override
-        public <S extends Player> S save(S entity) {
-            return null;
-        }
-
-        @Override
-        public <S extends Player> List<S> saveAll(Iterable<S> entities) {
-            return null;
-        }
-
-        @Override
-        public void flush() {
-
-        }
-
-        @Override
-        public <S extends Player> S saveAndFlush(S entity) {
-            return null;
-        }
-
-        @Override
-        public <S extends Player> List<S> saveAllAndFlush(Iterable<S> entities) {
-            return null;
-        }
-
-        @Override
-        public void deleteAllInBatch(Iterable<Player> entities) {
-
-        }
-
-        @Override
-        public void deleteAllByIdInBatch(Iterable<Long> longs) {
-
-        }
-
-        @Override
-        public void deleteAllInBatch() {
-
-        }
-
-        @Override
-        public Player getOne(Long aLong) {
-            return null;
-        }
-
-        @Override
-        public Player getById(Long aLong) {
-            return null;
-        }
-
-        @Override
-        public <S extends Player> Optional<S> findOne(Example<S> example) {
-            return Optional.empty();
-        }
-
-        @Override
-        public <S extends Player> List<S> findAll(Example<S> example) {
-            return null;
-        }
-
-        @Override
-        public <S extends Player> List<S> findAll(Example<S> example, Sort sort) {
-            return null;
-        }
-
-        @Override
-        public <S extends Player> Page<S> findAll(Example<S> example, Pageable pageable) {
-            return null;
-        }
-
-        @Override
-        public <S extends Player> long count(Example<S> example) {
-            return 0;
-        }
-
-        @Override
-        public <S extends Player> boolean exists(Example<S> example) {
-            return false;
-        }
-
-        @Override
-        public Optional<Player> findById(Long id) {
-            return null;
-        }
-
-        @Override
-        public boolean existsById(Long aLong) {
-            return false;
-        }
-    };
-
-    public ScoreMaker() {}
+    public ScoreMaker(PlayerRepository playerDao) {
+        this.playerDao = playerDao;
+    }
 
     public ArrayList<PlayerScore> generateScorecard(int gameId) throws IOException {
 
@@ -188,12 +47,19 @@ public class ScoreMaker {
         for (String s : json) {
 
             GameStatsModel stats = mapper.readValue(s, GameStatsModel.class);
-//            List<Player> allPlayers = playerDao.findById(stats.playerId);
+            Optional<Player> player = playerDao.findById(stats.playerId);
+            if (!player.isEmpty()){
+                System.out.println("he lives");
+                //create player
+            }else{
+                System.out.println("he dies");
+            }
 
-            Player player = new Player(stats.playerId);
+
+//            Player player = new Player(stats.playerId);
 // Needs an actual player model, and need to put points into database, and need to have a function that does this on a schedule
-            PlayerScore scorecard = new PlayerScore(0, player, generateFantasyPoints(stats), date);
-            scores.add(scorecard);
+//            PlayerScore scorecard = new PlayerScore(0, player, generateFantasyPoints(stats), date);
+//            scores.add(scorecard);
 
         }
 
@@ -262,11 +128,11 @@ public class ScoreMaker {
 
     }
 
-    public static void main(String[] args) throws IOException {
-        ScoreMaker sm = new ScoreMaker();
-        System.out.println(sm.generateScorecard(10842));
-
-    }
+//    public static void main(String[] args) throws IOException {
+//        ScoreMaker sm = new ScoreMaker();
+//        System.out.println(sm.generateScorecard(10842));
+//
+//    }
 
 
 
