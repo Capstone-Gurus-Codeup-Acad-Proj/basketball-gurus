@@ -10,7 +10,6 @@ public class UserWithRoles extends User implements UserDetails {
 
     public UserWithRoles(User user) {
         super(user);
-        //this.user = user; JJM
     }
 
     @Override

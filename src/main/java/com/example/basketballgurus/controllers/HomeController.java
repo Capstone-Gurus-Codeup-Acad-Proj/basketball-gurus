@@ -18,7 +18,7 @@ public class HomeController {
     }
 
     @GetMapping("/admin")
-    public String admin() {
+    public String admin()  {
         return "Admin Page";
     }
 
