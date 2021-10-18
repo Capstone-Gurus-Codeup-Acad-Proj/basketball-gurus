@@ -75,7 +75,7 @@ public class User {
         lastName = copy.lastName;
         bio = copy.bio;
         profilePicture = copy.profilePicture;
-        bannerUrl = copy.bannerUrl
+        bannerUrl = copy.bannerUrl;
         isActive = copy.isActive;
         role = copy.role;
     }
