@@ -47,10 +47,24 @@ public class User {
     @Getter @Setter
     private String bio;
 
+    @Column
+    @Getter @Setter
+    private String role;
+
+//    Below is for Admin function JJM
     @Column(nullable = false)
     @Getter @Setter
     private boolean isActive;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                 ", username='" + userName + '\'' +
+                 ", password='" + password + '\'' +
+                 ", role='" + role + '\'' +
+                '}';
+    }
 
     public User(User copy) {
         id = copy.id;
@@ -61,7 +75,12 @@ public class User {
         lastName = copy.lastName;
         bio = copy.bio;
         profilePicture = copy.profilePicture;
+<<<<<<< HEAD
+        bannerUrl = copy.bannerUrl; //changed to bannerUrl as application could "not resolve banner" JJM
+=======
         bannerUrl = copy.bannerUrl;
+>>>>>>> main
         isActive = copy.isActive;
+        //role = copy.role; JJM
     }
 }
