@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
 
-    @GetMapping("/home")
-    public String home() {
-        return "Landing Page";
-    }
+//    @GetMapping("/home")
+//    public String home() {
+//        return "Landing Page";
+//    }
 
     @GetMapping("/login")
     public String login() {
