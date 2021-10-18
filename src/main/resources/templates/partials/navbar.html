@@ -34,12 +34,13 @@
     <div class="navbar-header">
       <a class="navbar-brand" th:href="@{/home}">Fantasy Basketball</a>
     </div>
-
+    
+    
       <div sec:authorize="isAnonymous()">
-        <ul class="nav navbar-nav navbar-right ">
-          <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">
-            <a class="btn" href="#" th:href="@{/leagues}">View Leagues</a>
-          </li>
+    <ul class="nav navbar-nav navbar-right ">
+      <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">
+        <a class="btn" href="#" th:href="@{/leagues/visitor}">My Leagues</a>
+      </li>
       <li th:classappend="${module == 'Register' ? 'active' : ''}">
       <a class="btn" href="#" th:href="@{/register}">Register</a>
       </li>
