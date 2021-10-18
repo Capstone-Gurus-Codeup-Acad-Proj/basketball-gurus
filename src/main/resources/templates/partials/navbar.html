@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<nav th:fragment="navbar" class="navbar navbar-expand-sm navbar-dark bg-info fixed-top">
+
+<nav th:fragment="navbar" class="navbar navbar-expand-sm navbar-dark fixed-top">
+
+  <style>
+
+    .btn{
+      margin: 10px;
+      background: rgba(239, 113, 11, 0.91);
+      padding: 5px;
+      color: black;
+    }
+
+    .navbar-brand{
+      color: white;
+    }
+
+    .container-fluid{
+      background: #232020;
+    }
+
+    .navbar{
+      padding: 0;
+
+    }
+
+    a:hover {color: #2b2b2b;}
+
+
+  </style>
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Fantasy Basketball</a>
+      <a class="navbar-brand" th:href="@{/home}">Fantasy Basketball</a>
     </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li class="nav-item">
-        <a class="nav-link">View Leagues</a>
+    <ul class="nav navbar-nav navbar-right ">
+      <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">
+        <a class="btn" href="#" th:href="@{/leagues}">My Leagues</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link">Register</a>
+      <li th:classappend="${module == 'Register' ? 'active' : ''}">
+      <a class="btn" href="#" th:href="@{/register}">Register</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link">Log In</a>
+      <li th:classappend="${module == 'Login' ? 'active' : ''}">
+        <a class="btn" href="#" th:href="@{/login}">Login</a>
       </li>
     </ul>
   </div>
