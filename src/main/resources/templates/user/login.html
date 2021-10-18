@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Register</title>
+    <meta charset="UTF-8" />
+    <title>Log In</title>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <style>
@@ -32,38 +33,43 @@
             font-family: Impact;
             font-size: 20px;
         }
-
-
     </style>
-
 </head>
 <body>
 <nav th:replace="partials/navbar.html :: navbar">
 
 </nav>
+<div
+<!--<form th:action="@{/login}" method="post">-->
+<!--    <fieldset>-->
+<!--        <legend>Please Log In</legend>-->
+<!--        <div th:if="${param.error}" class="alert alert-error">-->
+<!--            Invalid Username and Password.-->
+<!--        </div>-->
+<!--        <div th:if="${param.logout}"class="alert alert-success">-->
+<!--            You have been logged out.-->
+<!--        </div>-->
+<!--        <label for="userName">Username</label>-->
+<!--        <input id="userName" name="userName" type="text" />-->
+<!--        <label for="password">Password</label>-->
+<!--        <input id="password" name="password" type="password" />-->
+<!--        <input type="submit" value="Log In" />-->
+<!--    </fieldset>-->
+<!--</form>-->
 
-<form th:action="@{/register}" th:method="user" th:object="${user}">
+<form th:action="@{/login}" th:method="user" th:object="${user}">
     <div class="form-group">
         <div class="card" style="width: 40rem;">
             <div class="card-body">
                 <div class="jumbotron">
-    Username:
-    <input th:field="*{userName}" />
-    <br />
-    Email:
-    <input th:field="*{email}" />
-    <br />
-    First Name:
-    <input th:field="*{firstName}" />
-    <br />
-    Last Name:
-    <input th:field="*{lastName}" />
-    <br />
-    Password:
-    <input type="password" th:field="*{password}" />
-    <br />
-    <input type="submit" />
-    </div>
+                    Username:
+                    <input th:field="*{userName}" />
+                    <br />
+                    Password:
+                    <input type="password" th:field="*{password}" />
+                    <br />
+                    <input type="submit" />
+                </div>
             </div>
         </div>
     </div>
@@ -75,3 +81,5 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
+
+

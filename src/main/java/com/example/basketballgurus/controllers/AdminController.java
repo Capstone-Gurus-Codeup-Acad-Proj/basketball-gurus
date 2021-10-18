@@ -5,14 +5,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-public class HomeController {
+public class AdminController {
 
-    @GetMapping("/home")
-    public String home() {
-        return "Landing Page";
+    @GetMapping("/admin")
+    public String admin()  {
+        return "Admin Page";
     }
-
-
 
 
 
