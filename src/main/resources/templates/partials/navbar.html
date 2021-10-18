@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <nav th:fragment="navbar" class="navbar navbar-expand-sm navbar-dark fixed-top">
@@ -34,17 +34,32 @@
     <div class="navbar-header">
       <a class="navbar-brand" th:href="@{/home}">Fantasy Basketball</a>
     </div>
-    <ul class="nav navbar-nav navbar-right ">
-      <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">
-        <a class="btn" href="#" th:href="@{/leagues}">My Leagues</a>
-      </li>
+
+      <div sec:authorize="isAnonymous()">
+        <ul class="nav navbar-nav navbar-right ">
+          <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">
+            <a class="btn" href="#" th:href="@{/leagues}">My Leagues</a>
+          </li>
       <li th:classappend="${module == 'Register' ? 'active' : ''}">
       <a class="btn" href="#" th:href="@{/register}">Register</a>
       </li>
       <li th:classappend="${module == 'Login' ? 'active' : ''}">
         <a class="btn" href="#" th:href="@{/login}">Login</a>
       </li>
-    </ul>
+        </ul>
+      </div>
+
+      <div sec:authorize="isAuthenticated()">
+        <ul class="nav navbar-nav navbar-right ">
+          <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">
+            <a class="btn" href="#" th:href="@{/leagues}">My Leagues</a>
+          </li>
+        <li th:classappend="${module == 'Logout' ? 'active' : ''}">
+          <a class="btn" href="#" th:href="@{/logout}">Logout</a>
+        </li>
+        </ul>
+      </div>
+
   </div>
 </nav>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
