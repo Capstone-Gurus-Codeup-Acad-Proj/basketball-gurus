@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -20,10 +21,9 @@ public class Controller {
 
     @GetMapping("/hello")
     @ResponseBody
-    public String hello() throws IOException {
+    public String hello() throws IOException, ParseException {
 
 
-//        sm.generateScorecard(10842);
         schedule.generateGames(2021);
 
 

@@ -19,10 +19,16 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.TimeZone;
 
 @Service
 public class ScheduleMaker implements ScheduleMakerService {
@@ -35,7 +41,7 @@ public class ScheduleMaker implements ScheduleMakerService {
         this.teamDao = teamDao;
     }
 
-    public ArrayList<GameModel> getGames(int year) throws IOException {
+    public ArrayList<GameModel> getGames(int year) throws IOException, ParseException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         Config config = new Config();
 
@@ -51,48 +57,60 @@ public class ScheduleMaker implements ScheduleMakerService {
         return truncateString(result);
     }
 
-    public ArrayList<GameModel> truncateString(String jsonString) throws JsonProcessingException {
+    public ArrayList<GameModel> truncateString(String jsonString) throws JsonProcessingException, ParseException {
         int start = jsonString.indexOf("games\":[{");
         int end = jsonString.length() - 3;
-        ArrayList<GameModel> arr = new ArrayList<>();
         System.out.println(jsonString.substring(start + 8, end));
-        return createGameArray(jsonString.substring(start + 8, end), arr);
-
+        return createGameArray(jsonString.substring(start + 8, end));
     }
 
-    public ArrayList<GameModel> createGameArray(String json, ArrayList<GameModel> arr) throws JsonProcessingException {
+    public ArrayList<GameModel> createGameArray(String json) throws JsonProcessingException, ParseException {
 
-        int end = json.indexOf(",\"vTeam");
-        int over = json.indexOf("{\"seasonYear", 25);
-        int cutOff;
+        ArrayList<GameModel> arr = new ArrayList<>();
 
-        if (over == -1){
-            cutOff = 0;
-        }else{
-            cutOff = json.indexOf("{\"seasonYear", 25);
-        }
-        String list = json.substring(0, end);
-        list += "}";
-        ObjectMapper mapper = new ObjectMapper();
-        GameModel game = mapper.readValue(list, GameModel.class);
-        if (checkDate(game)){
-            int hStart = json.indexOf("hTeam") + 7;
-            TeamModel vTeam =  createTeam(json.substring(json.indexOf("vTeam") + 7,json.indexOf(",\"score")) + "}");
-            TeamModel hTeam = createTeam(json.substring(hStart, json.indexOf(",\"score", hStart)) + "}");
-            game.setAwayTeamId(vTeam.getTeamId());
-            game.setHomeTeamId(hTeam.getTeamId());
-            arr.add(game);
-        }
-        if (over == -1){
-            return arr;
-        } else{
-            return createGameArray(json.substring(cutOff), arr);
-        }
+        String str = json;
+
+        do {
+
+            int end = str.indexOf(",\"vTeam");
+            int over = str.indexOf("{\"seasonYear", 25);
+
+            String gameStr = str.substring(0, end) + "}";
+
+            ObjectMapper mapper = new ObjectMapper();
+            GameModel game = mapper.readValue(gameStr, GameModel.class);
+            Date date = convertToEST(gameStr);
+
+            if (date != null){
+                game.setStartTimeUTC(date);
+            }
+
+
+
+            if(checkDate(game)){
+                int hStart = str.indexOf("hTeam") + 7;
+                TeamModel vTeam =  createTeam(str.substring(str.indexOf("vTeam") + 7,str.indexOf(",\"score")) + "}");
+                TeamModel hTeam = createTeam(str.substring(hStart, str.indexOf(",\"score", hStart)) + "}");
+                game.setAwayTeamId(vTeam.getTeamId());
+                game.setHomeTeamId(hTeam.getTeamId());
+                arr.add(game);
+            }
+            if (over == -1){
+                break;
+            }else{
+                str = str.substring(over);
+            }
+        } while (2 < 4);
+
+        return arr;
+
     }
 
     private TeamModel createTeam(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, TeamModel.class);
+        TeamModel team =  mapper.readValue(json, TeamModel.class);
+        System.out.println(json);
+        return team;
 
     }
 
@@ -103,25 +121,44 @@ public class ScheduleMaker implements ScheduleMakerService {
         LocalDate sunday = date.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
         Date input = game.startTimeUTC;
 
-
-
         LocalDate gameDate = input.toLocalDate();
         return monday.isBefore(gameDate) && sunday.isAfter(gameDate) || monday.isEqual(gameDate) || sunday.isEqual(gameDate);
 
+    }
 
+    private Date convertToEST(String json) throws ParseException {
+
+        int start = json.indexOf("startTime") + 15;
+        int end = json.indexOf("endTime") - 3;
+
+        String utc = json.substring(start, end);
+
+        DateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        utcFormat.setTimeZone(TimeZone.getTimeZone("NYC"));
+
+        try{
+            java.util.Date date = utcFormat.parse(utc);
+            System.out.println(utc);
+            Date newDate = new Date(date.getTime());
+            return newDate;
+        }catch (Exception e){
+            return null;
+        }
     }
 
     @Override
-    public void generateGames(int year) throws IOException {
+    public void generateGames(int year) throws IOException, ParseException {
 
         ArrayList<GameModel> arr = getGames(year);
         ArrayList<Game> games = new ArrayList<>();
+        gameDao.deleteAll();
 
         for(GameModel game : arr){
             Optional<Team> hTeam = teamDao.findById(game.homeTeamId);
             Optional<Team> vTeam = teamDao.findById(game.awayTeamId);
+            System.out.println(game.getStartTimeUTC());
 
-            Game newGame = new Game(0, game.getGameId(), hTeam.get(), vTeam.get(), game.startTimeUTC, false, false);
+            Game newGame = new Game(0, game.getGameId(), hTeam.get(), vTeam.get(), game.getStartTimeUTC(), false, false);
 
             games.add(newGame);
         }
@@ -129,5 +166,4 @@ public class ScheduleMaker implements ScheduleMakerService {
         gameDao.saveAll(games);
 
     }
-
 }
