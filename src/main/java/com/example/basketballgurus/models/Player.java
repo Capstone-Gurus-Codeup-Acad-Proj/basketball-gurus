@@ -41,15 +41,15 @@ public class Player {
 
     @Column
     @Getter @Setter
-    private int height;
+    private String height;
 
     @Column
     @Getter @Setter
-    private int weight;
+    private String weight;
 
     @Column
     @Getter @Setter
-    private int jerseyNumber;
+    private String jerseyNumber;
 
     @Column
     @Getter @Setter
