@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//Create Profile controller bare bones
-public class CreateController {
-    @GetMapping("/create")
+// Profile controller bare bones
+//will handle edit create and view
+public class ProfileController {
+    @GetMapping("/Profile")
     public String createProfile(Model model) {
         model.addAttribute("user", new User());
         return "user";
