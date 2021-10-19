@@ -5,6 +5,7 @@ import com.example.basketballgurus.RestModels.GameStatsModel;
 import com.example.basketballgurus.models.Player;
 import com.example.basketballgurus.models.PlayerScore;
 import com.example.basketballgurus.repositories.PlayerRepository;
+import com.example.basketballgurus.repositories.PlayerScoreRepository;
 import com.example.basketballgurus.services.ScoreMakerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpEntity;
@@ -14,28 +15,35 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 class ScoreMaker implements ScoreMakerService {
-    private final PlayerRepository playerDao;
 
-    public ScoreMaker(PlayerRepository playerDao) {
+    private final PlayerRepository playerDao;
+    private final PlayerScoreRepository scoreDao;
+
+    public ScoreMaker(PlayerRepository playerDao, PlayerScoreRepository scoreDao) {
         this.playerDao = playerDao;
+        this.scoreDao = scoreDao;
     }
 
-    public ArrayList<PlayerScore> generateScorecard(int gameId) throws IOException {
+
+    public void generateScorecard(int gameId) throws IOException {
 
         GameStats gameStats = new GameStats();
         ArrayList<String> json = gameStats.getStats(gameId);
-
-        ArrayList<GameStatsModel> statsList = new ArrayList<>();
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -43,36 +51,27 @@ class ScoreMaker implements ScoreMakerService {
 
         ArrayList<PlayerScore> scores = new ArrayList<>();
 
-
         for (String s : json) {
 
             GameStatsModel stats = mapper.readValue(s, GameStatsModel.class);
             Optional<Player> player = playerDao.findById(stats.playerId);
-            if (!player.isEmpty()){
+            if (player.isPresent()){
                 System.out.println("he lives");
-                //create player
+                PlayerScore scorecard = new PlayerScore(0, player.get(), generateFantasyPoints(stats), date);
+                scores.add(scorecard);
             }else{
                 System.out.println("he dies");
             }
-
-
-//            Player player = new Player(stats.playerId);
-// Needs an actual player model, and need to put points into database, and need to have a function that does this on a schedule
-//            PlayerScore scorecard = new PlayerScore(0, player, generateFantasyPoints(stats), date);
-//            scores.add(scorecard);
-
         }
 
-        return scores;
+        scoreDao.saveAll(scores);
 
     }
 
     public Date getGameDate(int gameId) throws IOException {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
 
-        Config config = new Config();
-
-        try {
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            Config config = new Config();
 
             HttpGet request = new HttpGet("https://api-nba-v1.p.rapidapi.com/games/gameId/" + gameId);
 
@@ -81,9 +80,9 @@ class ScoreMaker implements ScoreMakerService {
             request.addHeader("x-rapidapi-host", "api-nba-v1.p.rapidapi.com");
 
             CloseableHttpResponse response = httpClient.execute(request);
-            System.out.println(response);
 
-            try {
+            try (response) {
+                System.out.println(response);
 
 
                 HttpEntity entity = response.getEntity();
@@ -97,13 +96,9 @@ class ScoreMaker implements ScoreMakerService {
 
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                response.close();
             }
         } catch (ClientProtocolException e) {
             e.printStackTrace();
-        } finally {
-            httpClient.close();
         }
         return null;
     }
@@ -128,12 +123,12 @@ class ScoreMaker implements ScoreMakerService {
 
     }
 
+
 //    public static void main(String[] args) throws IOException {
-//        ScoreMaker sm = new ScoreMaker();
+//        ScoreMaker sm = new ScoreMaker(playerRepository);
 //        System.out.println(sm.generateScorecard(10842));
 //
 //    }
-
 
 
 

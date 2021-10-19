@@ -28,9 +28,16 @@ public class Game {
     @Getter @Setter
     private Team awayTeamId;
 
-
     @Column(nullable = false)
     @Getter @Setter
     private Date startTime;
+
+    @Column(nullable = false, columnDefinition = "Boolean default false")
+    @Getter @Setter
+    private Boolean finished;
+
+    @Column(nullable = false, columnDefinition = "Boolean default false")
+    @Getter @Setter
+    private Boolean recorded;
 
     }

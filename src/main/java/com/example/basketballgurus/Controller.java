@@ -1,7 +1,7 @@
 package com.example.basketballgurus;
 
+import com.example.basketballgurus.services.ScheduleMakerService;
 import com.example.basketballgurus.services.ScoreMakerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -11,9 +11,11 @@ import java.io.IOException;
 public class Controller {
 
     private final ScoreMakerService sm;
+    private final ScheduleMakerService schedule;
 
-    public Controller(ScoreMakerService sm) {
+    public Controller(ScoreMakerService sm, ScheduleMakerService schedule) {
         this.sm = sm;
+        this.schedule = schedule;
     }
 
     @GetMapping("/hello")
@@ -21,7 +23,10 @@ public class Controller {
     public String hello() throws IOException {
 
 
-        sm.generateScorecard(10842);
+//        sm.generateScorecard(10842);
+        schedule.generateGames(2021);
+
+
 
         return "";
     }

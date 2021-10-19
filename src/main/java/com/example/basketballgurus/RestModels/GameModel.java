@@ -13,7 +13,7 @@ public class GameModel {
     @Getter @Setter
     public String league;
     @Getter @Setter
-    public String gameId;
+    public int gameId;
     @Getter @Setter
     public Date startTimeUTC;
     @Getter @Setter
@@ -41,5 +41,9 @@ public class GameModel {
     public String statusShortGame;
     @Getter @Setter
     public String statusGame;
+    @Getter @Setter
+    public int homeTeamId;
+    @Getter @Setter
+    public int awayTeamId;
 
 }
