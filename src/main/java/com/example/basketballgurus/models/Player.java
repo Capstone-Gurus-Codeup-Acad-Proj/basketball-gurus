@@ -30,6 +30,7 @@ public class Player {
 
     @ManyToOne
     @JoinColumn(name = "team_id", referencedColumnName = "id")
+    @Getter @Setter
     private Team teamId;
 
     @Column(nullable = false, length = 100)
