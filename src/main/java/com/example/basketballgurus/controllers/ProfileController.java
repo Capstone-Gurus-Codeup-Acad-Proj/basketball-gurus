@@ -1,24 +1,34 @@
 package com.example.basketballgurus.controllers;
 
 import com.example.basketballgurus.models.User;
+import com.example.basketballgurus.repos.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 // Profile controller bare bones
 //will handle edit create and view
+@Controller
 public class ProfileController {
-    @GetMapping("/Profile")
-    public String createProfile(Model model) {
-        model.addAttribute("user", new User());
-        return "user";
+    private final UserRepository userDao;
+
+    public ProfileController(UserRepository userDao) {
+        this.userDao = userDao;
     }
-    @PostMapping("/create")
-    public String create(@ModelAttribute User user) {
-        return "/profile";
+
+    @GetMapping("/login")
+    public String login(Model model, String error, String logout) {
+    if (error != null)
+        model.addAttribute("error", "Your Username and Password is invalid.");
+    if (logout != null)
+        model.addAttribute("message", "You Have Been Logged Out Successfully.");
+    return "redirect:/landingPage";
+    }
+    @GetMapping({"/profile"})
+    public String profile(Model model) {
+        return "/Profile";
     }
 }
 
