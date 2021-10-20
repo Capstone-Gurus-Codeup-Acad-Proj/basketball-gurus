@@ -3,19 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Players</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+
+
+        .container{
+            margin-top: 100px;
+        }
+
+       .table{
+           color: white;
+       }
+
+        body {
+            background: #232020;
+        }
+
+    </style>
+
 </head>
 <body>
 <nav th:replace="partials/navbar.html :: navbar"> </nav>
-
-<div th:each="player : ${players}">
-    <div th:text="${player.teamName}"></div>
-    <div th:text="${player.firstName}"></div>
-    <div th:text="${player.lastName}"></div>
+<div class="container">
+    <div th:each="player : ${players}">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Team</th>
+            <th scope="col">Firstname</th>
+            <th scope="col">Lastname</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td> <div th:text="${(player.teamId.fullName)}"></div></td>
+            <td><div th:text="${player.firstName}"></div></td>
+            <td> <div th:text="${player.lastName}"></div></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-
-
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
