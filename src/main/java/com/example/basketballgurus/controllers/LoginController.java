@@ -2,17 +2,16 @@ package com.example.basketballgurus.controllers;
 
 import com.example.basketballgurus.models.User;
 import com.example.basketballgurus.repos.UserRepository;
-import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 
-@RestController
+@Controller
 public class LoginController {
 
-    private final UserRepository userDao;
+    private UserRepository userDao;
 
     public LoginController(UserRepository userDao) {
         this.userDao = userDao;
@@ -23,8 +22,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String create(@ModelAttribute User user) {
-        userDao.save(user);
+    public String show(@ModelAttribute User user) {
         return "redirect:/";
     }
 }

@@ -21,6 +21,7 @@ public class RegisterController {
         model.addAttribute("user", new User());
         return "user/register";
     }
+
     @PostMapping("/register")
     public String create(@ModelAttribute User user) {
         userDao.save(user);
