@@ -2,18 +2,23 @@ package com.example.basketballgurus.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Date;
 
-import java.util.Date;
 @Entity
 @Table(name="players")
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Player {
+
+    public Player(Long id) {
+        this.id = id;
+    }
 
     @Id
     @Column(nullable = false)
     @Getter @Setter
-    private int id;
+    private Long id;
 
     @Column(nullable = false, length = 100)
     @Getter @Setter
@@ -23,12 +28,9 @@ public class Player {
     @Getter @Setter
     private String lastName;
 
-    @Column(nullable = false, length = 100)
-    @Getter @Setter
-    private String teamName;
-
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "team_id", referencedColumnName = "id")
+    @Getter @Setter
     private Team teamId;
 
     @Column(nullable = false, length = 100)
@@ -41,15 +43,15 @@ public class Player {
 
     @Column
     @Getter @Setter
-    private int height;
+    private String height;
 
     @Column
     @Getter @Setter
-    private int weight;
+    private String weight;
 
     @Column
     @Getter @Setter
-    private int jerseyNumber;
+    private String jerseyNumber;
 
     @Column
     @Getter @Setter
@@ -90,5 +92,9 @@ public class Player {
     @Column(nullable = false)
     @Getter @Setter
     private int price;
+
+    @Column(nullable = false)
+    @Getter @Setter
+    private int percentFieldGoals;
 
 }

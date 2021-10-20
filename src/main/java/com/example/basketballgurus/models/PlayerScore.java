@@ -1,4 +1,5 @@
 package com.example.basketballgurus.models;
+import com.example.basketballgurus.RestModels.GameStatsModel;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,7 +16,8 @@ public class PlayerScore {
     @Getter @Setter
     private int id;
 
-    @OneToOne
+    @ManyToOne
+    @Getter @Setter
     @JoinColumn(name = "player_id", referencedColumnName = "id")
     private Player playerId;
 
@@ -26,6 +28,8 @@ public class PlayerScore {
     @Column(nullable = false, length = 100)
     @Getter @Setter
     private Date gameDate;
+
+
 
 
 }
