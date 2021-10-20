@@ -20,7 +20,7 @@
        }
 
         body {
-            background: #232020;
+            background: #020202;
         }
 
     </style>
@@ -40,9 +40,9 @@
         </thead>
         <tbody>
         <tr>
-            <td> <div th:text="${(player.teamId.fullName)}"></div></td>
-            <td><div th:text="${player.firstName}"></div></td>
-            <td> <div th:text="${player.lastName}"></div></td>
+            <td th:text="${(player.teamId.fullName)}"></td>
+            <td th:text="${player.firstName}"></td>
+            <td th:text="${player.lastName}"></td>
         </tr>
         </tbody>
     </table>
