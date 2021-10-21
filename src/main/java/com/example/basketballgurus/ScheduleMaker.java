@@ -145,22 +145,22 @@ public class ScheduleMaker implements ScheduleMakerService {
         }
     }
 
-//    @Scheduled(cron = "* * * * * *")
-//    public void checkSchedule() throws IOException, ParseException {
-//
-//        List<Game> games = gameDao.findAll();
-//
-//        for(Game game : games){
-//            if (!checkDate(game)){
-//                generateGames();
-//                break;
-//            }
-//        }
-//
-//    }
+    @Scheduled(cron = "0 */5 0-23 * * *")
+    public void checkSchedule() throws IOException, ParseException {
+
+        List<Game> games = gameDao.findAll();
+
+        for(Game game : games){
+            if (!checkDate(game)){
+                generateGames();
+                break;
+            }
+        }
+
+    }
 
     @Override
-    @Scheduled(cron = "* */2 * * * *", zone = "America/Chicago")
+    @Scheduled(cron = "0 0 0 * * SUN", zone = "America/Chicago")
     public void generateGames() throws IOException, ParseException {
 
         ArrayList<GameModel> arr = getGames();

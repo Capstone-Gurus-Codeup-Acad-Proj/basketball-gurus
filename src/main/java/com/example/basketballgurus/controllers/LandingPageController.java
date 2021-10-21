@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class LandingPageController {
-    @GetMapping("/homes")
+    @GetMapping("/home")
     public String landingPage() {
         return "landingPage";
     }
