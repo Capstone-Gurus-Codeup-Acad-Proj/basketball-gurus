@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LeagueVisitorController {
-    @GetMapping("/leagues/visitor")
+   /* @GetMapping("/leagues/visitor")
     public String leaguePageVisitor() {
         return "leagueVisitor";
-    }
+    }*/
 }
