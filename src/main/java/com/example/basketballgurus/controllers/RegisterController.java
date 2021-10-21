@@ -1,9 +1,11 @@
 package com.example.basketballgurus.controllers;
 
 import com.example.basketballgurus.models.User;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.basketballgurus.repositories.UserRepository;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
