@@ -1,8 +1,10 @@
 package com.example.basketballgurus.controllers;
 
 import com.example.basketballgurus.models.User;
-import com.example.basketballgurus.repos.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.example.basketballgurus.repositories.UserRepository;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,13 +28,14 @@ public class RegisterController {
         return "user/register";
     }
     //added saving user /hash pass
-    @PostMapping("/register")
-    public String create(@ModelAttribute User user) {
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        userDao.save(user);
-        return "redirect:/login";
-    }
 
+//    @PostMapping("/register")
+//    public String create(@ModelAttribute User user) {
+//        String hash = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(hash);
+//        userDao.save(user);
+//        return "redirect:/login";
+//    }
+//
 
 }

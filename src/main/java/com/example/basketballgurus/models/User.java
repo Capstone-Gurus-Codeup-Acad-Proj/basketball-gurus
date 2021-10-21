@@ -75,9 +75,8 @@ public class User {
         lastName = copy.lastName;
         bio = copy.bio;
         profilePicture = copy.profilePicture;
-        bannerUrl = copy.bannerUrl; //changed to bannerUrl as application could "not resolve banner" JJM
         bannerUrl = copy.bannerUrl;
         isActive = copy.isActive;
-        //role = copy.role; JJM
+        role = copy.role;
     }
 }
