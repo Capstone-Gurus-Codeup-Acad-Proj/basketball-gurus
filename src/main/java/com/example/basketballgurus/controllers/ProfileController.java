@@ -1,12 +1,15 @@
+package com.example.basketballgurus.controllers;
 
+import com.example.basketballgurus.models.User;
+import com.example.basketballgurus.repos.UserRepository;
 import com.example.basketballgurus.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-// Profile controller bare bones
-//will handle edit create and view
-@Controller()
+@Controller
 public class ProfileController {
     private final UserRepository userDao;
 
@@ -14,16 +17,23 @@ public class ProfileController {
         this.userDao = userDao;
     }
 
-    @GetMapping("profile/login")
-    public String login(Model model, String error, String logout) {
-    if (error != null)
-        model.addAttribute("error", "Your Username and Password is invalid.");
-    if (logout != null)
-        model.addAttribute("message", "You Have Been Logged Out Successfully.");
-    return "redirect:/landingPage";
+    @GetMapping("/profile")
+    public String ProfilePage() {
+        return "profile";
     }
-    @GetMapping({"/profile"})
-    public String profile(Model model) {
-        return "/Profile";
+
+    @GetMapping("/{username}/profile")
+    public String showUserProfile(@PathVariable String username, Model model){
+        User otherProfile = userDao.findByUserName(username);
+        model.addAttribute("viewOtherProfile", otherProfile);
+        return "publicProfile";
     }
+    @GetMapping("/profile")
+    public String ownProfile(Model model){
+        User userLoggedIn = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userProfile = userDao.getById((long) userLoggedIn.getId());
+        model.addAttribute("viewOwnProfile", userProfile);
+        return "personalProfile";
+    }
+
 }
