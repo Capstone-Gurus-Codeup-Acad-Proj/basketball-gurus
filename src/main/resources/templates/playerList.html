@@ -23,13 +23,13 @@
             background: #020202;
         }
 
+
     </style>
 
 </head>
 <body>
 <nav th:replace="partials/navbar.html :: navbar"> </nav>
 <div class="container">
-    <div th:each="player : ${players}">
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -39,14 +39,15 @@
         </tr>
         </thead>
         <tbody>
+        <div th:each="player : ${players}">
         <tr>
             <td th:text="${(player.teamId.fullName)}"></td>
             <td th:text="${player.firstName}"></td>
             <td th:text="${player.lastName}"></td>
         </tr>
+        </div>
         </tbody>
     </table>
-</div>
 </div>
 
 
