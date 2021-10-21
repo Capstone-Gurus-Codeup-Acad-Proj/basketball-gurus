@@ -2,8 +2,10 @@ package com.example.basketballgurus;
 
 import com.example.basketballgurus.RestModels.GameModel;
 import com.example.basketballgurus.RestModels.GameStatsModel;
+import com.example.basketballgurus.models.Game;
 import com.example.basketballgurus.models.Player;
 import com.example.basketballgurus.models.PlayerScore;
+import com.example.basketballgurus.repositories.GameRepository;
 import com.example.basketballgurus.repositories.PlayerRepository;
 import com.example.basketballgurus.repositories.PlayerScoreRepository;
 import com.example.basketballgurus.services.ScoreMakerService;
@@ -15,17 +17,12 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,10 +30,12 @@ class ScoreMaker implements ScoreMakerService {
 
     private final PlayerRepository playerDao;
     private final PlayerScoreRepository scoreDao;
+    private final GameRepository gameDao;
 
-    public ScoreMaker(PlayerRepository playerDao, PlayerScoreRepository scoreDao) {
+    public ScoreMaker(PlayerRepository playerDao, PlayerScoreRepository scoreDao, GameRepository gameDao) {
         this.playerDao = playerDao;
         this.scoreDao = scoreDao;
+        this.gameDao = gameDao;
     }
 
 
@@ -57,7 +56,7 @@ class ScoreMaker implements ScoreMakerService {
             Optional<Player> player = playerDao.findById(stats.playerId);
             if (player.isPresent()){
                 System.out.println("he lives");
-                PlayerScore scorecard = new PlayerScore(0, player.get(), generateFantasyPoints(stats), date);
+                PlayerScore scorecard = new PlayerScore(0, player.get(), generateFantasyPoints(stats), gameId, date);
                 scores.add(scorecard);
             }else{
                 System.out.println("he dies");

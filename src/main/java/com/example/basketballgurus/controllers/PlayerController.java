@@ -4,7 +4,8 @@ import com.example.basketballgurus.models.Player;
 import com.example.basketballgurus.repositories.PlayerRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,11 +18,17 @@ public class PlayerController {
         this.playerDao = playerDao;
     }
 
-
     @GetMapping("/players")
     public String showPlayers(Model model) {
         List<Player> allPlayers = playerDao.findAll();
         model.addAttribute("players", allPlayers);
+        return "playerList";
+    }
+
+    @RequestMapping(value = "/players", method = RequestMethod.POST)
+    public String getPlayerByName(@RequestParam(name = "search") String search, Model model) {
+        List<Player> player = playerDao.findByFirstNameOrLastName(search);
+        model.addAttribute("players", player);
         return "playerList";
     }
 

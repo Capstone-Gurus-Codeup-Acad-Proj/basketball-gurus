@@ -10,13 +10,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class Game {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, name = "id")
     @Getter @Setter
     private int id;
-
-    @Column(nullable = false, name = "game_api_id")
-    @Getter @Setter
-    private int gameApiId;
 
     @OneToOne
     @JoinColumn(name = "home_team_id", referencedColumnName = "id")
