@@ -25,6 +25,9 @@ public class PlayerScore {
     @Getter @Setter
     private int score;
 
+    @Getter @Setter
+    private int gameApiId;
+
     @Column(nullable = false, length = 100)
     @Getter @Setter
     private Date gameDate;

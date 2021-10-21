@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 // Profile controller bare bones
 //will handle edit create and view
-@Controller
+@Controller()
 public class ProfileController {
     private final UserRepository userDao;
 
@@ -18,7 +18,7 @@ public class ProfileController {
         this.userDao = userDao;
     }
 
-    @GetMapping("/login")
+    @GetMapping("profile/login")
     public String login(Model model, String error, String logout) {
     if (error != null)
         model.addAttribute("error", "Your Username and Password is invalid.");
