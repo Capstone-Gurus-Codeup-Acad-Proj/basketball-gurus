@@ -1,4 +1,3 @@
-package com.example.basketballgurus.controllers;
 
 import com.example.basketballgurus.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -28,4 +27,3 @@ public class ProfileController {
         return "/Profile";
     }
 }
-

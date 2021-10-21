@@ -21,24 +21,29 @@ public class Player {
     private Long id;
 
     @Column(nullable = false, length = 100)
-    @Getter @Setter
+    @Getter
+    @Setter
     private String firstName;
 
     @Column(nullable = false, length = 100)
-    @Getter @Setter
+    @Getter
+    @Setter
     private String lastName;
 
     @ManyToOne
     @JoinColumn(name = "team_id", referencedColumnName = "id")
     @Getter @Setter
+
     private Team teamId;
 
     @Column(nullable = false, length = 100)
-    @Getter @Setter
+    @Getter
+    @Setter
     private String position;
 
     @Column(nullable = true)
-    @Getter @Setter
+    @Getter
+    @Setter
     private Date dob;
 
     @Column
@@ -54,43 +59,53 @@ public class Player {
     private String jerseyNumber;
 
     @Column
-    @Getter @Setter
+    @Getter
+    @Setter
     private int age;
 
     @Column(nullable = false)
-    @Getter @Setter
+    @Getter
+    @Setter
     private double point;
 
     @Column(nullable = false)
-    @Getter @Setter
+    @Getter
+    @Setter
     private double blocks;
 
     @Column(nullable = false)
-    @Getter @Setter
+    @Getter
+    @Setter
     private double assists;
 
     @Column(nullable = false)
-    @Getter @Setter
+    @Getter
+    @Setter
     private double rebounds;
 
     @Column(nullable = false)
-    @Getter @Setter
+    @Getter
+    @Setter
     private double turnOvers;
 
     @Column(nullable = false)
-    @Getter @Setter
+    @Getter
+    @Setter
     private float percentThrees;
 
     @Column(nullable = false)
-    @Getter @Setter
+    @Getter
+    @Setter
     private float percentFreethrows;
 
     @Column(nullable = false)
-    @Getter @Setter
+    @Getter
+    @Setter
     private String headshotUrl;
 
     @Column(nullable = false)
-    @Getter @Setter
+    @Getter
+    @Setter
     private int price;
 
     @Column(nullable = false)
