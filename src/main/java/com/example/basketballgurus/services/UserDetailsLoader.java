@@ -1,8 +1,7 @@
 package com.example.basketballgurus.services;
 
 import com.example.basketballgurus.models.User;
-import com.example.basketballgurus.repos.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.basketballgurus.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.example.basketballgurus.models.UserWithRoles;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -3,8 +3,8 @@ package com.example.basketballgurus.services;
 import java.io.IOException;
 import java.text.ParseException;
 
-public interface ScheduleMakerService {
+public interface GameCompletionService {
 
-    public void generateGames() throws IOException, ParseException;
+    public void checkStatus() throws IOException, ParseException;
 
 }
