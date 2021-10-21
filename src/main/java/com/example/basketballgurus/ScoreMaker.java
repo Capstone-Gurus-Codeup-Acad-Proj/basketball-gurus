@@ -113,6 +113,8 @@ class ScoreMaker implements ScoreMakerService {
 
         total += stats.points;
         total += stats.assists * 1.5;
+        total += stats.defReb * 1.5;
+        total += stats.offReb * 1.5;
         total += stats.steals * 3;
         total += stats.blocks * 3;
         total -= stats.turnovers;
@@ -121,15 +123,4 @@ class ScoreMaker implements ScoreMakerService {
 
 
     }
-
-
-//    public static void main(String[] args) throws IOException {
-//        ScoreMaker sm = new ScoreMaker(playerRepository);
-//        System.out.println(sm.generateScorecard(10842));
-//
-//    }
-
-
-
-
 }
