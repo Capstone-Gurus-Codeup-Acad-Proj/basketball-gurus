@@ -79,4 +79,7 @@ public class User {
         isActive = copy.isActive;
         role = copy.role;
     }
+
+    public void save(User user) {
+    }
 }
