@@ -1,12 +1,9 @@
 package com.example.basketballgurus.controllers;
 
-import com.example.basketballgurus.models.User;
-import com.example.basketballgurus.repos.UserRepository;
+import com.example.basketballgurus.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 // Profile controller bare bones
 //will handle edit create and view
