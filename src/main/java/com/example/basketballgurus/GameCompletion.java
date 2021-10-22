@@ -37,7 +37,7 @@ public class GameCompletion implements GameCompletionService {
     }
 
     @Override
-    @Scheduled(cron = "0 */3 * * * *")
+    @Scheduled(cron = "0 */15 * * * *")
     public void checkStatus() throws IOException, ParseException {
 
         ArrayList<GameModel> weeksGames = scheduleMaker.getGames();

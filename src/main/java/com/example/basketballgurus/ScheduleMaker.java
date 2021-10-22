@@ -145,7 +145,7 @@ public class ScheduleMaker implements ScheduleMakerService {
         }
     }
 
-    @Scheduled(cron = "0 */1 * * * *")
+    @Scheduled(cron = "0 */5 * * * *")
     public void checkSchedule() throws IOException, ParseException {
 
         List<Game> games = gameDao.findAll();
