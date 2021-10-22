@@ -1,5 +1,8 @@
 body{
-    background-image: url("/static/img/squad.jpeg");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
+     background-image: url("/img/squad.jpeg");
+     background-size: cover;
+     background-repeat: no-repeat;
+ }
+
+
+

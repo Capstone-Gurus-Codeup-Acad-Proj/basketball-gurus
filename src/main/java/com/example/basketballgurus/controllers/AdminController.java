@@ -1,6 +1,10 @@
 package com.example.basketballgurus.controllers;
 
 import com.example.basketballgurus.models.User;
+<<<<<<< HEAD
+import com.example.basketballgurus.repos.UserRepository;
+=======
+>>>>>>> 31761165d10e18dfdc41393b437a2a399b3b00d8
 import com.example.basketballgurus.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

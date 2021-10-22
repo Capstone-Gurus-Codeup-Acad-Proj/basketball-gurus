@@ -29,6 +29,10 @@ package com.example.basketballgurus.controllers;
 
 
 import com.example.basketballgurus.models.User;
+
+import com.example.basketballgurus.repos.UserRepository;
+import com.example.basketballgurus.repositories.UserRepository;
+
 import com.example.basketballgurus.repositories.UserRepository;
 import com.example.basketballgurus.services.GameBarService;
 import org.springframework.stereotype.Controller;
@@ -53,6 +57,7 @@ public class LoginController {
         model.addAttribute("games", gm.getTodaysGames());
         return "user/login";
     }
+
 
 //    @PostMapping("/login")
 //    public String show(@ModelAttribute User user, Model model) {
