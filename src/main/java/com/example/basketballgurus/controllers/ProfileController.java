@@ -31,7 +31,7 @@ public class ProfileController {
 
     @GetMapping("/{username}/profile")
     public String showUserProfile(@PathVariable String username, Model model){
-        User otherProfile = userDao.findByUserName(username);
+        User otherProfile = userDao.findByUsername(username);
         model.addAttribute("viewOtherProfile", otherProfile);
         return "publicProfile";
     }
@@ -43,7 +43,7 @@ public class ProfileController {
         return "personalProfile";
     }
 
-}
+
 //    @GetMapping("/profile")
 //    public String ProfilePage() {
 //        return "profile";
