@@ -34,23 +34,18 @@ public class User {
     @Column(nullable = false, length = 100)
     @Getter @Setter
     private String password;
-
     @Column
     @Getter @Setter
     private String profilePicture;
-
     @Column
     @Getter @Setter
     private String bannerUrl;
-
     @Column
     @Getter @Setter
     private String bio;
-
     @Column
     @Getter @Setter
     private String role;
-
 //    Below is for Admin function JJM
     @Column(nullable = false)
     @Getter @Setter

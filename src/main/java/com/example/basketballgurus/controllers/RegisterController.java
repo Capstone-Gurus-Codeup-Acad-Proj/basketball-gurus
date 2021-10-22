@@ -33,6 +33,7 @@ public class RegisterController {
     public String create(@ModelAttribute User user) {
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
+//        user.setActive(true);
         userDao.save(user);
         return "user/login";
     }
