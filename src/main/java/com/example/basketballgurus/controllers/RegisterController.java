@@ -1,18 +1,9 @@
 package com.example.basketballgurus.controllers;
 
 import com.example.basketballgurus.models.User;
-<<<<<<< HEAD
-import com.example.basketballgurus.repos.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
-=======
-
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import com.example.basketballgurus.repositories.UserRepository;
-
 import com.example.basketballgurus.services.GameBarService;
-
->>>>>>> 1d52bd12c7293e3fb5b71b283acdbe464f1f35c6
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
