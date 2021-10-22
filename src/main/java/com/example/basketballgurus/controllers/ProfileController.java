@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.model.IModel;
-
 @Controller
 public class ProfileController {
     private final UserRepository userDao;
@@ -27,12 +26,13 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String userProfile(Model model) {
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userDao.findByUserName(currentUser.getUserName());
+ //       User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUserName("Papa");
+        model.addAttribute("user",user);
         if (!user.isActive()) {
             return "redirect:/home";
         }
-        return "redirect:/profile/" + currentUser.getId();
+        return "/profile";
     }
 
     @GetMapping("/profile/{id}")
@@ -42,14 +42,14 @@ public class ProfileController {
         return "profile/Idview";
     }
 
-    @GetMapping("/profile/edit")
-    public String EditProfile(Model model) {
-        User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userDao.findByUserName(loggedin.getUserName());
-        model.addAttribute("user", (user).getUserName());
-        return "profile/edit";
-    }
-
+//  need to get all user details
+//    @GetMapping("/profile/edit")
+//    public String EditProfile(Model model) {
+//        User loggedin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = userDao.findByUserName(loggedin.getUserName());
+//        model.addAttribute("user", (user).getUserName());
+//        return "profile/edit";
+//    }
     @RequestMapping(value = "profile/{id}", method = RequestMethod.POST)
     public String getUserName(@RequestParam(name = "username") String username,Model model) {
         User currentUser = userDao.findByUserName(username);

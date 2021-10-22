@@ -12,10 +12,6 @@
         width: 140px;
         border-radius: 50%
     }
-    .name {
-        font-size: 22px;
-        font-weight: bold
-    }
     .text span {
         font-size: 13px;
         color: #545454;
@@ -37,7 +33,6 @@
         src: local('Roboto Light'), local('Roboto-Light'), url(https://fonts.gstatic.com/s/roboto/v18/KFOlCnqEu92Fr1MmSU5fCRc4AMP6lbBP.woff2) format('woff2');
         unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
     }
-
     /* cyrillic */
     @font-face {
         font-family: 'Roboto';
@@ -138,29 +133,28 @@
     </header>
     <section class="profile-content">
     <div class="container">
-        <div th:action="@{user}" class="card">
+        <tbody>
+        <div class="card">
             <button class="btn1 btn-1-2"> <img src="" height="100" width="100" alt="PFP" /></button>
-                <div th:each="user : ${users}">
-                    <h2 value="username"></h2>
-                <div class="container card-right">
-                    <ul class="pro pro-pills pro-pills-icons">
-                        <li class="pro-items">
-                            <button class="btn1 btn-1-1">
-                                <i class="material-icons">visibility</i>Edit Profile
-                            </button>
-                        </li>
-                        <li class="pro-items">
-                            <button class="btn1 btn-1-1">
-                                <i class="material-icons">groups</i>View my Leagues
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-                </div>
+            <h2 th:text="${user.getUserName}"></h2>
+            <div class="container card-right">
+                <ul class="pro pro-pills pro-pills-icons">
+                    <li class="pro-items">
+                        <button class="btn1 btn-1-1">
+                            <i class="material-icons">visibility</i>Edit Profile
+                        </button>
+                    </li>
+                    <li class="pro-items">
+                        <button class="btn1 btn-1-1">
+                            <i class="material-icons">groups</i>View my Leagues
+                        </button>
+                    </li>
+                </ul>
             </div>
         </div>
+        </div>
+        </tbody>
     </section>
-
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
