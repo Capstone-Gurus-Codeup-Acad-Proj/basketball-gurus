@@ -11,32 +11,29 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class RegisterController {
+public class UserController {
     private final UserRepository userDao;
     private final GameBarService gm;
     private final PasswordEncoder passwordEncoder;
 
-    public RegisterController(UserRepository userDao, GameBarService gm, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository userDao, GameBarService gm, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.gm = gm;
         this.passwordEncoder = passwordEncoder;
     }
 
 
-    @GetMapping("/register")
+    @GetMapping("/sign-up")
     public String showCreateForm(Model model) {
         model.addAttribute("games", gm.getTodaysGames());
         model.addAttribute("user", new User());
         return "user/register";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/sign-up")
     public String create(@ModelAttribute User user, Model model) {
-        System.out.println(user);
         model.addAttribute("games", gm.getTodaysGames());
         String hash = passwordEncoder.encode(user.getPassword());
-        System.out.println("Passwords match is :");
-        System.out.println(passwordEncoder.matches(hash, user.getPassword()));
         user.setPassword(hash);
 //        user.setActive(true);
         userDao.save(user);

@@ -1,29 +1,25 @@
 package com.example.basketballgurus;
 
 import com.example.basketballgurus.services.UserDetailsLoader;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@EnableWebSecurity
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsLoader usersLoader;
+    private UserDetailsLoader usersLoader;
 
-    public WebSecurityConfiguration(UserDetailsLoader usersLoader) {
+    public SecurityConfiguration(UserDetailsLoader usersLoader) {
         this.usersLoader = usersLoader;
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-
         return new BCryptPasswordEncoder();
     }
 
@@ -50,30 +46,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/teams") // anyone can see the home and the ads pages
+                .antMatchers("/", "/home") // anyone can see the home and the ads pages
                 .permitAll()
                 /* Pages that require authentication */
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/teams/create", // only authenticated users can create ads
-                        "/teams/{id}/edit" // only authenticated users can edit ads
+                        "/profile", // only authenticated users can create ads
+                        "/profile/edit" // only authenticated users can edit ads
                 )
                 .authenticated()
         ;
-//
-//                http.authorizeRequests()
-//                        .antMatchers("/")
-//                        .permitAll()
-//                        .antMatchers("/home")
-//                        .hasAuthority("USER")
-//                        .antMatchers("/admin")
-//                        .hasAuthority("ADMIN")
-//                        .anyRequest()
-//                        .authenticated()
-//                        .and()
-//                        .httpBasic();
-
     }
 }
-

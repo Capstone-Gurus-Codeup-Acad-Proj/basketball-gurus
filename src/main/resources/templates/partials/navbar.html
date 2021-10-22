@@ -42,7 +42,7 @@
         <a class="btn" href="#" th:href="@{/leagues}">My Leagues</a>
       </li>
       <li th:classappend="${module == 'Register' ? 'active' : ''}">
-      <a class="btn" href="#" th:href="@{/register}">Register</a>
+      <a class="btn" href="#" th:href="@{/sign-up}">Register</a>
       </li>
       <li th:classappend="${module == 'Login' ? 'active' : ''}">
         <a class="btn" href="#" th:href="@{/login}">Login</a>
@@ -59,7 +59,9 @@
             <a class="btn" href="#" th:href="@{/profile}">My Profile</a>
           </li>
         <li th:classappend="${module == 'Logout' ? 'active' : ''}">
-          <a class="btn" href="#" th:href="@{/logout}">Logout</a>
+          <form th:action="@{/logout}" th:method="post">
+            <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+          </form>
         </li>
         </ul>
       </div>
