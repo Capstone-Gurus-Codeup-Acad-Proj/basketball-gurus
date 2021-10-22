@@ -12,11 +12,6 @@
         width: 140px;
         border-radius: 50%
     }
-    .text span {
-        font-size: 13px;
-        color: #545454;
-        font-weight: 500
-    }
     /* google fonts */
     /* fallback */
     @font-face {
@@ -127,21 +122,30 @@
     }
 </style>
 <body>
-    <header>
-        <nav th:replace="partials/navbar.html :: navbar">
-        </nav>
-    </header>
-    <section class="profile-content">
-    <div class="container">
-        <tbody>
-        <div class="card">
-            <button class="btn1 btn-1-2"> <img src="" height="100" width="100" alt="PFP" /></button>
-            <h2 th:text="${user.getUserName}"></h2>
-            <div class="container card-right">
+<header>
+    <nav th:replace="partials/navbar.html :: navbar">
+    </nav>
+</header>
+<div class="row py-5 px-4">
+    <div class="col-md-5 mx-auto">
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 cover">
+                <div class="media align-items-end profile-head">
+                    <div class="profile mr-3"><img th:src="${user.getProfilePicture}" alt="PFP" width="130" class="rounded mb-2 img-thumbnail">
+                        <a href="#" class="btn btn-outline-dark btn-sm btn-block align-items-end" style="margin: revert">Edit profile</a>
+                    </div>
+                    <br>
+                    <div class="media-body mb-5 justify-content-start text-right">
+                        <h4 th:text="${user.getUserName}">Hello</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
                 <ul class="pro pro-pills pro-pills-icons">
                     <li class="pro-items">
                         <button class="btn1 btn-1-1">
-                            <i class="material-icons">visibility</i>Edit Profile
+                            <i class="material-icons">visibility</i>View my Team
                         </button>
                     </li>
                     <li class="pro-items">
@@ -151,44 +155,29 @@
                     </li>
                 </ul>
             </div>
+            <div class="px-4 py-3">
+                <h5 class="mb-0">Fantasy Management</h5>
+                <div class="p-4 rounded shadow-sm bg-light">
+                    <p class="font-italic mb-0">Game History</p>
+                    <br>
+                    <p class="font-italic mb-0">Edit Team</p>
+                    <br>
+                    <p class="font-italic mb-0">View Scores</p>
+                </div>
+            </div>
+            <div class="py-4 px-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="mb-0">League Leaderboards</h5><a href="#" class="btn btn-link text-muted">Show all Leagues</a>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-2 pr-lg-1">Hola</div>
+                    <div class="col-lg-6 mb-2 pl-lg-1">Bonjour</div>
+                    <div class="col-lg-6 pr-lg-1 mb-2">Hello</div>
+                    <div class="col-lg-6 pl-lg-1">Hi</div>
+                </div>
+            </div>
         </div>
-        </div>
-        </tbody>
-    </section>
+    </div>
+</div>
 </body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>
-
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">-->
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
-<!--<style th:inline="text">-->
-
-
-<!--</style>-->
-
-<!--<nav th:fragment="gamebar" class="navbar navbar-expand-lg navbar-light bg-light">-->
-
-<!--    <tbody>-->
-<!--    <div th:each="game : ${games}" class="container">-->
-<!--        <div class="d-block">-->
-<!--            <div><small><td th:text="${game.getFormattedStartTime}"></td> PM CST</small></div>-->
-<!--            <div>-->
-<!--                <img th:src="${game.getAwayTeamId.getLogoUrl}" alt="" style="width: 25px">-->
-<!--                <small><td th:text="${game.getAwayTeamId.getAbbr}"></td></small>-->
-<!--            </div>-->
-<!--            <div><small><td th:text="${game.getHomeTeamId.getAbbr}"></td></small></div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    </tbody>-->
-
-<!--</nav>-->
-
-<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
-<!--<script></script>-->
-<!--</html>-->

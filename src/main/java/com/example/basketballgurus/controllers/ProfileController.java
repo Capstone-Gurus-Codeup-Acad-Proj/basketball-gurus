@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.model.IModel;
+
+import java.util.Optional;
+
 @Controller
 public class ProfileController {
     private final UserRepository userDao;
@@ -27,11 +30,11 @@ public class ProfileController {
     @GetMapping("/profile")
     public String userProfile(Model model) {
  //       User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userDao.findByUserName("Papa");
+        User user = userDao.getById(1L);
         model.addAttribute("user",user);
-        if (!user.isActive()) {
-            return "redirect:/home";
-        }
+//        if (!user.isActive()) {
+//            return "redirect:/home";
+//        }
         return "/profile";
     }
 
