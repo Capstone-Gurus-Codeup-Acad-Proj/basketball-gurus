@@ -1,6 +1,5 @@
 package com.example.basketballgurus.controllers;
 
-import com.example.basketballgurus.GameBar;
 import com.example.basketballgurus.repositories.GameRepository;
 import com.example.basketballgurus.services.GameBarService;
 import org.springframework.stereotype.Controller;
@@ -21,6 +20,6 @@ public class LeagueVisitorController {
     @GetMapping("/leagues/visitor")
     public String leaguePageVisitor(Model model) {
         model.addAttribute("games", gm.getTodaysGames());
-        return "leagueVisitor";
+        return "MyLeague";
     }
 }
