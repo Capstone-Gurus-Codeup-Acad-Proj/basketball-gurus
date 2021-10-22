@@ -9,31 +9,14 @@ import java.util.Collection;
 public class UserWithRoles extends User implements UserDetails {
 
     public UserWithRoles(User user) {
-        super(user);
+        super(user);  // Call the copy constructor defined in User
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         String roles = ""; // Since we're not using the authorization part of the component
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
-        //or return Collections.singleton(new SimpleGrantedAuthority(user.getRole));
     }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-        @Override
-    public String getRole() {
-        return null;
-    }
-
 
     @Override
     public boolean isAccountNonExpired() {
