@@ -1,3 +1,4 @@
+package com.example.basketballgurus.controllers;
 //package com.example.basketballgurus.controllers;
 //
 //import com.example.basketballgurus.models.User;
@@ -26,8 +27,7 @@
 //    }
 //}
 
-<<<<<<< HEAD
-=======
+
 import com.example.basketballgurus.models.User;
 import com.example.basketballgurus.repositories.UserRepository;
 import com.example.basketballgurus.services.GameBarService;
@@ -54,11 +54,11 @@ public class LoginController {
         return "user/login";
     }
 
-    @PostMapping("/login")
-    public String show(@ModelAttribute User user, Model model) {
-        model.addAttribute("games", gm.getTodaysGames());
-        return "redirect:/";
-    }
+//    @PostMapping("/login")
+//    public String show(@ModelAttribute User user, Model model) {
+//        model.addAttribute("games", gm.getTodaysGames());
+//        return "redirect:/";
+//    }
 }
->>>>>>> 1d52bd12c7293e3fb5b71b283acdbe464f1f35c6
+
 

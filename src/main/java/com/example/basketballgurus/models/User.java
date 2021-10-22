@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
+@ToString
 @Table(name="users")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +18,7 @@ public class User {
 
     @Column(length = 100)
     @Getter @Setter
-    private String userName;
+    private String username;
 
     @Column(nullable = false, length = 100)
     @Getter @Setter
@@ -51,30 +52,14 @@ public class User {
     @Getter @Setter
     private boolean isActive;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                 ", username='" + userName + '\'' +
-                 ", password='" + password + '\'' +
-                 ", role='" + role + '\'' +
-                '}';
-    }
+
 
     public User(User copy) {
         id = copy.id;
         email = copy.email;
-        userName = copy.userName;
+        username = copy.username;
         password = copy.password;
-        firstName = copy.firstName;
-        lastName = copy.lastName;
-        bio = copy.bio;
-        profilePicture = copy.profilePicture;
-        bannerUrl = copy.bannerUrl;
-        isActive = copy.isActive;
-        role = copy.role;
+
     }
 
-    public void save(User user) {
-    }
 }

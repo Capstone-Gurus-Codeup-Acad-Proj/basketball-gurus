@@ -1,18 +1,12 @@
 package com.example.basketballgurus.controllers;
 
 import com.example.basketballgurus.models.User;
-<<<<<<< HEAD
-import com.example.basketballgurus.repos.UserRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
-=======
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.basketballgurus.repositories.UserRepository;
 
 import com.example.basketballgurus.services.GameBarService;
 
->>>>>>> 1d52bd12c7293e3fb5b71b283acdbe464f1f35c6
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +19,12 @@ public class RegisterController {
     private final GameBarService gm;
     private final PasswordEncoder passwordEncoder;
 
-    public RegisterController(UserRepository userDao, PasswordEncoder passwordEncoder, GameBarService gm) {
+    public RegisterController(UserRepository userDao, GameBarService gm, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
-        this.passwordEncoder = passwordEncoder;
         this.gm = gm;
+        this.passwordEncoder = passwordEncoder;
     }
+
 
     @GetMapping("/register")
     public String showCreateForm(Model model) {
@@ -40,11 +35,14 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String create(@ModelAttribute User user, Model model) {
+        System.out.println(user);
         model.addAttribute("games", gm.getTodaysGames());
         String hash = passwordEncoder.encode(user.getPassword());
+        System.out.println("Passwords match is :");
+        System.out.println(passwordEncoder.matches(hash, user.getPassword()));
         user.setPassword(hash);
 //        user.setActive(true);
         userDao.save(user);
-        return "user/login";
+        return "redirect:/login";
     }
 }

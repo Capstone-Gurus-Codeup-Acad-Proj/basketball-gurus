@@ -2,15 +2,10 @@ package com.example.basketballgurus.controllers;
 
 import com.example.basketballgurus.models.User;
 import com.example.basketballgurus.repositories.UserRepository;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.model.IModel;
-
-import java.util.Optional;
 
 @Controller
 public class ProfileController {
@@ -55,7 +50,7 @@ public class ProfileController {
 //    }
     @RequestMapping(value = "profile/{id}", method = RequestMethod.POST)
     public String getUserName(@RequestParam(name = "username") String username,Model model) {
-        User currentUser = userDao.findByUserName(username);
+        User currentUser = userDao.findByUsername(username);
         model.addAttribute("users", currentUser);
         return "/profile";
     }

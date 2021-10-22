@@ -19,7 +19,9 @@ public class UserDetailsLoader implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User user = userDao.findByUserName(userName);
+        System.out.println("I am serching by username");
+        User user = userDao.findByUsername(userName);
+        System.out.println(user);
         if (user == null) {
             throw new UsernameNotFoundException("No user found for " + userName);
         }
