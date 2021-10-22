@@ -12,15 +12,6 @@
         width: 140px;
         border-radius: 50%
     }
-    .name {
-        font-size: 22px;
-        font-weight: bold
-    }
-    .text span {
-        font-size: 13px;
-        color: #545454;
-        font-weight: 500
-    }
     /* google fonts */
     /* fallback */
     @font-face {
@@ -37,7 +28,6 @@
         src: local('Roboto Light'), local('Roboto-Light'), url(https://fonts.gstatic.com/s/roboto/v18/KFOlCnqEu92Fr1MmSU5fCRc4AMP6lbBP.woff2) format('woff2');
         unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
     }
-
     /* cyrillic */
     @font-face {
         font-family: 'Roboto';
@@ -132,36 +122,62 @@
     }
 </style>
 <body>
-    <header>
-        <nav th:replace="partials/navbar.html :: navbar">
-
-        </nav>
-    </header>
-    <section class="profile-content">
-    <div class="container">
-            <div class="card">
-            <button class="btn1 btn-1-2"> <img src="" height="100" width="100" alt="PFP" /></button>
-                <h1 class="name mt-3">Username</h1>
-                <div class="container card-right">
-                    <ul class="pro pro-pills pro-pills-icons">
-                        <li class="pro-items">
-                            <button class="btn1 btn-1-1">
-                                <i class="material-icons">visibility</i>Edit Profile
-                            </button>
-                        </li>
-                        <li class="pro-items">
-                            <button class="btn1 btn-1-1">
-                                <i class="material-icons">groups</i>View my Leagues
-                            </button>
-                        </li>
-                    </ul>
+<header>
+    <nav th:replace="partials/navbar.html :: navbar">
+    </nav>
+</header>
+<div class="row py-5 px-4">
+    <div class="col-md-5 mx-auto">
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 cover">
+                <div class="media align-items-end profile-head">
+                    <div class="profile mr-3"><img th:src="${user.getProfilePicture}" alt="PFP" width="130" class="rounded mb-2 img-thumbnail">
+                        <a href="#" class="btn btn-outline-dark btn-sm btn-block align-items-end" style="margin: revert">Edit profile</a>
+                    </div>
+                    <br>
+                    <div class="media-body mb-5 justify-content-start text-right">
+                        <h4 th:text="${user.getUserName}">Hello</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="pro pro-pills pro-pills-icons">
+                    <li class="pro-items">
+                        <button class="btn1 btn-1-1">
+                            <i class="material-icons">visibility</i>View my Team
+                        </button>
+                    </li>
+                    <li class="pro-items">
+                        <button class="btn1 btn-1-1">
+                            <i class="material-icons">groups</i>View my Leagues
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="px-4 py-3">
+                <h5 class="mb-0">Fantasy Management</h5>
+                <div class="p-4 rounded shadow-sm bg-light">
+                    <p class="font-italic mb-0">Game History</p>
+                    <br>
+                    <p class="font-italic mb-0">Edit Team</p>
+                    <br>
+                    <p class="font-italic mb-0">View Scores</p>
+                </div>
+            </div>
+            <div class="py-4 px-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="mb-0">League Leaderboards</h5><a href="#" class="btn btn-link text-muted">Show all Leagues</a>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-2 pr-lg-1">Hola</div>
+                    <div class="col-lg-6 mb-2 pl-lg-1">Bonjour</div>
+                    <div class="col-lg-6 pr-lg-1 mb-2">Hello</div>
+                    <div class="col-lg-6 pl-lg-1">Hi</div>
                 </div>
             </div>
         </div>
-    </section>
-
+    </div>
+</div>
 </body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>
