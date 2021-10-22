@@ -15,14 +15,6 @@ public class ProfileController {
         this.userDao = userDao;
     }
 
-    @GetMapping("profile/login")
-    public String login(Model model, String error, String logout) {
-    if (error != null)
-        model.addAttribute("error", "Your Username and Password is invalid.");
-    if (logout != null)
-        model.addAttribute("message", "You Have Been Logged Out Successfully.");
-    return "redirect:/landingPage";
-    }
     @GetMapping({"/profile"})
     public String profile(Model model) {
         return "/Profile";

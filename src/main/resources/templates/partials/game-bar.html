@@ -2,19 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-<nav th:fragment="gamebar" class="navbar navbar-expand-lg navbar-light">
+
+
+<nav th:fragment="gamebar" class="navbar navbar-expand-lg navbar-light" style="background-color: #f1f2f3">
     <tbody>
-    <div th:each="game : ${games}" class="d-block px-4 border-right border-left game-div">
-        <div class="d-flex align-items-center">
-            <div th:text="${game.getFormattedStartTime()}"></div><small><div class="pl-1">PM CST</div></small>
-        </div>
-        <div class="d-flex">
-            <img th:src="${game.getAwayTeamId.getLogoUrl}" alt="" style="width: 20px">
-            <small><div th:text="${game.getAwayTeamId.getAbbr}" class="pl-3"></div></small>
-        </div>
-        <div class="d-flex">
-            <img th:src="${game.getHomeTeamId.getLogoUrl}" alt="" style="width: 20px">
-            <small><div th:text="${game.getHomeTeamId.getAbbr}" class="pl-3"></div></small>
+    <div style="background-color: white" class="d-flex">
+        <div th:each="game : ${games}" class="d-block px-4 border-right border-dark game-div">
+            <div class="d-flex align-items-center">
+                <div th:text="${game.getFormattedStartTime()}" class=""></div><div class="pl-1" style="font-size: 16px">PM <inline style="font-size: 10px">CST</inline></div>
+            </div>
+            <div class="d-flex mt-1 mb-1">
+                <img th:src="${game.getAwayTeamId.getLogoUrl}" alt="" style="width: 15px; height: auto">
+                <div th:text="${game.getAwayTeamId.getAbbr}" class="pl-3 small"></div>
+            </div>
+            <div class="d-flex mt-1 mb-1">
+                <img th:src="${game.getHomeTeamId.getLogoUrl}" alt="" style="width: 15px; height: auto">
+                <div th:text="${game.getHomeTeamId.getAbbr}" class="pl-3 small"></div>
+            </div>
         </div>
     </div>
     </tbody>
