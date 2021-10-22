@@ -20,7 +20,7 @@ public class RegisterController {
     private final GameBarService gm;
     private final PasswordEncoder passwordEncoder;
 
-    public RegisterController(UserRepository userDao, PasswordEncoder passwordEncoder) {
+    public RegisterController(UserRepository userDao, PasswordEncoder passwordEncoder, GameBarService gm) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
         this.gm = gm;
@@ -34,7 +34,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String create(@ModelAttribute User user) {
+    public String create(@ModelAttribute User user, Model model) {
         model.addAttribute("games", gm.getTodaysGames());
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);

@@ -21,5 +21,6 @@ public class LeagueVisitorController {
     @GetMapping("/leagues/visitor")
     public String leaguePageVisitor(Model model) {
         model.addAttribute("games", gm.getTodaysGames());
-
+        return "leagueVisitor";
+    }
 }
