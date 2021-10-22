@@ -2,6 +2,7 @@ package com.example.basketballgurus.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -27,6 +28,13 @@ public class Game {
     @Column(nullable = false)
     @Getter @Setter
     private Date startTime;
+
+    public String getFormattedStartTime(){
+        String pattern = "h:mm";
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        String date =  sdf.format(startTime);
+        return date;
+    }
 
     @Column(nullable = false, columnDefinition = "Boolean default false")
     @Getter @Setter

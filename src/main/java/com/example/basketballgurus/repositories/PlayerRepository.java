@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, Long> {
+
     @Query("select e from Player e where lower(e.firstName) like lower(concat('%', :search, '%')) " +
             "or lower(e.lastName) like lower(concat('%', :search, '%'))")
     List<Player> findByFirstNameOrLastName(@Param("search") String search);

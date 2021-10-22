@@ -26,6 +26,7 @@ public class ProfileController {
         User otherProfile = userDao.findByUserName(username);
         model.addAttribute("viewOtherProfile", otherProfile);
         return "publicProfile";
+
     }
 //    @GetMapping("/profile")
 //    public String ownProfile(Model model){

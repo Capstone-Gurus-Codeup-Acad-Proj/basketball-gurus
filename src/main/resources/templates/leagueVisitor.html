@@ -10,6 +10,7 @@
 
 </head>
 <body>
+<nav th:replace="partials/game-bar.html :: gamebar"></nav>
 <nav th:replace="partials/navbar.html :: navbar">
 
 </nav>
@@ -108,7 +109,47 @@
     </tr>
     <tr>
         <th scope="row">3</th>
-        <td>Seths Misfits League</td>
+        <td>Seth's Misfits League</td>
+        <td>TBD</td>
+        <td>TBD</td>
+        <td>7/9</td>
+        <td th:classappend="${module == 'Register' ? 'active' : ''}">
+            <a class="btn" th:href="@{/register}">Register</a>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">3</th>
+        <td>Quentin's Quirky Queens</td>
+        <td>TBD</td>
+        <td>TBD</td>
+        <td>12/25</td>
+        <td th:classappend="${module == 'Register' ? 'active' : ''}">
+            <a class="btn" th:href="@{/register}">Register</a>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">3</th>
+        <td>Allison's Appendixes</td>
+        <td>TBD</td>
+        <td>TBD</td>
+        <td>11/11</td>
+        <td th:classappend="${module == 'Register' ? 'active' : ''}">
+            <a class="btn" th:href="@{/register}">Register</a>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">3</th>
+        <td>John's Jaded Journey</td>
+        <td>TBD</td>
+        <td>TBD</td>
+        <td>7/9</td>
+        <td th:classappend="${module == 'Register' ? 'active' : ''}">
+            <a class="btn" th:href="@{/register}">Register</a>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">3</th>
+        <td>Youssef's Yodeling Yankees</td>
         <td>TBD</td>
         <td>TBD</td>
         <td>7/9</td>
