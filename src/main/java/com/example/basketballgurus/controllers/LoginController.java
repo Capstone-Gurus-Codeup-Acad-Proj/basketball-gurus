@@ -30,7 +30,6 @@ package com.example.basketballgurus.controllers;
 
 import com.example.basketballgurus.models.User;
 
-import com.example.basketballgurus.repos.UserRepository;
 import com.example.basketballgurus.repositories.UserRepository;
 
 import com.example.basketballgurus.repositories.UserRepository;
