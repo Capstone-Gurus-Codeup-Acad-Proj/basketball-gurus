@@ -153,7 +153,7 @@ public class ScheduleMaker implements ScheduleMakerService {
         if(games.isEmpty()){
             generateGames();
         }
-
+      
         for(Game game : games){
             if (!checkDate(game)){
                 generateGames();

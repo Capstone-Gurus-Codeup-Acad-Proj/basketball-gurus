@@ -25,8 +25,57 @@
 </div>
 </div>
 <div class="container">
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Create a League
+</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create a League</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/leagues/create}" th:method="league" th:object="${league}">
+                    League PFP URL
+                    <input th:field="*{leaguePfp}" />
+                    <br />
+                    League Name:
+                    <input th:field="*{leagueName}" />
+                    <br />
+                    Start Date:
+                    <input th:field="*{startDate}" />
+                    <br />
+                    End Date:
+                    <input th:field="*{endDate}" />
+                    <br />
+                    Password:
+                    <input th:field="*{password}" />
+                    <br />
+
+                    <input type="submit" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
 <table class="table table-dark">
+
+
+
     <thead>
+
     <tr>
         <th scope="col">#</th>
         <th scope="col">League Name</th>
