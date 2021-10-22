@@ -7,11 +7,17 @@
 </head>
 <body>
 
+<h1>Log In</h1>
 
 <nav th:replace="partials/game-bar.html :: gamebar"></nav>
 <nav th:replace="partials/navbar.html :: navbar"></nav>
 
 <!--</nav>-->
+
+<h1>MEMBER LOGIN PAGE</h1>
+<form th:action="@{/login}" method="post">
+</form>
+
 <h1>LOGIN PAGE</h1>
 
 <form th:action="@{/login}" method="post">

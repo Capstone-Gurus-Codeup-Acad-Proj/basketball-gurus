@@ -16,11 +16,12 @@ public class RegisterController {
     private final GameBarService gm;
     private final PasswordEncoder passwordEncoder;
 
-    public RegisterController(UserRepository userDao, PasswordEncoder passwordEncoder, GameBarService gm) {
+    public RegisterController(UserRepository userDao, GameBarService gm, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
-        this.passwordEncoder = passwordEncoder;
         this.gm = gm;
+        this.passwordEncoder = passwordEncoder;
     }
+
 
     @GetMapping("/register")
     public String showCreateForm(Model model) {
@@ -31,11 +32,14 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String create(@ModelAttribute User user, Model model) {
+        System.out.println(user);
         model.addAttribute("games", gm.getTodaysGames());
         String hash = passwordEncoder.encode(user.getPassword());
+        System.out.println("Passwords match is :");
+        System.out.println(passwordEncoder.matches(hash, user.getPassword()));
         user.setPassword(hash);
 //        user.setActive(true);
         userDao.save(user);
-        return "user/login";
+        return "redirect:/login";
     }
 }

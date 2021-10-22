@@ -1,17 +1,14 @@
 package com.example.basketballgurus.controllers;
 
 import com.example.basketballgurus.models.User;
-<<<<<<< HEAD
-import com.example.basketballgurus.repos.UserRepository;
 import com.example.basketballgurus.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
-=======
 import com.example.basketballgurus.repositories.UserRepository;
 import com.example.basketballgurus.services.GameBarService;
 import org.springframework.security.crypto.password.PasswordEncoder;
->>>>>>> 31761165d10e18dfdc41393b437a2a399b3b00d8
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -27,7 +24,6 @@ public class ProfileController {
         this.gm = gm;
     }
 
-<<<<<<< HEAD
     @GetMapping("/profile")
     public String ProfilePage() {
         return "profile";
@@ -48,7 +44,6 @@ public class ProfileController {
     }
 
 }
-=======
 //    @GetMapping("/profile")
 //    public String ProfilePage() {
 //        return "profile";
@@ -83,9 +78,8 @@ public class ProfileController {
 //    }
     @RequestMapping(value = "profile/{id}", method = RequestMethod.POST)
     public String getUserName(@RequestParam(name = "username") String username,Model model) {
-        User currentUser = userDao.findByUserName(username);
+        User currentUser = userDao.findByUsername(username);
         model.addAttribute("users", currentUser);
         return "/profile";
     }
 }
->>>>>>> 31761165d10e18dfdc41393b437a2a399b3b00d8
