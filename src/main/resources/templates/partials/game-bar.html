@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<style th:inline="text">
 
-
-</style>
-
-<nav th:fragment="gamebar" class="navbar navbar-expand-lg navbar-light bg-light">
-
+<nav th:fragment="gamebar" class="navbar navbar-expand-lg navbar-light">
     <tbody>
-    <div th:each="game : ${games}" class="container">
-        <div class="d-block">
-            <div><small><td th:text="${game.getFormattedStartTime}"></td> PM CST</small></div>
-            <div>
-                <img th:src="${game.getAwayTeamId.getLogoUrl}" alt="" style="width: 25px">
-                <small><td th:text="${game.getAwayTeamId.getAbbr}"></td></small>
-            </div>
-            <div><small><td th:text="${game.getHomeTeamId.getAbbr}"></td></small></div>
+    <div th:each="game : ${games}" class="d-block px-4 border-right border-left game-div">
+        <div class="d-flex align-items-center">
+            <div th:text="${game.getFormattedStartTime()}"></div><small><div class="pl-1">PM CST</div></small>
+        </div>
+        <div class="d-flex">
+            <img th:src="${game.getAwayTeamId.getLogoUrl}" alt="" style="width: 20px">
+            <small><div th:text="${game.getAwayTeamId.getAbbr}" class="pl-3"></div></small>
+        </div>
+        <div class="d-flex">
+            <img th:src="${game.getHomeTeamId.getLogoUrl}" alt="" style="width: 20px">
+            <small><div th:text="${game.getHomeTeamId.getAbbr}" class="pl-3"></div></small>
         </div>
     </div>
     </tbody>
