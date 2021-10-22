@@ -18,6 +18,7 @@ public class League {
     private int id;
 
     @OneToOne
+    @Getter @Setter
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User ownerId;
 
