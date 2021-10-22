@@ -43,9 +43,9 @@ public class GameStatsModel {
     @Getter @Setter
     public String tpp;
     @Getter @Setter
-    public String offReb;
+    public int offReb;
     @Getter @Setter
-    public String defReb;
+    public int defReb;
     @Getter @Setter
     public String totReb;
     @Getter @Setter

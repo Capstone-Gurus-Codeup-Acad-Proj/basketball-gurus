@@ -149,9 +149,11 @@ public class ScheduleMaker implements ScheduleMakerService {
     public void checkSchedule() throws IOException, ParseException {
 
         List<Game> games = gameDao.findAll();
+
         if(games.isEmpty()){
             generateGames();
         }
+      
         for(Game game : games){
             if (!checkDate(game)){
                 generateGames();
