@@ -1,276 +1,183 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Landing Page</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <style th:inline="text">
-    body{
-      background-image: url("/static/img/squad.jpeg");
-      background-size: cover;
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<style>
+    .btn1 {
+        height: 140px;
+        width: 140px;
+        border-radius: 50%
     }
-    * {
-      margin: 0;
-      padding: 0
+    /* google fonts */
+    /* fallback */
+    @font-face {
+        font-family: 'Material Icons';
+        font-style: normal;
+        font-weight: 400;
+        src: url(https://fonts.gstatic.com/s/materialicons/v41/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');
     }
-    .image img {
-      transition: all 0.5s
+    /* cyrillic-ext */
+    @font-face {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        src: local('Roboto Light'), local('Roboto-Light'), url(https://fonts.gstatic.com/s/roboto/v18/KFOlCnqEu92Fr1MmSU5fCRc4AMP6lbBP.woff2) format('woff2');
+        unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
     }
-    .card:hover .image img {
-      transform: scale(1.5)
+    /* cyrillic */
+    @font-face {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        src: local('Roboto Light'), local('Roboto-Light'), url(https://fonts.gstatic.com/s/roboto/v18/KFOlCnqEu92Fr1MmSU5fABc4AMP6lbBP.woff2) format('woff2');
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
     }
-    .btn {
-      height: 140px;
-      width: 140px;
-      border-radius: 50%
+    .pro .pro-items {
+        position: relative;
+        margin: 0 2px;
     }
-    .name {
-      font-size: 22px;
-      font-weight: bold
+    .pro-pills .pro-items {
+        line-height: 24px;
+        font-size: 12px;
+        font-weight: 500;
+        min-width: 100px;
+        color: #555;
+        transition: all .3s;
+        border-radius: 30px;
+        padding: 10px 15px;
     }
-    .text span {
-      font-size: 13px;
-      color: #545454;
-      font-weight: 500
+    .pro-pills .pro-items i {
+        display: block;
+        font-size: 20px;
+        padding: 15px 0;
     }
-    .icons i {
-      font-size: 19px
-    }
-    hr  {
-      border: 1px solid
-    }
-
-    .card{
-      background-color: rgba(239, 113, 11, 0.91);
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-    }
-    .container{
-      display: flex;
-      flex-direction: column;
-      top: 400px;
-    }
-    .material-icons {
-      font-family: 'Material Icons',serif;
-      font-weight: normal;
-      font-style: normal;
-      font-size: 24px;
-      line-height: 1;
-      letter-spacing: normal;
-      text-transform: none;
-      display: inline-block;
-      white-space: nowrap;
-      word-wrap: normal;
-      direction: ltr;
-      -webkit-font-feature-settings: 'liga';
-      -webkit-font-smoothing: antialiased;
-      text-align: center;
-    }
-
-    html * {
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* typography */
-
-    h1{
-      font-size: 3.3125rem;
-      line-height: 1.15em;
-    }
-
-    h2{
-      font-size: 2.25rem;
-      line-height: 1.5em;
-    }
-
-    h3{
-      font-size: 1.5625rem;
-      line-height: 1.4em;
-    }
-
-    h4 {
-      font-size: 1.125rem;
-      line-height: 1.5em;
-    }
-
-    h5{
-      font-size: 1.0625rem;
-      line-height: 1.55em;
-      margin-bottom: 15px;
-    }
-
-    h6{
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-
-    p {
-      font-size: 14px;
-      margin: 0 0 10px;
-    }
-    .navbar .navbar-nav .nav-item {
-      position: relative;
-      color: inherit;
-      padding: .9375rem;
-      font-weight: 400;
-      font-size: 12px;
-      border-radius: 3px;
-      line-height: 20px;
-      text-transform: uppercase;
-    }
-
-    i .material-icons {
-      vertical-align: center;
-    }
-
-    .profile-page .profile img {
-      max-width: 160px;
-      width: 100%;
-      margin: 0 auto;
-      -webkit-transform: translate3d(0, -50%, 0);
-      -moz-transform: translate3d(0, -50%, 0);
-      -o-transform: translate3d(0, -50%, 0);
-      -ms-transform: translate3d(0, -50%, 0);
-      transform: translate3d(0, -50%, 0);
-    }
-
-    .nav-pills{
-      border: 0;
-      border-radius: 3px;
-      padding: 0 15px;
-    }
-
-    .nav .nav-item {
-      position: relative;
-      margin: 0 2px;
-    }
-
-    .nav-pills .nav-item .nav-link {
-      line-height: 24px;
-      font-size: 12px;
-      font-weight: 500;
-      min-width: 100px;
-      color: #555;
-      transition: all .3s;
-      border-radius: 30px;
-      padding: 10px 15px;
-    }
-
-    .nav-pills .nav-item i {
-      display: block;
-      font-size: 20px;
-      padding: 15px 0;
-
+    .container .card-right{
+        width: 0;
+        float: right;
+        margin-right: 150px;
     }
     /* buttons */
-    .btn {
-      position: relative;
-      padding: 12px 30px;
-      margin: .3125rem 1px;
-      font-size: .75rem;
-      font-weight: 400;
-      line-height: 1.428571;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0;
-      cursor: pointer;
-      background-color: transparent;
-      border: 0;
-      border-radius: .2rem;
-      outline: 0;
-      transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1);
-      will-change: box-shadow, transform;
-    }
-    .btn.btn-primary {
-      color: #fff;
-      background-color: #000000;
-      border-color: #9c27b0;
-      box-shadow: 0 2px 2px 0 rgba(156, 39, 176, .14), 0 3px 1px -2px rgba(156, 39, 176, .2), 0 1px 5px 0 rgba(156, 39, 176, .12);
-    }
-    .btn.btn-primary:focus {
-      color: #fff;
-      background-color: #9124a3;
-      border-color: #701c7e;
-    }
-    .btn.btn-primary:hover {
-      color: #fff;
-      background-color: #9124a3;
-      box-shadow: 0 14px 26px -12px rgba(156, 39, 176, .42), 0 4px 23px 0 rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(156, 39, 176, .2);
-    }
-    @media screen and (min-width: 767px) {
-      .card-profile {
-        max-height: 215px;
-      }
-    }
-
-    @media (max-width: 991px) {
-      .navbar .navbar-translate {
-        width: 100%;
+    .btn1 {
         position: relative;
-        display: flex;
-        -ms-flex-pack: justify !important;
-        justify-content: space-between !important;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-transition: transform .5s cubic-bezier(.685, .0473, .346, 1);
-        -moz-transition: transform .5s cubic-bezier(.685, .0473, .346, 1);
-        -o-transition: transform .5s cubic-bezier(.685, .0473, .346, 1);
-        transition: transform .5s cubic-bezier(.685, .0473, .346, 1);
-      }
-      ul {
+        padding: 12px;
+        margin: .3125rem 1px;
+        font-size: .75rem;
+        font-weight: 400;
+        line-height: 1.428571;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0;
+        cursor: pointer;
+        background-color: transparent;
+        border: 0;
+        border-radius: .2rem;
+        outline: 0;
+        transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1);
+        will-change: box-shadow, transform;
+    }
+    .btn1.btn-1-1 {
+        color: #fff;
+        background-color: #000000;
+        border-color: #9c27b0;
+        box-shadow: 0 2px 2px 0 rgba(156, 39, 176, .14), 0 3px 1px -2px rgba(156, 39, 176, .2), 0 1px 5px 0 rgba(156, 39, 176, .12);
+    }
+    .btn1.btn-1-1:focus {
+        color: #fff;
+        background-color: #9124a3;
+        border-color: #701c7e;
+    }
+    .btn1.btn-1-1:hover {
+        color: #fff;
+        background-color: #9124a3;
+        box-shadow: 0 14px 26px -12px rgba(156, 39, 176, .42), 0 4px 23px 0 rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(156, 39, 176, .2);
+    }
+    ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
-      }
     }
-  </style>
-</head>
+    .material-icons {
+        font-family: 'Material Icons',serif;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+        text-align: center;
+    }
+
+    html * {
+        -webkit-font-smoothing: antialiased;
+    }
+</style>
 <body>
-<nav th:replace="partials/navbar.html :: navbar">
-</nav>
-<br>
-<div class="container" style="width: 40rem">
-  <div class="card" style="width: 40rem">
-    <div class="card-body" style="width: 40rem">
-      <div class="jumbotron text-center" >
-        <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
-          <div class="card p-4">
-            <div class=" image d-flex flex-column justify-content-center align-items-center">
-              <button class="btn btn-secondary"> <img src="" height="100" width="100" alt="PFP" /></button>
-              <span class="name mt-3">Username</span>
-              <div class=" d-flex mt-2"> <button class="btn btn-primary">Edit Profile</button> </div>
-                <div class="row">
-                    <div class="profile-tabs">
-                      <ul class="nav nav-pills nav-pills-icons">
-                        <li class="nav-item">
-                          <button class="btn btn-primary">
-                            <i class="material-icons">groups</i>View my Leagues</button>
-                        </li>
-                        <li class="nav-item">
-                          <button class="btn btn-primary">
-                            <i class="material-icons">edit</i>Edit My Team</button>
-                        </li>
-                        <li class="nav-item">
-                          <button class="btn btn-primary" >
-                            <i class="material-icons">build</i>Manage My Team</button>
-                        </li>
-                      </ul>
+<header>
+    <nav th:replace="partials/navbar.html :: navbar">
+    </nav>
+</header>
+<div class="row py-5 px-4">
+    <div class="col-md-5 mx-auto">
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 cover">
+                <div class="media align-items-end profile-head">
+                    <div class="profile mr-3"><img th:src="${user.getProfilePicture}" alt="PFP" width="130" class="rounded mb-2 img-thumbnail">
+                        <a href="#" class="btn btn-outline-dark btn-sm btn-block align-items-end" style="margin: revert">Edit profile</a>
                     </div>
-                  </div>
+                    <br>
+                    <div class="media-body mb-5 justify-content-start text-right">
+                        <h4 th:text="${user.getUserName}">Hello</h4>
+                    </div>
                 </div>
-              </div>
             </div>
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="pro pro-pills pro-pills-icons">
+                    <li class="pro-items">
+                        <button class="btn1 btn-1-1">
+                            <i class="material-icons">visibility</i>View my Team
+                        </button>
+                    </li>
+                    <li class="pro-items">
+                        <button class="btn1 btn-1-1">
+                            <i class="material-icons">groups</i>View my Leagues
+                        </button>
+                    </li>
+                </ul>
             </div>
-          </div>
+            <div class="px-4 py-3">
+                <h5 class="mb-0">Fantasy Management</h5>
+                <div class="p-4 rounded shadow-sm bg-light">
+                    <p class="font-italic mb-0">Game History</p>
+                    <br>
+                    <p class="font-italic mb-0">Edit Team</p>
+                    <br>
+                    <p class="font-italic mb-0">View Scores</p>
+                </div>
+            </div>
+            <div class="py-4 px-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="mb-0">League Leaderboards</h5><a href="#" class="btn btn-link text-muted">Show all Leagues</a>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-2 pr-lg-1">Hola</div>
+                    <div class="col-lg-6 mb-2 pl-lg-1">Bonjour</div>
+                    <div class="col-lg-6 pr-lg-1 mb-2">Hello</div>
+                    <div class="col-lg-6 pl-lg-1">Hi</div>
+                </div>
+            </div>
         </div>
-      </div>
-<br>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </div>
+</div>
 </body>
 </html>

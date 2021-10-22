@@ -2,7 +2,8 @@ package com.example.basketballgurus.models;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 @Table(name="weeks_games")
@@ -10,13 +11,9 @@ import java.sql.Date;
 @NoArgsConstructor
 public class Game {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, name = "id")
     @Getter @Setter
     private int id;
-
-    @Column(nullable = false, name = "game_api_id")
-    @Getter @Setter
-    private int gameApiId;
 
     @OneToOne
     @JoinColumn(name = "home_team_id", referencedColumnName = "id")
@@ -28,9 +25,23 @@ public class Game {
     @Getter @Setter
     private Team awayTeamId;
 
-
     @Column(nullable = false)
     @Getter @Setter
     private Date startTime;
+
+    public String getFormattedStartTime(){
+        String pattern = "h:mm";
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        String date =  sdf.format(startTime);
+        return date;
+    }
+
+    @Column(nullable = false, columnDefinition = "Boolean default false")
+    @Getter @Setter
+    private Boolean finished;
+
+    @Column(nullable = false, columnDefinition = "Boolean default false")
+    @Getter @Setter
+    private Boolean recorded;
 
     }

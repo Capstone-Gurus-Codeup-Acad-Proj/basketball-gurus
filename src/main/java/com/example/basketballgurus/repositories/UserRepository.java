@@ -1,4 +1,4 @@
-package com.example.basketballgurus.repos;
+package com.example.basketballgurus.repositories;
 
 import com.example.basketballgurus.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
