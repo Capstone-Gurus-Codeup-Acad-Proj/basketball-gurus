@@ -6,13 +6,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private UserDetailsLoader usersLoader;
+    private final UserDetailsLoader usersLoader;
 
     public SecurityConfiguration(UserDetailsLoader usersLoader) {
         this.usersLoader = usersLoader;
@@ -31,7 +34,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         ;
     }
 
-    @Override
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+//        manager.createUser(User.withDefaultPasswordEncoder()
+//                .username("admin1").password("codeup1").roles("ADMIN").build());
+//        return manager;
+//    }
+//
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//
+//        http
+//                .authorizeRequests()
+//                .anyRequest().hasRole("ADMIN")
+//                .and().formLogin().and()
+//                .httpBasic()
+//                .and()
+//                .logout()
+//                .logoutUrl("/ADMIN_logout")
+//                .logoutSuccessUrl("/")
+//        ;
+
+        @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 /* Login configuration */
@@ -52,10 +77,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/profile", // only authenticated users can create ads
-                        "/profile/edit" // only authenticated users can edit ads
-                )
-                .authenticated()
-        ;
+                        "/profile", // only authenticated users can create teams/leagues
+                        "/profile/edit",// only authenticated users can edit teams/leagues
+                        "/admin", //only admin users can edit/delete teams/leagues
+                        "/admin/edit")
+                .authenticated();
+
     }
 }

@@ -1,12 +1,11 @@
 package com.example.basketballgurus.controllers;
 
 import com.example.basketballgurus.models.User;
-
 import com.example.basketballgurus.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+
 
 
 @Controller
@@ -17,8 +16,9 @@ public class AdminController {
     public AdminController(UserRepository userDao) {
         this.userDao = userDao;
     }
+
     @GetMapping("/admin")
-    public String admin()  {
+    public String admin() {
         return "user/admin";
     }
 
@@ -27,6 +27,5 @@ public class AdminController {
         userDao.save(user);
         return "redirect:/";
     }
+
 }
-
-
