@@ -24,23 +24,27 @@ public class ProfileController {
         this.gm = gm;
     }
 
-//    @GetMapping("/profile")
-//    public String ownProfile(Model model){
-//        User userLoggedIn = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User userProfile = userDao.getById((long) userLoggedIn.getId());
-//        model.addAttribute("viewOwnProfile", userProfile);
-//        return "personalProfile";
-//    }
-
     @GetMapping("/profile")
     public String userProfile(Model model) {
- //       User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.getById(1L);
         model.addAttribute("games", gm.getTodaysGames());
         model.addAttribute("user",user);
 //        if (!user.isActive()) {
 //            return "redirect:/home";
 //        }
-        return "/profile";
+        return "profile";
+    }
+    @GetMapping("/profile/{id}")
+    public String viewById(@PathVariable long id, Model model) {
+        User currentUser = userDao.getById(id);
+        model.addAttribute("user", currentUser);
+        return "profile/{id}";
+    }
+    @RequestMapping(value = "profile/{id}", method = RequestMethod.POST)
+    public String getUserName(@RequestParam(name = "username") String username,Model model) {
+        User currentUser = userDao.findByUsername(username);
+        model.addAttribute("users", currentUser);
+        return "profile";
     }
 }
