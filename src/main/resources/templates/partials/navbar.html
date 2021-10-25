@@ -31,10 +31,12 @@
 
   </style>
   <div class="container-fluid">
+    <div sec:authorize="isAnonymous()">
     <div class="navbar-header">
       <a class="navbar-brand" th:href="@{/home}">Fantasy Basketball</a>
     </div>
-    
+    </div>
+
     
       <div sec:authorize="isAnonymous()">
     <ul class="nav navbar-nav navbar-right ">
@@ -49,6 +51,12 @@
       </li>
         </ul>
       </div>
+
+    <div sec:authorize="isAuthenticated()">
+    <div class="navbar-header">
+      <a class="navbar-brand" th:href="@{/profile}">Fantasy Basketball</a>
+    </div>
+    </div>
 
       <div sec:authorize="isAuthenticated()">
         <ul class="nav navbar-nav navbar-right ">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Visitor League Page</title>
@@ -33,11 +33,23 @@
         <p class="lead">This is the current list of Leagues that are currently going on right now.</p>
 </div>
 </div>
-<div class="container">
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Create a League
-</button>
+
+<div sec:authorize="isAnonymous()">
+
+
+
+
+</div>
+
+
+
+<div sec:authorize="isAuthenticated()">
+    <div class="container">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Create a League
+        </button>
+    </div>
 </div>
 
 <!-- Model -->
@@ -78,6 +90,7 @@
         </div>
     </div>
 </div>
+
 <div class="container">
 <table class="table table-dark">
 

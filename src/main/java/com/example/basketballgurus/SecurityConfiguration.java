@@ -34,29 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         ;
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//        manager.createUser(User.withDefaultPasswordEncoder()
-//                .username("admin1").password("codeup1").roles("ADMIN").build());
-//        return manager;
-//    }
-//
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//
-//        http
-//                .authorizeRequests()
-//                .anyRequest().hasRole("ADMIN")
-//                .and().formLogin().and()
-//                .httpBasic()
-//                .and()
-//                .logout()
-//                .logoutUrl("/ADMIN_logout")
-//                .logoutSuccessUrl("/")
-//        ;
-
-        @Override
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 /* Login configuration */
@@ -77,6 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
+
                         "/profile", // only authenticated users can create teams/leagues
                         "/profile/edit",// only authenticated users can edit teams/leagues
                         "/admin", //only admin users can edit/delete teams/leagues
