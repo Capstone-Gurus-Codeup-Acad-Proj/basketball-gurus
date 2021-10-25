@@ -25,7 +25,7 @@ public class LeaguesController {
     public String leaguePageVisitor(Model model) {
         model.addAttribute("games", gm.getTodaysGames());
         model.addAttribute("league", new League());
-        return "leagueVisitor";
+        return "MyLeague";
     }
 
     @PostMapping("/leagues/create")
