@@ -44,7 +44,6 @@ public class PlayerController {
 
     @RequestMapping(value = "/players/team", method = RequestMethod.POST)
     public String getTeamByName(@RequestParam(name = "team") String team, Model model) {
-        System.out.println(team);
         Team teamFilter = teamDao.findTeamByFullName(team);
         List<Player> player = playerDao.findByTeamId(teamFilter);
         model.addAttribute("players", player);
