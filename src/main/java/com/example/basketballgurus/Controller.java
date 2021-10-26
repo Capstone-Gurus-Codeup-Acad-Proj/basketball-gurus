@@ -17,21 +17,21 @@ public class Controller {
     private final RosterRepository rosterDao;
     private final LeaguesRepository leagueDao;
     private final LeagueScoreCalculator lsc;
+    private final PlayerPrice pp;
 
-    public Controller(RosterScoreCalculator rsc, RosterRepository rosterDao, LeaguesRepository leagueDao, LeagueScoreCalculator lsc) {
+    public Controller(RosterScoreCalculator rsc, RosterRepository rosterDao, LeaguesRepository leagueDao, LeagueScoreCalculator lsc, PlayerPrice pp) {
         this.rsc = rsc;
         this.rosterDao = rosterDao;
         this.leagueDao = leagueDao;
         this.lsc = lsc;
+        this.pp = pp;
     }
 
-    @GetMapping("/hello")
+    @GetMapping("/setPrice")
     @ResponseBody
     public String hello() throws IOException, ParseException {
 
-        League league = leagueDao.getById(1);
-
-        System.out.println(lsc.getLeagueScores(league));
+        pp.createPlayerPrice();
 
 
         return "";
