@@ -46,7 +46,7 @@ public class PlayerActivity {
 
     }
 
-    @Scheduled(cron = "0 0 0 * * SUN", zone = "America/Chicago")
+    @Scheduled(cron = "0 0 0 * * MON", zone = "America/Chicago")
     public void createHistories() throws ParseException {
 
         List<History> currentWeeksHistory = getWeeksScore();

@@ -165,7 +165,7 @@ public class ScheduleMaker implements ScheduleMakerService {
     }
 
     @Override
-    @Scheduled(cron = "0 0 0 * * SUN", zone = "America/Chicago")
+    @Scheduled(cron = "0 0 0 * * MON", zone = "America/Chicago")
     public void generateGames() throws IOException, ParseException {
 
         ArrayList<GameModel> arr = getGames();
