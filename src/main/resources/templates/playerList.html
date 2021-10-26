@@ -37,10 +37,12 @@
             width: 100%;
         }
         .modal-body{
-            background: #555555;
+            background: #767676;
             color: black ;
             display: flex;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
         }
 
         .firstName{
@@ -51,7 +53,13 @@
             border-left: 3px solid rgba(221, 221, 221, 0);
         }
 
+        .teamW{
+            display: flex;
+            flex-direction: row;
+        }
+
     </style>
+
 </head>
 <body>
 <nav th:replace="partials/game-bar.html :: gamebar"> </nav>
@@ -94,12 +102,12 @@
             <td th:text="${player.lastName}"></td>
             <td th:text="${player.teamId.fullName}"></td>
             <td class = "detail">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" value="${player.id}" class="btn btn-primary" data-toggle="modal" th:data-target="${'#modal'+player.id}"  >
                     Details
                 </button>
 
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                <div class="modal fade" th:id="${'modal'+player.id}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <div class="modal-title">
@@ -111,9 +119,20 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
+
                             <div class="modal-body">
-                                <div th:text="${(player.teamId.fullName)}"></div>
+                               <div class ="teamW"> Team: &nbsp; <div th:text="${player.teamId.fullName}"></div> </div>
+                                <div class ="teamW"> Height: &nbsp; <div th:text="${player.height}"></div> </div>
+                                <div class ="teamW"> Weight: &nbsp; <div th:text="${player.weight}"></div> </div>
+                                <div class ="teamW"> Age: &nbsp; <div th:text="${player.age}"></div> </div>
+                                <div class ="teamW"> Assists: &nbsp; <div th:text="${player.assists}"></div> </div>
+                                <div class ="teamW"> Blocks: &nbsp; <div th:text="${player.blocks}"></div> </div>
+                                <div class ="teamW"> Jersey Number: &nbsp; <div th:text="${player.jerseyNumber}"></div> </div>
+                                <div class ="teamW"> Point Average: &nbsp; <div th:text="${player.point}"></div> </div>
+                                <div class ="teamW"> Position: &nbsp; <div th:text="${player.position}"></div> </div>
+                                <div class ="teamW"> Rebounds: &nbsp; <div th:text="${player.rebounds}"></div> </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
