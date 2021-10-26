@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
@@ -134,12 +134,14 @@
         <div class="bg-white shadow rounded overflow-hidden">
             <div class="px-4 pt-0 pb-4 cover">
                 <div class="media align-items-end profile-head">
-                    <div class="profile mr-3"><img th:src="${user.getProfilePicture}" alt="PFP" width="130" class="rounded mb-2 img-thumbnail">
+                    <div class="profile mr-3"><img src="" alt="PFP" width="130" class="rounded mb-2 img-thumbnail">
                         <a href="#" class="btn btn-outline-dark btn-sm btn-block align-items-end" style="margin: revert">Edit profile</a>
                     </div>
                     <br>
                     <div class="media-body mb-5 justify-content-start text-right">
-                        <h4 th:text="${user.getUsername}">Hello</h4>
+                        <div>
+                            <h4 th:text="${user.getUsername()}">hi</h4>
+                        </div>
                     </div>
                 </div>
             </div>

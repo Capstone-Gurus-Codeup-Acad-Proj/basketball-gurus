@@ -6,13 +6,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private UserDetailsLoader usersLoader;
+    private final UserDetailsLoader usersLoader;
 
     public SecurityConfiguration(UserDetailsLoader usersLoader) {
         this.usersLoader = usersLoader;
@@ -52,10 +55,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/", // only authenticated users can create ads
-                        "/" // only authenticated users can edit ads
-                )
-                .authenticated()
-        ;
+
+                        "/profile", // only authenticated users can create teams/leagues
+                        "/profile/edit",// only authenticated users can edit teams/leagues
+                        "/admin", //only admin users can edit/delete teams/leagues
+                        "/admin/edit")
+                .authenticated();
+
     }
 }
