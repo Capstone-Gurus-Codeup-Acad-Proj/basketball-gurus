@@ -71,14 +71,14 @@
         <div class="input-group-append">
             <button class="btn btn-outline-light" value="Search">Search</button>
         </div>
-</form>
+    </form>
 
     <form action="#" th:action="@{/players/team}" method="post" class="input-group">
-    <label for="team"></label>
+        <label for="team"></label>
         <select id="team"  name="team" class="form-control" >
-    <option value="0">Select Team</option>
-    <option th:each="team : ${teams}" th:value="${team.fullName}" th:text="${team.fullName}"></option>
-</select>
+            <option value="0">Select Team</option>
+            <option th:each="team : ${teams}" th:value="${team.fullName}" th:text="${team.fullName}"></option>
+        </select>
         <div class="input-group-append">
             <button class="btn btn-outline-light" value="Search">Search</button>
         </div>

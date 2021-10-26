@@ -37,7 +37,10 @@ public class PlayerController {
     @RequestMapping(value = "/players", method = RequestMethod.POST)
     public String getPlayerByName(@RequestParam(name = "search") String search, Model model) {
         List<Player> player = playerDao.findByFirstNameOrLastName(search);
+        List<Team> allTeams = teamDao.findAll();
         model.addAttribute("players", player);
+        model.addAttribute("teams", allTeams);
+        model.addAttribute("games", gm.getTodaysGames());
         return "playerList";
     }
 
@@ -46,7 +49,10 @@ public class PlayerController {
     public String getTeamByName(@RequestParam(name = "team") String team, Model model) {
         Team teamFilter = teamDao.findTeamByFullName(team);
         List<Player> player = playerDao.findByTeamId(teamFilter);
+        List<Team> allTeams = teamDao.findAll();
         model.addAttribute("players", player);
+        model.addAttribute("teams", allTeams);
+        model.addAttribute("games", gm.getTodaysGames());
         return "playerList";
     }
 
