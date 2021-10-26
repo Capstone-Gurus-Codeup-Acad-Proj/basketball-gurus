@@ -41,7 +41,7 @@
       <div sec:authorize="isAnonymous()">
     <ul class="nav navbar-nav navbar-right ">
       <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">
-        <a class="btn" href="#" th:href="@{/leagues}">My Leagues</a>
+        <a class="btn" href="#" th:href="@{/leagues}">Leagues</a>
       </li>
       <li th:classappend="${module == 'Register' ? 'active' : ''}">
       <a class="btn" href="#" th:href="@{/sign-up}">Register</a>
@@ -57,7 +57,6 @@
       <a class="navbar-brand" th:href="@{/home}">Fantasy Basketball</a>
     </div>
     </div>
-
       <div sec:authorize="isAuthenticated()">
         <ul class="nav navbar-nav navbar-right ">
           <li th:classappend="${module == 'My Leagues' ? 'active' : ''}">
