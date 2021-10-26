@@ -16,7 +16,7 @@ public class User {
     @Getter @Setter
     private long id;
 
-    @Column(length = 100)
+    @Column(nullable = false, length = 100)
     @Getter @Setter
     private String username;
 
@@ -31,7 +31,6 @@ public class User {
     @Column(nullable = false, length = 100)
     @Getter @Setter
     private String email;
-
     @Column(nullable = false, length = 100)
     @Getter @Setter
     private String password;
@@ -51,7 +50,6 @@ public class User {
     @Column(nullable = false)
     @Getter @Setter
     private boolean isActive;
-
 
 
     public User(User copy) {
