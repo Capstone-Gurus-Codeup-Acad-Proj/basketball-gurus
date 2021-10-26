@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class RosterPlayer {
 
     @Id
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter
     private int id;
 

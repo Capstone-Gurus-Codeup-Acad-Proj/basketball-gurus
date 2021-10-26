@@ -3,6 +3,7 @@ package com.example.basketballgurus;
 import com.example.basketballgurus.RestModels.GameModel;
 import com.example.basketballgurus.RestModels.TeamModel;
 import com.example.basketballgurus.models.Game;
+import com.example.basketballgurus.models.PlayerScore;
 import com.example.basketballgurus.models.Team;
 import com.example.basketballgurus.repositories.GameRepository;
 import com.example.basketballgurus.repositories.TeamRepository;
