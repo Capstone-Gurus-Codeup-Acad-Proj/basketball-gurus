@@ -1,31 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Admin Page for Basketball Gurus</title>
 </head>
-
 <body>
-<h1>ADMIN PAGE</h1>
-<form th:action="@{/admin}" method="post">
 
-        <h2>Admin Login</h2>
-        <label for="userName">Username</label>
-        <input id="userName" name="userName" type="text" />
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" />
-        <input type="submit" value="Admin Log In" />
+<nav th:replace="partials/game-bar.html :: gamebar"></nav>
+<nav th:replace="partials/navbar.html :: navbar"></nav>
 
+<h1>ADMIN Login</h1>
 
-        <div th:if="${param.error}" class="alert alert-error">
-            Invalid Admin Username and Password.
-        </div>
-    <br/>
-        <div th:if="${param.logout}"class="alert alert-success">
-            Your Admin Account has been logged out.
-        </div>
-
+<form th:action="@{/login}" method="post">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" />
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" />
+    <input type="submit" value="Log In" />
+    <br>
+    <div th:if="${param.error}">
+        Invalid Admin Username and Password..
+    </div>
+    <div th:if="${param.logout}">
+        Your Admin Account has been logged out.
+    </div>
 </form>
-
 </body>
 </html>

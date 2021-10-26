@@ -18,14 +18,14 @@ public class AdminController {
     }
 
     @GetMapping("/admin")
-    public String admin() {
+    public String showCreateForm() {
         return "user/admin";
     }
 
     @PostMapping("/admin")
     public String create(@ModelAttribute User user) {
         userDao.save(user);
-        return "redirect:/";
+        return "redirect:/login";
     }
 
 }
