@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.PushBuilder;
 import java.sql.Date;
 import java.time.DayOfWeek;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
@@ -25,13 +26,11 @@ public class RosterScoreCalculator implements RosterScoreService {
 
     private final RosterPlayerRepository rosterPlayerDao;
     private final ScoreRepository scoreRepositoryDao;
-    private final LeaguesRepository leagueDao;
     private final HistoryRepository historyDao;
 
-    public RosterScoreCalculator(RosterPlayerRepository rosterPlayerDao, ScoreRepository scoreRepositoryDao, LeaguesRepository leagueDao, HistoryRepository historyDao) {
+    public RosterScoreCalculator(RosterPlayerRepository rosterPlayerDao, ScoreRepository scoreRepositoryDao, HistoryRepository historyDao) {
         this.rosterPlayerDao = rosterPlayerDao;
         this.scoreRepositoryDao = scoreRepositoryDao;
-        this.leagueDao = leagueDao;
         this.historyDao = historyDao;
     }
 
@@ -53,15 +52,10 @@ public class RosterScoreCalculator implements RosterScoreService {
                         System.out.println("this week");
                         total += score.getScore();
                     }
-
                 }
-
             }
-
         }
-
         return total;
-
     }
 
     public HashMap<Date,Integer> getHistoricalScore(Roster roster, java.util.Date startDate, java.util.Date endDate) {
@@ -74,8 +68,7 @@ public class RosterScoreCalculator implements RosterScoreService {
             List<History> histories = historyDao.getByRosterPlayerId(player);
 
             for (History history : histories) {
-                if (history.getWasActive() && startDate.after(history.getWeekDate()) || startDate.equals(history.getWeekDate()) && endDate.before(history.getWeekDate()) || startDate.equals(history.getWeekDate())) {
-
+                if (history.getWasActive() && (startDate.before(history.getWeekDate()) || startDate.equals(history.getWeekDate())) && (endDate.after(history.getWeekDate()) || endDate.equals(history.getWeekDate()))) {
                     int weekTotal = 0;
 
                     List<PlayerScore> scores = scoreRepositoryDao.getByPlayerId(player.getPlayerId());
@@ -85,23 +78,22 @@ public class RosterScoreCalculator implements RosterScoreService {
                             weekTotal += score.getScore();
                         }
                     }
-
                     Date weekDate = new Date(history.getWeekDate().getTime());
                     scoreMap.put(weekDate, scoreMap.get(weekDate) + weekTotal);
                 }
             }
 
         }
-
         return scoreMap;
-
     }
+
 
     public boolean checkWeekDate(java.util.Date historyDate, Date scoreDate){
 
-        LocalDate date = LocalDate.ofEpochDay(scoreDate.getTime());
+        LocalDate date = Instant.ofEpochMilli(scoreDate.getTime()).atZone(ZoneId.of("UTC")).toLocalDate();
         LocalDate monday = date.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-        LocalDate weekDate = LocalDate.ofEpochDay(historyDate.getTime());
+        LocalDate weekDate = Instant.ofEpochMilli(historyDate.getTime()).atZone(ZoneId.of("UTC")).toLocalDate();
+
         return monday.isEqual(weekDate);
 
 
@@ -132,5 +124,4 @@ public class RosterScoreCalculator implements RosterScoreService {
         return monday.isBefore(gameDate) && sunday.isAfter(gameDate) || monday.isEqual(gameDate) || sunday.isEqual(gameDate);
 
     }
-
 }
