@@ -66,20 +66,6 @@ public class UserController {
         model.addAttribute("user", user);
         return "profile";
     }
-//    @GetMapping("/profile/{id}")
-//    public String viewProfile(@PathVariable long id, Model model){
-//        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User user = userDao.findByUsername(currentUser.getUsername());
-//
-//        model.addAttribute("loggedin", user);
-//        User displayedUser = userDao.getById(id);
-//        UserDetails displayed = displayedUser.getDetails();
-//
-//        model.addAttribute("user", displayedUser);
-//        model.addAttribute("info", displayed);
-//
-//        return "/profile";
-//    }
 
     @PostMapping("logout")
     public String logout(){
