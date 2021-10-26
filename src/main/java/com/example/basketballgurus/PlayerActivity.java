@@ -35,7 +35,7 @@ public class PlayerActivity {
         this.rosterDao = rosterDao;
         this.rosterPlayerDao = rosterPlayerDao;
     }
-    @Scheduled(cron = "* */3 * * * ?")
+    @Scheduled(cron = "0 */3 * * * ?")
     public void checkStatus() throws ParseException {
 
         List<History> currentWeeksHistory = getWeeksScore();
