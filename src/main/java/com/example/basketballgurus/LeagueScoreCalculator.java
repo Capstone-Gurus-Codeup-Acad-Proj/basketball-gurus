@@ -7,6 +7,7 @@ import com.example.basketballgurus.repositories.RosterPlayerRepository;
 import com.example.basketballgurus.repositories.RosterRepository;
 import com.example.basketballgurus.repositories.ScoreRepository;
 import com.example.basketballgurus.services.LeagueScoreService;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -41,15 +42,9 @@ public class LeagueScoreCalculator implements LeagueScoreService {
 
         HashMap<String, HashMap<Date, Integer>> leagueRosterWeeklyScores = new HashMap<>();
 
-        LocalDate date = LocalDate.now(ZoneId.of("America/Chicago"));
-        LocalDate monday = date.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-
-        Date currentWeekDate = Date.valueOf(monday);
-
         for (Roster roster : rosters){
 
-            HashMap<Date, Integer> weeklyScores = rsc.getHistoricalScore(roster, league.getStartDate(), league.getEndDate());
-            weeklyScores.put(currentWeekDate, rsc.getWeeksScore(roster));
+            HashMap<Date, Integer> weeklyScores = rsc.getScore(roster, league.getStartDate(), league.getEndDate());
 
             leagueRosterWeeklyScores.put(roster.getName(), weeklyScores);
         }

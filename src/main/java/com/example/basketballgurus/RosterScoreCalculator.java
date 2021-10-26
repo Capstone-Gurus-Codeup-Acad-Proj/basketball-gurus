@@ -34,31 +34,31 @@ public class RosterScoreCalculator implements RosterScoreService {
         this.historyDao = historyDao;
     }
 
-    public int getWeeksScore(Roster roster){
+//    public int getWeeksScore(Roster roster){
+//
+//        List<RosterPlayer> rp = rosterPlayerDao.getByRosterId(roster);
+//
+//        int total = 0;
+//
+//        for (RosterPlayer player : rp){
+//
+//            if (player.getIsActive()){
+//                System.out.println("active");
+//
+//                List<PlayerScore> scores = scoreRepositoryDao.getByPlayerId(player.getPlayerId());
+//
+//                for (PlayerScore score : scores){
+//                    if (checkDate(score)){
+//                        System.out.println("this week");
+//                        total += score.getScore();
+//                    }
+//                }
+//            }
+//        }
+//        return total;
+//    }
 
-        List<RosterPlayer> rp = rosterPlayerDao.getByRosterId(roster);
-
-        int total = 0;
-
-        for (RosterPlayer player : rp){
-
-            if (player.getIsActive()){
-                System.out.println("active");
-
-                List<PlayerScore> scores = scoreRepositoryDao.getByPlayerId(player.getPlayerId());
-
-                for (PlayerScore score : scores){
-                    if (checkDate(score)){
-                        System.out.println("this week");
-                        total += score.getScore();
-                    }
-                }
-            }
-        }
-        return total;
-    }
-
-    public HashMap<Date,Integer> getHistoricalScore(Roster roster, java.util.Date startDate, java.util.Date endDate) {
+    public HashMap<Date,Integer> getScore(Roster roster, java.util.Date startDate, java.util.Date endDate) {
 
         HashMap<Date, Integer> scoreMap = seedHashMap(startDate, endDate);
 
