@@ -35,6 +35,7 @@ public class Player {
     @Getter @Setter
 
     private Team teamId;
+   // private Team team;
 
     @Column(nullable = false, length = 100)
     @Getter

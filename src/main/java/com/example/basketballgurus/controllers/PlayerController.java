@@ -1,11 +1,12 @@
 package com.example.basketballgurus.controllers;
 
 import com.example.basketballgurus.models.Player;
+import com.example.basketballgurus.models.Team;
 import com.example.basketballgurus.repositories.PlayerRepository;
+import com.example.basketballgurus.repositories.TeamRepository;
 import com.example.basketballgurus.services.GameBarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,24 +16,43 @@ public class PlayerController {
 
     private final PlayerRepository playerDao;
     private final GameBarService gm;
+    private final TeamRepository teamDao;
 
-    public PlayerController(PlayerRepository playerDao, GameBarService gm) {
+    public PlayerController(PlayerRepository playerDao, GameBarService gm, TeamRepository teamDao) {
         this.playerDao = playerDao;
         this.gm = gm;
+        this.teamDao = teamDao;
     }
 
     @GetMapping("/players")
     public String showPlayers(Model model) {
         List<Player> allPlayers = playerDao.findAll();
+        List<Team> allTeams = teamDao.findAll();
         model.addAttribute("games", gm.getTodaysGames());
         model.addAttribute("players", allPlayers);
+        model.addAttribute("teams", allTeams);
         return "playerList";
     }
 
     @RequestMapping(value = "/players", method = RequestMethod.POST)
     public String getPlayerByName(@RequestParam(name = "search") String search, Model model) {
         List<Player> player = playerDao.findByFirstNameOrLastName(search);
+        List<Team> allTeams = teamDao.findAll();
         model.addAttribute("players", player);
+        model.addAttribute("teams", allTeams);
+        model.addAttribute("games", gm.getTodaysGames());
+        return "playerList";
+    }
+
+
+    @RequestMapping(value = "/players/team", method = RequestMethod.POST)
+    public String getTeamByName(@RequestParam(name = "team") String team, Model model) {
+        Team teamFilter = teamDao.findTeamByFullName(team);
+        List<Player> player = playerDao.findByTeamId(teamFilter);
+        List<Team> allTeams = teamDao.findAll();
+        model.addAttribute("players", player);
+        model.addAttribute("teams", allTeams);
+        model.addAttribute("games", gm.getTodaysGames());
         return "playerList";
     }
 

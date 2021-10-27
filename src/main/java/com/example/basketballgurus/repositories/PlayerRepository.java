@@ -1,6 +1,7 @@
 package com.example.basketballgurus.repositories;
 
 import com.example.basketballgurus.models.Player;
+import com.example.basketballgurus.models.Team;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,4 +15,6 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
     @Query("select e from Player e where lower(e.firstName) like lower(concat('%', :search, '%')) " +
             "or lower(e.lastName) like lower(concat('%', :search, '%'))")
     List<Player> findByFirstNameOrLastName(@Param("search") String search);
+
+        List<Player> findByTeamId(Team team);
 }
