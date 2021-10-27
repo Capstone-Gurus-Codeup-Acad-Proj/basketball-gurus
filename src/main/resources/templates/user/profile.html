@@ -7,11 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <style>
-    .btn1 {
-        height: 140px;
-        width: 140px;
-        border-radius: 50%
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
     /* google fonts */
     /* fallback */
     @font-face {
@@ -116,9 +112,18 @@
         -webkit-font-smoothing: antialiased;
         text-align: center;
     }
-
     html * {
         -webkit-font-smoothing: antialiased;
+    }
+    body {
+        place-items: center;
+        background: #edeef0;
+    }
+    .card {
+        color: #fff;
+        background: linear-gradient(145deg, #9a40a9, #b74cc9);
+        box-shadow: 20px 20px 60px #913ca0, -20px -20px 60px #c552d8;
+        border: none
     }
 </style>
 <body>
@@ -130,18 +135,15 @@
 </header>
 <div class="row py-5 px-4">
     <div class="col-md-5 mx-auto">
-        <!-- Profile widget -->
-        <div class="bg-white shadow rounded overflow-hidden">
+        <div class="bg-dark shadow rounded overflow-hidden">
             <div class="px-4 pt-0 pb-4 cover">
                 <div class="media align-items-end profile-head">
-                    <div class="profile mr-3"><img src="" alt="PFP" width="130" class="rounded mb-2 img-thumbnail">
-                        <a href="#" class="btn btn-outline-dark btn-sm btn-block align-items-end" style="margin: revert">Edit profile</a>
+                    <div class="profile mr-3">
+                        <img th:src="${user.getProfilePicture()}" alt ="pfp" width="100" class="rounded-circle">
+                        <a href="#" class="btn btn-outline-dark btn-sm btn-block align-items-end" style="margin: revert; color: white">Edit profile</a>
                     </div>
-                    <br>
                     <div class="media-body mb-5 justify-content-start text-right">
-                        <div>
-                            <h4 th:text="${user.getUsername()}">hi</h4>
-                        </div>
+                        <h3 class="mt-2" th:text="${user.getUsername()}" style="color: white"></h3>
                     </div>
                 </div>
             </div>
@@ -149,35 +151,31 @@
                 <ul class="pro pro-pills pro-pills-icons">
                     <li class="pro-items">
                         <button class="btn1 btn-1-1">
-                            <i class="material-icons">visibility</i>View my Team
+                            <i class="material-icons">visibility</i>Manage Team
                         </button>
                     </li>
                     <li class="pro-items">
                         <button class="btn1 btn-1-1">
-                            <i class="material-icons">groups</i>View my Leagues
+                            <i class="material-icons">groups</i>View Leagues
                         </button>
                     </li>
                 </ul>
             </div>
             <div class="px-4 py-3">
-                <h5 class="mb-0">Fantasy Management</h5>
-                <div class="p-4 rounded shadow-sm bg-light">
-                    <p class="font-italic mb-0">Game History</p>
-                    <br>
-                    <p class="font-italic mb-0">Edit Team</p>
-                    <br>
-                    <p class="font-italic mb-0">View Scores</p>
-                </div>
+                <h5 class="mb-0" style="color: white">Fantasy Management</h5>
             </div>
-            <div class="py-4 px-4">
+            <div class="py-4 px-4 row">
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h5 class="mb-0">League Leaderboards</h5><a href="#" class="btn btn-link text-muted">Show all Leagues</a>
+                    <a th:href="@{/home}" class="btn btn-link text-black" style="color: white">Home</a>
                 </div>
-                <div class="row">
-                    <div class="col-lg-6 mb-2 pr-lg-1">Hola</div>
-                    <div class="col-lg-6 mb-2 pl-lg-1">Bonjour</div>
-                    <div class="col-lg-6 pr-lg-1 mb-2">Hello</div>
-                    <div class="col-lg-6 pl-lg-1">Hi</div>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <a th:href="@{/leagues}" class="btn btn-link text-black" style="color: white">Show all Leagues</a>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <a th:href="@{/players}" class="btn btn-link text-black" style="color: white">Scout PLayers</a>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <a th:href="@{/players}" class="btn btn-link text-black" style="color: white">Scout PLayers</a>
                 </div>
             </div>
         </div>

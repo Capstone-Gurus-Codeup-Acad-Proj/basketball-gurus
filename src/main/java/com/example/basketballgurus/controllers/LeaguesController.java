@@ -1,7 +1,6 @@
 package com.example.basketballgurus.controllers;
 
 import com.example.basketballgurus.models.League;
-import com.example.basketballgurus.models.Player;
 import com.example.basketballgurus.repositories.LeaguesRepository;
 import com.example.basketballgurus.services.GameBarService;
 import org.springframework.stereotype.Controller;
@@ -21,14 +20,13 @@ public class LeaguesController {
         this.leaguesDao = leaguesDao;
         this.gm = gm;
     }
-
     @GetMapping("/leagues")
     public String leaguePageVisitor(Model model) {
         model.addAttribute("games", gm.getTodaysGames());
         model.addAttribute("League", new League());
         List<League> allLeagues = leaguesDao.findAll();
         model.addAttribute("leagues", allLeagues);
-        return "MyLeague";
+        return "myLeague";
 
 
     }
