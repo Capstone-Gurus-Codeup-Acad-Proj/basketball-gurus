@@ -3,6 +3,8 @@ package com.example.basketballgurus.controllers;
 import com.example.basketballgurus.models.League;
 import com.example.basketballgurus.repositories.LeaguesRepository;
 import com.example.basketballgurus.services.GameBarService;
+import org.dom4j.rule.Mode;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,12 +47,29 @@ public class LeaguesController {
         return "leagueJoin";
     }
 
+    @PostMapping("/leagues/join")
+    public String leagueJoin(@RequestParam int leagueId, @RequestParam String password, Model model){
+
+        League league = leaguesDao.getById(leagueId);
+
+        if(BCrypt.checkpw(password, league.getPassword())){
+
+            return "createTeam";
+
+        }else{
+            model.addAttribute("leagueId", leagueId);
+            model.addAttribute("failedLogin", true);
+            return "leagueJoin";
+        }
+
+    }
+
     @PostMapping("/leagues/create")
     public String create(@ModelAttribute League league, Model model){
 
         model.addAttribute("games", gm.getTodaysGames());
         league.setLeagueDifficulty("100");
-        String hash = passwordEncoder.encode(league.getPassword());
+        String hash = BCrypt.hashpw(league.getPassword(), BCrypt.gensalt());
         league.setPassword(hash);
         leaguesDao.save(league);
         return "redirect:/leagues";

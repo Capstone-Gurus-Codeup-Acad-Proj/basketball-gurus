@@ -13,21 +13,7 @@
 <nav th:replace="partials/game-bar.html :: gamebar"></nav>
 <nav th:replace="partials/navbar.html :: navbar"></nav>
 
-
-
-</div>
-<form th:action="@{/leagues/join}" method="post">
-    <input id="leagueId" name="leagueId" type="hidden" th:value="${leagueId}" />
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password" />
-    <input type="submit" value="join" />
-    <br>
-    <div th:if="${failedLogin != null}" style="color: red">
-        Invalid Password
-    </div>
-</form>
-
-
+<div>create your team here</div>
 
 </body>
 </html>

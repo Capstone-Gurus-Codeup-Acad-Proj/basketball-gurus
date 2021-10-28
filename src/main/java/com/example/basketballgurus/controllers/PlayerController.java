@@ -35,25 +35,33 @@ public class PlayerController {
     }
 
     @RequestMapping(value = "/players", method = RequestMethod.POST)
-    public String getPlayerByName(@RequestParam(name = "search") String search, Model model) {
-        List<Player> player = playerDao.findByFirstNameOrLastName(search);
+    public String getPlayerByName(@RequestParam(name = "search") String search, @RequestParam(name = "team") String team, Model model) {
+        Team teamFilter = teamDao.findTeamByFullName(team);
+        List<Player> players = playerDao.findByTeamId(teamFilter);
+        if (!search.equals("")){
+            List<Player> playersByName = searchName(search);
+            playersByName.addAll(players);
+            players = playersByName;
+        }
         List<Team> allTeams = teamDao.findAll();
-        model.addAttribute("players", player);
+        model.addAttribute("players", players);
         model.addAttribute("teams", allTeams);
         model.addAttribute("games", gm.getTodaysGames());
         return "playerList";
     }
 
+    private List<Player> searchName(String nameToSearch){
 
-    @RequestMapping(value = "/players/team", method = RequestMethod.POST)
-    public String getTeamByName(@RequestParam(name = "team") String team, Model model) {
-        Team teamFilter = teamDao.findTeamByFullName(team);
-        List<Player> player = playerDao.findByTeamId(teamFilter);
-        List<Team> allTeams = teamDao.findAll();
-        model.addAttribute("players", player);
-        model.addAttribute("teams", allTeams);
-        model.addAttribute("games", gm.getTodaysGames());
-        return "playerList";
+        String[] splitName = nameToSearch.split(" ");
+
+        if(splitName.length != 1){
+            return playerDao.findPlayerByFirstNameAndLastName(splitName[0], splitName[1]);
+
+        } else{
+
+            return playerDao.findByFirstNameOrLastName(nameToSearch);
+        }
+
     }
 
 //    @GetMapping("/players{id}")
