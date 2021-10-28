@@ -3,6 +3,7 @@ package com.example.basketballgurus.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -26,13 +27,21 @@ public class League {
     @Getter @Setter
     private Date startDate;
 
+
+    public String getFormattedStartDate() {
+        String pattern = "mm-d-yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        String date =  sdf.format(startDate);
+        return date;
+    }
+
     @Column(nullable = false)
     @Getter @Setter
     private Date endDate;
 
     @Column(nullable = false)
     @Getter @Setter
-    private UUID uuid = UUID.randomUUID();
+    private String uuid = UUID.randomUUID().toString();
 
     @Column(nullable = false, length = 100)
     @Getter @Setter
