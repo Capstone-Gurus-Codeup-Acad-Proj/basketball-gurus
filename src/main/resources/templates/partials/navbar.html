@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 <nav th:fragment="navbar" class="navbar navbar-expand-sm navbar-dark sticky-top">
-
   <style>
 
     .btn{
@@ -33,11 +31,9 @@
   <div class="container-fluid">
     <div sec:authorize="isAnonymous()">
     <div class="navbar-header">
-      <a class="navbar-brand" th:href="@{/home}">Fantasy Basketball</a>
+      <a class="navbar-brand" th:href="@{/home}">BasketBallGurus</a>
     </div>
     </div>
-
-    
       <div sec:authorize="isAnonymous()">
     <ul class="nav navbar-nav navbar-right ">
       <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">
@@ -51,10 +47,9 @@
       </li>
         </ul>
       </div>
-
     <div sec:authorize="isAuthenticated()">
     <div class="navbar-header">
-      <a class="navbar-brand" th:href="@{/profile}">Fantasy Basketball</a>
+      <a class="navbar-brand" th:href="@{/profile}">BasketBallGurus</a>
     </div>
     </div>
 

@@ -3,6 +3,7 @@ package com.example.basketballgurus;
 import com.example.basketballgurus.RestModels.GameModel;
 import com.example.basketballgurus.RestModels.TeamModel;
 import com.example.basketballgurus.models.Game;
+import com.example.basketballgurus.models.PlayerScore;
 import com.example.basketballgurus.models.Team;
 import com.example.basketballgurus.repositories.GameRepository;
 import com.example.basketballgurus.repositories.TeamRepository;
@@ -145,7 +146,7 @@ public class ScheduleMaker implements ScheduleMakerService {
         }
     }
 
-    @Scheduled(cron = "0 */1 * * * *")
+//    @Scheduled(cron = "0 */1 * * * *")
     public void checkSchedule() throws IOException, ParseException {
 
         List<Game> games = gameDao.findAll();
@@ -164,7 +165,7 @@ public class ScheduleMaker implements ScheduleMakerService {
     }
 
     @Override
-    @Scheduled(cron = "0 0 0 * * SUN", zone = "America/Chicago")
+    @Scheduled(cron = "0 0 0 * * MON", zone = "America/Chicago")
     public void generateGames() throws IOException, ParseException {
 
         ArrayList<GameModel> arr = getGames();

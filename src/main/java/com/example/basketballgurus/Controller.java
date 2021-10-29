@@ -1,8 +1,8 @@
 package com.example.basketballgurus;
 
-import com.example.basketballgurus.models.Game;
-import com.example.basketballgurus.repositories.GameRepository;
-import com.example.basketballgurus.services.GameCompletionService;
+import com.example.basketballgurus.models.League;
+import com.example.basketballgurus.repositories.LeaguesRepository;
+import com.example.basketballgurus.repositories.RosterRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -13,22 +13,25 @@ import java.text.ParseException;
 public class Controller {
 
 
-    private final GameRepository gc;
+    private final RosterScoreCalculator rsc;
+    private final RosterRepository rosterDao;
+    private final LeaguesRepository leagueDao;
+    private final LeagueScoreCalculator lsc;
+    private final PlayerPrice pp;
 
-    public Controller(GameRepository gc) {
-
-        this.gc = gc;
+    public Controller(RosterScoreCalculator rsc, RosterRepository rosterDao, LeaguesRepository leagueDao, LeagueScoreCalculator lsc, PlayerPrice pp) {
+        this.rsc = rsc;
+        this.rosterDao = rosterDao;
+        this.leagueDao = leagueDao;
+        this.lsc = lsc;
+        this.pp = pp;
     }
 
-    @GetMapping("/hello")
+    @GetMapping("/setPrice")
     @ResponseBody
     public String hello() throws IOException, ParseException {
 
-
-        Game game = gc.getById(8787);
-
-        System.out.println(game.getFormattedStartTime());
-
+        pp.createPlayerPrice();
 
 
         return "";

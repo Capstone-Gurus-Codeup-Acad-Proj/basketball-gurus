@@ -6,6 +6,9 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <style th:style="inline">
 
@@ -63,7 +66,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/leagues/create}" th:method="league" th:object="${league}">
+                <form th:action="@{/leagues/create}" th:method="league" th:object="${League}">
                     League PFP URL
                     <input th:field="*{leaguePfp}" />
                     <br />
@@ -76,10 +79,12 @@
                     End Date:
                     <input th:field="*{endDate}" />
                     <br />
+                    League Difficulty
+                    <input th:field="*{leagueDifficulty}" />
+                    <br />
                     Password:
                     <input th:field="*{password}" />
                     <br />
-
                     <input type="submit" />
                 </form>
             </div>
@@ -99,17 +104,17 @@
     <thead>
 
     <tr>
-        <th scope="col">#</th>
+        <th scope="col">League ID </th>
         <th scope="col">League Name</th>
-        <th scope="col">Draft Deadline</th>
+        <th scope="col">Start Date</th>
         <th scope="col">End Date</th>
-        <th scope="col">Entries</th>
+        <th scope="col">Team Cost</th>
         <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <th scope="row">1</th>
+        <td>ID</td>
         <td>Eastern Conference</td>
         <td>TBD</td>
         <td>TBD</td>
@@ -119,66 +124,17 @@
         </td>
 
     </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>Western Conference</td>
-        <td>TBD</td>
-        <td>TBD</td>
-        <td>8/10</td>
-        <td th:classappend="${module == 'Register' ? 'active' : ''}">
-            <a class="btn" th:href="@{/register}">Register</a>
-        </td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>Seth's Misfits League</td>
-        <td>TBD</td>
-        <td>TBD</td>
-        <td>7/9</td>
-        <td th:classappend="${module == 'Register' ? 'active' : ''}">
-            <a class="btn" th:href="@{/register}">Register</a>
-        </td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>Quentin's Quirky Queens</td>
-        <td>TBD</td>
-        <td>TBD</td>
-        <td>12/25</td>
-        <td th:classappend="${module == 'Register' ? 'active' : ''}">
-            <a class="btn" th:href="@{/register}">Register</a>
-        </td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>Allison's Appendixes</td>
-        <td>TBD</td>
-        <td>TBD</td>
-        <td>11/11</td>
-        <td th:classappend="${module == 'Register' ? 'active' : ''}">
-            <a class="btn" th:href="@{/register}">Register</a>
-        </td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>John's Jaded Journey</td>
-        <td>TBD</td>
-        <td>TBD</td>
-        <td>7/9</td>
-        <td th:classappend="${module == 'Register' ? 'active' : ''}">
-            <a class="btn" th:href="@{/register}">Register</a>
-        </td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>Youssef's Yodeling Yankees</td>
-        <td>TBD</td>
-        <td>TBD</td>
-        <td>7/9</td>
-        <td th:classappend="${module == 'Register' ? 'active' : ''}">
-            <a class="btn" th:href="@{/register}">Register</a>
-        </td>
-    </tr>
+    <div th:each="league : ${leagues}">
+        <tr>
+            <td th:text="${league.getId()}"></td>
+            <td th:text="${league.getLeagueName()}"></td>
+            <td th:text="${league.getStartDate()}"></td>
+            <td th:text="${league.getEndDate()}"></td>
+            <td th:text="${league.getLeagueDifficulty()}"></td>
+            <td th:classappend="${module == 'Register' ? 'active' : ''}">
+
+        </tr>
+    </div>
     </tbody>
 
 
@@ -189,9 +145,7 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
 </body>
 </html>
