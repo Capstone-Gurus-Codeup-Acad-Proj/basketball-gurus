@@ -2,6 +2,7 @@ package com.example.basketballgurus.controllers;
 
 
 import com.example.basketballgurus.models.AdminUser;
+import com.example.basketballgurus.models.User;
 import com.example.basketballgurus.repositories.AdminUserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.example.basketballgurus.services.GameBarService;
@@ -24,19 +25,19 @@ public class AdminUserController {
     }
 
 
-    @GetMapping("/sign-up")
+    @GetMapping("/admin")
     public String showCreateForm(Model model) {
         model.addAttribute("games", gm.getTodaysGames());
         model.addAttribute("adminUser", new AdminUser());
         return "user/register";
     }
 
-    @PostMapping("/sign-up")
-    public String create(@ModelAttribute AdminUser adminuser, Model model) {
+    @PostMapping("/admin")
+    public String create(@ModelAttribute AdminUser adminuser, Model model, User adminUser) {
         model.addAttribute("games", gm.getTodaysGames());
         String hash = passwordEncoder.encode(adminuser.getAdminPassword());
         adminuser.setAdminPassword(hash);
-//        adminUserDao.save(adminuser);
+        adminUserDao.save(adminUser);
         return "redirect:/login";
     }
 }

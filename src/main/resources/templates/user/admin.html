@@ -10,18 +10,18 @@
 
 <body>
 
-<div sec:authorize="isAuthenticated()"
-Authenticated as <span sec:authentication="name"></span></div>
+<!--<div sec:authorize="isAuthenticated()"-->
+<!--Authenticated as <span sec:authentication="name"></span></div>-->
 <nav th:replace="partials/game-bar.html :: gamebar"></nav>
 <nav th:replace="partials/navbar.html :: navbar"></nav>
 
 <h1>ADMIN Login</h1>
 
 <form th:action="@{/login}" method="post">
-    <label for="username">Username</label>
-    <input id="username" name="username" type="text" />
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password" />
+    <label for="adminusername">Username</label>
+    <input id="adminusername" name="adminusername" type="text" />
+    <label for="adminpassword">Password</label>
+    <input id="adminpassword" name="adminpassword" type="password" />
     <input type="submit" value="Log In" />
     <br>
     <div th:if="${param.error}">
