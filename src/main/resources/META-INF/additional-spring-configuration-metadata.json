@@ -1,1 +1,8 @@
-{ "properties": [ ] }
+{
+  "properties": [
+    {
+      "name": "SPRING_JPA_HIBERNATE_DDLAUTO",
+      "type": "java.lang.String",
+      "description": "Description for SPRING_JPA_HIBERNATE_DDLAUTO."
+  }
+] }
