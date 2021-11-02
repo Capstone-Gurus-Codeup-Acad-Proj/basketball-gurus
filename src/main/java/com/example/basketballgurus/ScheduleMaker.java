@@ -99,7 +99,7 @@ public class ScheduleMaker implements ScheduleMakerService {
             }else{
                 str = str.substring(over);
             }
-        } while (2 < 4);
+        } while (true);
 
         return arr;
 

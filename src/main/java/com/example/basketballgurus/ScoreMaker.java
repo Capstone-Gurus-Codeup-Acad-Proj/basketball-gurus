@@ -2,7 +2,6 @@ package com.example.basketballgurus;
 
 import com.example.basketballgurus.RestModels.GameModel;
 import com.example.basketballgurus.RestModels.GameStatsModel;
-import com.example.basketballgurus.models.Game;
 import com.example.basketballgurus.models.Player;
 import com.example.basketballgurus.models.PlayerScore;
 import com.example.basketballgurus.repositories.GameRepository;
@@ -21,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 
 import java.io.IOException;
-import java.io.ObjectInputFilter;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -123,5 +121,9 @@ class ScoreMaker implements ScoreMakerService {
         return total;
 
 
+    }
+
+    public GameRepository getGameDao() {
+        return gameDao;
     }
 }

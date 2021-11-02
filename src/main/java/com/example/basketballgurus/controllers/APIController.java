@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 public class APIController {
 
     @Value("${APIKEY}")
@@ -13,7 +15,8 @@ public class APIController {
     @ResponseBody
     public String apiKey() {
         System.out.println(apiKey);
-        return String.format("const apiKey = `Isnull", apiKey);
+        final AtomicReference<String> format = new AtomicReference<>(String.format("const apiKey = `Isnull", apiKey));
+        return format.get();
 
     }
 }
