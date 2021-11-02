@@ -3,7 +3,6 @@ package com.example.basketballgurus;
 import com.example.basketballgurus.RestModels.GameModel;
 import com.example.basketballgurus.RestModels.TeamModel;
 import com.example.basketballgurus.models.Game;
-import com.example.basketballgurus.models.PlayerScore;
 import com.example.basketballgurus.models.Team;
 import com.example.basketballgurus.repositories.GameRepository;
 import com.example.basketballgurus.repositories.TeamRepository;
@@ -19,21 +18,13 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
 import java.io.IOException;
-import java.io.ObjectInputFilter;
 import java.sql.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.TimeZone;
 
 @Service
 @EnableScheduling

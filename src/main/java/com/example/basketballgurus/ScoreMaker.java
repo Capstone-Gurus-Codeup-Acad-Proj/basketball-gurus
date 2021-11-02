@@ -17,8 +17,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Service;
-
-
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
