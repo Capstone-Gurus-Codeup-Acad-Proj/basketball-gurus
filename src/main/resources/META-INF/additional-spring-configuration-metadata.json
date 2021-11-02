@@ -4,5 +4,15 @@
       "name": "environment",
       "type": "java.lang.String",
       "description": "Description for environment."
-  }
-] }
+    },
+    {
+      "name": "dokku",
+      "type": "java.lang.String",
+      "description": "Description for dokku."
+    },
+    {
+      "name": "APIKEY",
+      "type": "java.lang.String",
+      "description": "Description for APIKEY."
+    }
+  ] }
