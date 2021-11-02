@@ -9,6 +9,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.io.ObjectInputFilter;
 import java.util.ArrayList;
 
 public class GameStats {
@@ -16,7 +17,8 @@ public class GameStats {
     public ArrayList<String> getStats(int gameId) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
-        Config config = new Config();
+       Config config;
+        config = new Config();
 
         try {
 

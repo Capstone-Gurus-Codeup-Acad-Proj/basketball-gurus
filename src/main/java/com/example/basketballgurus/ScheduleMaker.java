@@ -21,6 +21,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.io.ObjectInputFilter;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -48,7 +49,7 @@ public class ScheduleMaker implements ScheduleMakerService {
 
     public ArrayList<GameModel> getGames() throws IOException, ParseException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        Config config = new Config();
+       Config config = new Config();
 
             HttpGet request = new HttpGet("https://api-nba-v1.p.rapidapi.com/games/league/standard/" + getSeasonYear());
 
