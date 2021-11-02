@@ -25,8 +25,8 @@ public class GameStats {
             HttpGet request = new HttpGet("https://api-nba-v1.p.rapidapi.com/statistics/players/gameId/" + gameId);
 
             // add request headers
-            request.addHeader("x-rapidapi-key", config.getApiKey());
-            request.addHeader("x-rapidapi-host", "api-nba-v1.p.rapidapi.com");
+            request.addHeader("x-rapidApi-key", config.getApiKey());
+            request.addHeader("x-rapidApi-host", "api-nba-v1.p.rapidApi.com");
 
             CloseableHttpResponse response = httpClient.execute(request);
             System.out.println(response);

@@ -54,8 +54,8 @@ public class ScheduleMaker implements ScheduleMakerService {
             HttpGet request = new HttpGet("https://api-nba-v1.p.rapidapi.com/games/league/standard/" + getSeasonYear());
 
         // add request headers
-        request.addHeader("x-rapidapi-key", config.getApiKey());
-        request.addHeader("x-rapidapi-host", "api-nba-v1.p.rapidapi.com");
+        request.addHeader("x-rapidApi-key", config.getApiKey());
+        request.addHeader("x-rapidApi-host", "api-nba-v1.p.rapidApi.com");
 
         CloseableHttpResponse response = httpClient.execute(request);
         HttpEntity entity = response.getEntity();
