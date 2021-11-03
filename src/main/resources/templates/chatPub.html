@@ -1,7 +1,7 @@
 <!--shamelessly swiped and modified from:-->
 <!--https://www.pubnub.com/blog/realtime-live-chat-application-javascript-pubnub-10-lines-of-code/-->
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Pubnub Chat Demo</title>
@@ -11,16 +11,14 @@
 
 <h4>I am user:</h4>
 <select id="chat_source">
-  <option value="user1">Bob</option>
-  <option value="user2">Sue</option>
-  <option value="user3">Jimmy</option>
+  <option th:text="${user.getUsername()}"></option>
 </select>
 
 <h4>Chat with which user:</h4>
 <select id="chat_target">
-  <option value="user1">Bob</option>
-  <option value="user2">Sue</option>
-  <option value="user3">Jimmy</option>
+  <option value="user1">Channel 1</option>
+  <option value="user2">Channel 2</option>
+  <option value="user3">Channel 3</option>
 </select>
 <h4>Enter Chat and press enter:</h4>
 <div>
