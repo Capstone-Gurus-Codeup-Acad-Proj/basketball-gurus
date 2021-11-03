@@ -15,7 +15,7 @@ public class APIController {
     @ResponseBody
     public String apiKey() {
         System.out.println(apiKey);
-//        return MessageFormat.format("const ApiKey = `{0}null", apiKey);
-        return "89a8882cffmshf92bc0d749a1870p1ab611jsnc71954fcf253";
+        return "const ApiKey = " + apiKey;
+
     }
 }
