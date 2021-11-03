@@ -14,5 +14,10 @@
       "name": "environment",
       "type": "java.lang.String",
       "description": "Description for environment."
+    },
+    {
+      "name": "enviroment",
+      "type": "java.lang.String",
+      "description": "Description for enviroment."
     }
   ] }
