@@ -16,10 +16,33 @@
 <nav th:replace="partials/navbar.html :: navbar"></nav>
 
 <div th:text="${league.getLeagueName}">
-
+    <div th:text="${leagueScores}"></div>
 </div>
 
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <td>Team Name</td>
+        <div th:each="score : ${leagueScores.entrySet().iterator().next().getValue()}">
+            <td th:each="week : ${score}">
+                <div th:text="${week.getKey()}"></div>
+            </td>
+        </div>
+    </tr>
+    </thead>
+    <tbody>
+    <div th:each="roster : ${leagueScores}">
+        <tr>
+            <td th:text="${roster.getKey()}"></td>
+            <td th:each="score : ${roster.getValue()}">
+                <div th:text="${score.getValue()}"></div>
+            </td>
+        </tr>
+    </div>
+    </tbody>
 
+    <div th:text="${leagueScores}"></div>
+</table>
 
 </body>
 </html>

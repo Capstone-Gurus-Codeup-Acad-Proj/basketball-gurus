@@ -13,7 +13,209 @@
 <nav th:replace="partials/game-bar.html :: gamebar"></nav>
 <nav th:replace="partials/navbar.html :: navbar"></nav>
 
-<div>create your team here</div>
+<div class="div d-flex justify-content-around">
+
+    <div>
+        <form action="#" th:action="@{/team/create}" method="post" class="input-group">
+            <div class="d-flex align-items-center justify-items-apart">
+                <input class="form-control form-control-dark" type="text" placeholder="Search" name="search" aria-label="Search">
+                <input name="leagueId" type="hidden" th:value="${leagueId}">
+                <input name="roster" type="hidden" th:value="${roster.getId()}">
+                <input name="playerId" type="hidden" th:value="${0}">
+                <input name="isUpdate" type="hidden" value="false">
+                <input name="delete" type="hidden" th:value="false">
+                <label for="team"></label>
+                <select id="team"  name="team" class="form-control" >
+                    <option value="0">Select Team</option>
+                    <option th:each="team : ${teams}" th:value="${team.fullName}" th:text="${team.fullName}"></option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-light" value="Search">Search</button>
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">FirstName</th>
+                <th scope="col">LastName</th>
+                <th scope="col">Team</th>
+                <th scope="col">Value</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <div th:each="player : ${players}">
+                <tr>
+                    <td class = "headshot"> <img th:src="${player.headshotUrl}" alt="" style="width: 50px; height: 50px"> </td>
+                    <td th:text="${player.firstName}"></td>
+                    <td th:text="${player.lastName}"></td>
+                    <td th:text="${player.teamId.fullName}"></td>
+                    <td><div class="d-flex">$<div th:text="${player.getPrice()}"></div></div></td>
+                    <td class = "detail">
+                        <button type="button" value="${player.id}" class="btn btn-primary" data-toggle="modal" th:data-target="${'#modal'+player.id}"  >
+                            Details
+                        </button>
+
+                        <div class="modal fade" th:id="${'modal'+player.id}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="modal-title">
+                                            <img th:src="${player.headshotUrl}" alt="" style="width: 100px; height: 100px">
+                                            <div class = "firstName" th:text="${player.firstName}"></div>
+                                            <div class = "lastName" th:text="${player.lastName}"></div>
+                                        </div>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class ="teamW"> Team: &nbsp; <div th:text="${player.teamId.fullName}"></div> </div>
+                                        <div class ="teamW"> Height: &nbsp; <div th:text="${player.height}"></div> </div>
+                                        <div class ="teamW"> Weight: &nbsp; <div th:text="${player.weight}"></div> </div>
+                                        <div class ="teamW"> Age: &nbsp; <div th:text="${player.age}"></div> </div>
+                                        <div class ="teamW"> Assists: &nbsp; <div th:text="${player.assists}"></div> </div>
+                                        <div class ="teamW"> Blocks: &nbsp; <div th:text="${player.blocks}"></div> </div>
+                                        <div class ="teamW"> Jersey Number: &nbsp; <div th:text="${player.jerseyNumber}"></div> </div>
+                                        <div class ="teamW"> Point Average: &nbsp; <div th:text="${player.point}"></div> </div>
+                                        <div class ="teamW"> Position: &nbsp; <div th:text="${player.position}"></div> </div>
+                                        <div class ="teamW"> Rebounds: &nbsp; <div th:text="${player.rebounds}"></div> </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <form action="#" th:action="@{/team/create}" method="post">
+                            <input name="leagueId" type="hidden" th:value="${leagueId}">
+                            <input name="roster" type="hidden" th:value="${roster.getId()}">
+                            <input name="search" type="hidden" th:value="${search}">
+                            <input name="team" type="hidden" th:value="${team}">
+                            <input name="playerId" type="hidden" th:value="${player.getId()}">
+                            <input name="isUpdate" type="hidden" th:value="false">
+                            <input name="delete" type="hidden" th:value="false">
+                            <button type="submit" class="btn btn-primary">
+                                Add Player
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </div>
+            </tbody>
+        </table>
+    </div>
+    <div>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">FirstName</th>
+                <th scope="col">LastName</th>
+                <th scope="col">Team</th>
+                <th scope="col">Value</th>
+                <th scope="col">Activity</th>
+                <th scope="col">Delete</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <div th:each="player : ${rosterPlayers}">
+                <tr>
+                    <td class = "headshot"> <img th:src="${player.getPlayerId.headshotUrl}" alt="" style="width: 50px; height: 50px"> </td>
+                    <td th:text="${player.getPlayerId.firstName}"></td>
+                    <td th:text="${player.getPlayerId.lastName}"></td>
+                    <td th:text="${player.getPlayerId.teamId.fullName}"></td>
+                    <td><div class="d-flex">$<div th:text="${player.getPlayerId.getPrice()}"></div></div></td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div th:if="${player.isActive}" style="padding-right: 11px">Active</div>
+                            <div th:if="${!player.isActive}">Inactive</div>
+                            <form action="#" th:action="@{/team/create}" method="post">
+                                <input name="leagueId" type="hidden" th:value="${leagueId}">
+                                <input name="roster" type="hidden" th:value="${roster.getId()}">
+                                <input name="search" type="hidden" th:value="${search}">
+                                <input name="team" type="hidden" th:value="${team}">
+                                <input name="playerId" type="hidden" th:value="${player.getPlayerId().getId()}">
+                                <input name="isUpdate" type="hidden" th:value="true">
+                                <input name="delete" type="hidden" th:value="false">
+                                <button type="submit" class="btn btn-primary">
+                                    switch
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                    <td class = "detail">
+                        <button type="button" value="${player.getPlayerId.id}" class="btn btn-primary" data-toggle="modal" th:data-target="${'#modal'+player.getPlayerId.id}"  >
+                            Details
+                        </button>
+
+                        <div class="modal fade" th:id="${'modal'+player.getPlayerId.id}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="modal-title">
+                                            <img th:src="${player.getPlayerId.headshotUrl}" alt="" style="width: 100px; height: 100px">
+                                            <div class = "firstName" th:text="${player.getPlayerId.firstName}"></div>
+                                            <div class = "lastName" th:text="${player.getPlayerId.lastName}"></div>
+                                        </div>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class ="teamW"> Team: &nbsp; <div th:text="${player.getPlayerId.teamId.fullName}"></div> </div>
+                                        <div class ="teamW"> Height: &nbsp; <div th:text="${player.getPlayerId.height}"></div> </div>
+                                        <div class ="teamW"> Weight: &nbsp; <div th:text="${player.getPlayerId.weight}"></div> </div>
+                                        <div class ="teamW"> Age: &nbsp; <div th:text="${player.getPlayerId.age}"></div> </div>
+                                        <div class ="teamW"> Assists: &nbsp; <div th:text="${player.getPlayerId.assists}"></div> </div>
+                                        <div class ="teamW"> Blocks: &nbsp; <div th:text="${player.getPlayerId.blocks}"></div> </div>
+                                        <div class ="teamW"> Jersey Number: &nbsp; <div th:text="${player.getPlayerId.jerseyNumber}"></div> </div>
+                                        <div class ="teamW"> Point Average: &nbsp; <div th:text="${player.getPlayerId.point}"></div> </div>
+                                        <div class ="teamW"> Position: &nbsp; <div th:text="${player.getPlayerId.position}"></div> </div>
+                                        <div class ="teamW"> Rebounds: &nbsp; <div th:text="${player.getPlayerId.rebounds}"></div> </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <form action="#" th:action="@{/team/create}" method="post">
+                                <input name="leagueId" type="hidden" th:value="${leagueId}">
+                                <input name="roster" type="hidden" th:value="${roster.getId()}">
+                                <input name="search" type="hidden" th:value="${search}">
+                                <input name="team" type="hidden" th:value="${team}">
+                                <input name="playerId" type="hidden" th:value="${player.getPlayerId().getId()}">
+                                <input name="isUpdate" type="hidden" th:value="false">
+                                <input name="delete" type="hidden" th:value="true">
+                                <button type="submit" class="btn btn-primary">
+                                    delete
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </div>
+            <tr>
+                <td colspan="4"></td>
+                <td><div class="d-flex"><div th:text="${valueTotal}"></div> / <div th:text="${league.leagueDifficulty}"></div></div></td>
+                <td colspan="3" style="text-align: center">SUBMIT ME</td>
+
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
 
 </body>
 </html>

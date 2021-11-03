@@ -80,7 +80,11 @@
                     <input th:field="*{endDate}" />
                     <br />
                     League Difficulty
-                    <input th:field="*{leagueDifficulty}" />
+                    <select th:field="*{leagueDifficulty}" class="form-select" aria-label="Default select example">
+                        <option th:value="Easy">Easy</option>
+                        <option th:value="Medium">Medium</option>
+                        <option th:value="Hard">Hard</option>
+                    </select>
                     <br />
                     Password:
                     <input th:field="*{password}" />

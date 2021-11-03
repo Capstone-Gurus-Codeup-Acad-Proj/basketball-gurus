@@ -22,10 +22,27 @@
     <input id="password" name="password" type="password" />
     <input type="submit" value="join" />
     <br>
-    <div th:if="${failedLogin != null}" style="color: red">
-        Invalid Password
-    </div>
+
 </form>
+<div th:if="${failedLogin != null}" style="color: red">
+    <div th:if="${failedLogin == false}">
+
+        Login successful!
+
+        <form action="#" th:action="@{/team/create/newRoster}" method="post" class="input-group">
+            <div class="d-flex align-items-center justify-items-apart">
+                <input name="leagueId" type="hidden" th:value="${leagueId}" />
+                <input name="search" type="hidden" value="">
+                <input name="team" type="hidden" value="">
+                <input name="rosterName" type="text">
+                <button class="btn btn-outline-light" value="Search">Click here to create team</button>
+            </div>
+        </form>
+
+    </div>
+
+    <div th:if="${failedLogin == true}">Invalid Password</div>
+</div>
 
 
 
