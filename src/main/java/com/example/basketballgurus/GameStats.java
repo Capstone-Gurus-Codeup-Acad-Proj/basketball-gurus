@@ -7,6 +7,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -27,9 +28,9 @@ public class GameStats {
             request.addHeader("x-rapidApi-host", "api-nba-v1.p.rapidApi.com");
 
             CloseableHttpResponse response = httpClient.execute(request);
+            System.out.println(response);
 
-            try (response) {
-                System.out.println(response);
+            try {
 
 
                 HttpEntity entity = response.getEntity();
@@ -39,6 +40,8 @@ public class GameStats {
                     return truncateString(result);
                 }
 
+            } finally {
+                response.close();
             }
         } finally {
             httpClient.close();
