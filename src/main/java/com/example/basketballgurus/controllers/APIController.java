@@ -8,7 +8,7 @@ import java.text.MessageFormat;
 
 public class APIController {
 
-    @Value("${APIKEY}")
+    @Value("${NBA_API_KEY}")
     private String apiKey;
 
     @RequestMapping(path = "/keys.js", produces = "application/javascript")
