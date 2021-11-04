@@ -8,8 +8,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-
 </head>
 <body>
 <nav th:replace="partials/game-bar.html :: gamebar"></nav>
@@ -18,16 +16,33 @@
 
 
 </div>
-<form th:action="@{/leagues/join/id}" method="post">
-    <input id="teamId" name="teamId" type="hidden" th:value="${leagueId}" />
+<form th:action="@{/leagues/join}" method="post">
+    <input id="leagueId" name="leagueId" type="hidden" th:value="${leagueId}" />
     <label for="password">Password</label>
     <input id="password" name="password" type="password" />
     <input type="submit" value="join" />
     <br>
-    <div th:if="${param.error}">
-        Invalid Password
-    </div>
+
 </form>
+<div th:if="${failedLogin != null}" style="color: red">
+    <div th:if="${failedLogin == false}">
+
+        Login successful!
+
+        <form action="#" th:action="@{/team/create/newRoster}" method="post" class="input-group">
+            <div class="d-flex align-items-center justify-items-apart">
+                <input name="leagueId" type="hidden" th:value="${leagueId}" />
+                <input name="search" type="hidden" value="">
+                <input name="team" type="hidden" value="">
+                <input name="rosterName" type="text">
+                <button class="btn btn-outline-light" value="Search">Click here to create team</button>
+            </div>
+        </form>
+
+    </div>
+
+    <div th:if="${failedLogin == true}">Invalid Password</div>
+</div>
 
 
 

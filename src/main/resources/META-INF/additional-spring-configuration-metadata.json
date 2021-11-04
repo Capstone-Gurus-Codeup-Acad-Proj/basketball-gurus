@@ -19,5 +19,10 @@
       "name": "enviroment",
       "type": "java.lang.String",
       "description": "Description for enviroment."
+    },
+    {
+      "name": "NBA_API_KEY",
+      "type": "java.lang.String",
+      "description": "Description for NBA_API_KEY."
     }
   ] }

@@ -7,24 +7,31 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class GameStats {
 
+    @Value("${API_NBA_KEY}")
+    private final String apiKey;
+
+    public GameStats(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
     public ArrayList<String> getStats(int gameId) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
-       Config config;
-        config = new Config();
+
 
         try {
 
             HttpGet request = new HttpGet("https://api-nba-v1.p.rapidapi.com/statistics/players/gameId/" + gameId);
 
             // add request headers
-            request.addHeader("x-rapidApi-key", config.getApiKey());
+            request.addHeader("x-rapidApi-key", apiKey);
             request.addHeader("x-rapidApi-host", "api-nba-v1.p.rapidApi.com");
 
             CloseableHttpResponse response = httpClient.execute(request);

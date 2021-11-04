@@ -42,8 +42,10 @@ public class PlayerPrice implements PlayerPriceService {
         total += player.getBlocks() * 3;
         total -= player.getTurnOvers();
 
-        return total;
+        int finalTotal = (total + 2) * 10;
 
+
+        return ((finalTotal + 49) / 50) * 50;
 
     }
 
