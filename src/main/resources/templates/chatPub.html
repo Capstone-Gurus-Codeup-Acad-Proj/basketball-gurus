@@ -14,11 +14,11 @@
   <option th:text="${user.getUsername()}"></option>
 </select>
 
-<h4>Chat with which user:</h4>
+<h4>Chat in which Channel:</h4>
 <select id="chat_target">
-  <option value="user1">Channel 1</option>
-  <option value="user2">Channel 2</option>
-  <option value="user3">Channel 3</option>
+  <div th:each="roster : ${rosters}">
+  <option th:text="${roster.leagueId.getLeagueName()}"></option>
+  </div>
 </select>
 <h4>Enter Chat and press enter:</h4>
 <div>

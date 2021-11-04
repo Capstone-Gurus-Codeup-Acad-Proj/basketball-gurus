@@ -21,6 +21,7 @@ public class Roster {
 
     @ManyToOne
     @JoinColumn(name = "league_id", referencedColumnName = "id")
+    @Getter @Setter
     private League leagueId;
 
     @ManyToOne
