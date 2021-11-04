@@ -23,9 +23,9 @@
 </head>
 <body>
 <nav th:replace="partials/game-bar.html :: gamebar"></nav>
-<nav th:replace="partials/navbar.html :: navbar">
+<nav th:replace="partials/navbar.html :: navbar"></nav>
 
-</nav>
+
 <br>
 
 <div class="container">
@@ -80,7 +80,11 @@
                     <input th:field="*{endDate}" />
                     <br />
                     League Difficulty
-                    <input th:field="*{leagueDifficulty}" />
+                    <select th:field="*{leagueDifficulty}" class="form-select" aria-label="Default select example">
+                        <option th:value="Easy">Easy</option>
+                        <option th:value="Medium">Medium</option>
+                        <option th:value="Hard">Hard</option>
+                    </select>
                     <br />
                     Password:
                     <input th:field="*{password}" />
@@ -130,9 +134,10 @@
             <td th:text="${league.getLeagueName()}"></td>
             <td th:text="${league.getStartDate()}"></td>
             <td th:text="${league.getEndDate()}"></td>
+            <td th:text="${league.getUuid()}"></td>
             <td th:text="${league.getLeagueDifficulty()}"></td>
             <td th:classappend="${module == 'Register' ? 'active' : ''}">
-
+            <a class="btn" th:href="@{/leagues/join/__${league.getId()}__}">Join League</a>
         </tr>
     </div>
     </tbody>

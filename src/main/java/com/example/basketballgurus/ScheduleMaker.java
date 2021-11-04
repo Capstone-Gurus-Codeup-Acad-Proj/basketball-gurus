@@ -3,7 +3,6 @@ package com.example.basketballgurus;
 import com.example.basketballgurus.RestModels.GameModel;
 import com.example.basketballgurus.RestModels.TeamModel;
 import com.example.basketballgurus.models.Game;
-import com.example.basketballgurus.models.PlayerScore;
 import com.example.basketballgurus.models.Team;
 import com.example.basketballgurus.repositories.GameRepository;
 import com.example.basketballgurus.repositories.TeamRepository;
@@ -19,20 +18,13 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.sql.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.TimeZone;
 
 @Service
 @EnableScheduling
@@ -48,13 +40,13 @@ public class ScheduleMaker implements ScheduleMakerService {
 
     public ArrayList<GameModel> getGames() throws IOException, ParseException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        Config config = new Config();
+       Config config = new Config();
 
             HttpGet request = new HttpGet("https://api-nba-v1.p.rapidapi.com/games/league/standard/" + getSeasonYear());
 
         // add request headers
-        request.addHeader("x-rapidapi-key", config.getApiKey());
-        request.addHeader("x-rapidapi-host", "api-nba-v1.p.rapidapi.com");
+        request.addHeader("x-rapidApi-key", config.getApiKey());
+        request.addHeader("x-rapidApi-host", "api-nba-v1.p.rapidApi.com");
 
         CloseableHttpResponse response = httpClient.execute(request);
         HttpEntity entity = response.getEntity();
@@ -98,7 +90,7 @@ public class ScheduleMaker implements ScheduleMakerService {
             }else{
                 str = str.substring(over);
             }
-        } while (2 < 4);
+        } while (true);
 
         return arr;
 
@@ -146,7 +138,7 @@ public class ScheduleMaker implements ScheduleMakerService {
         }
     }
 
-//    @Scheduled(cron = "0 */1 * * * *")
+    @Scheduled(cron = "0 */1 * * * *")
     public void checkSchedule() throws IOException, ParseException {
 
         List<Game> games = gameDao.findAll();

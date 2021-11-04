@@ -2,7 +2,6 @@ package com.example.basketballgurus;
 
 import com.example.basketballgurus.RestModels.GameModel;
 import com.example.basketballgurus.RestModels.GameStatsModel;
-import com.example.basketballgurus.models.Game;
 import com.example.basketballgurus.models.Player;
 import com.example.basketballgurus.models.PlayerScore;
 import com.example.basketballgurus.repositories.GameRepository;
@@ -18,8 +17,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Service;
-
-
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -75,8 +72,8 @@ class ScoreMaker implements ScoreMakerService {
             HttpGet request = new HttpGet("https://api-nba-v1.p.rapidapi.com/games/gameId/" + gameId);
 
             // add request headers
-            request.addHeader("x-rapidapi-key", config.getApiKey());
-            request.addHeader("x-rapidapi-host", "api-nba-v1.p.rapidapi.com");
+            request.addHeader("x-rapidApi-key", config.getApiKey());
+            request.addHeader("x-rapidApi-host", "api-nba-v1.p.rapidApi.com");
 
             CloseableHttpResponse response = httpClient.execute(request);
 
@@ -122,5 +119,9 @@ class ScoreMaker implements ScoreMakerService {
         return total;
 
 
+    }
+
+    public GameRepository getGameDao() {
+        return gameDao;
     }
 }
