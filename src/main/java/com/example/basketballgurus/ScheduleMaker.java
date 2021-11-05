@@ -15,6 +15,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,9 @@ public class ScheduleMaker implements ScheduleMakerService {
     private final GameRepository gameDao;
     private final TeamRepository teamDao;
 
+    @Value("${NBA_API_KEY}")
+    private String apiKey;
+
     public ScheduleMaker(GameRepository gameDao, TeamRepository teamDao) {
         this.gameDao = gameDao;
         this.teamDao = teamDao;
@@ -40,12 +44,11 @@ public class ScheduleMaker implements ScheduleMakerService {
 
     public ArrayList<GameModel> getGames() throws IOException, ParseException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
-       Config config = new Config();
 
             HttpGet request = new HttpGet("https://api-nba-v1.p.rapidapi.com/games/league/standard/" + getSeasonYear());
 
         // add request headers
-        request.addHeader("x-rapidApi-key", config.getApiKey());
+        request.addHeader("x-rapidApi-key", apiKey);
         request.addHeader("x-rapidApi-host", "api-nba-v1.p.rapidApi.com");
 
         CloseableHttpResponse response = httpClient.execute(request);
