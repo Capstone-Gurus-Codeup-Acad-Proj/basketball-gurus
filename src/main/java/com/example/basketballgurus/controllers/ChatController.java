@@ -35,12 +35,7 @@ public class ChatController {
         return "/chatPub";
     }
 
-//    @GetMapping("/chat/create")
-//    public String memberChat(Model model) {
-//        User userInSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        List<Roster> allRosters = rosterDao.findById();
-//        return "/chatPub";
-//    }
+
 
     @PostMapping("/chat/create")
     public String memberChatSend(@ModelAttribute User user,Model model){
@@ -50,10 +45,11 @@ public class ChatController {
     }
 
 
-    @GetMapping("/chat/{id}")
-    public String redirectUser(@PathVariable int id, Model model, Principal principal){
+    @GetMapping("/chat")
+    public String redirectUser(Model model, Principal principal){
         User user = userDao.findByUsername(principal.getName());
-        List<Roster> rosters = rosterDao.getByLeagueId(leagueDao.getById(id));
+//        List<Roster> rosters = rosterDao.getByLeagueId(leagueDao.getById(id));
+        List<Roster> rosters = rosterDao.getByUserId(user);
         System.out.println(user.getUsername());
         model.addAttribute("user", user);
         model.addAttribute("rosters", rosters);
