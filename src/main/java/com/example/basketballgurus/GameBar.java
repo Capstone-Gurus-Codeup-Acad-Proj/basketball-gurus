@@ -26,11 +26,13 @@ public class GameBar implements GameBarService {
         ArrayList<Game> fiveGames = new ArrayList<>();
         LocalDate date = LocalDate.now();
         String today = Integer.toString(date.getDayOfMonth());
+        System.out.println(date);
         for(Game game : allGames){
             String pattern = "d";
             SimpleDateFormat sdf = new SimpleDateFormat(pattern);
             String gameDate =  sdf.format(game.getStartTime());
             if (today.equals(gameDate)){
+                System.out.println(game.getStartTime());
                 fiveGames.add(game);
             }
         }
