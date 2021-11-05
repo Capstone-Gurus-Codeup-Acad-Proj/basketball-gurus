@@ -5,12 +5,12 @@ import com.example.basketballgurus.models.User;
 import com.example.basketballgurus.repositories.LeaguesRepository;
 import com.example.basketballgurus.repositories.RosterRepository;
 import com.example.basketballgurus.repositories.UserRepository;
+import com.example.basketballgurus.services.GameBarService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
@@ -21,11 +21,13 @@ public class ChatController {
     private final UserRepository userDao;
     private final RosterRepository rosterDao;
     private final LeaguesRepository leagueDao;
+    private final GameBarService gm;
 
-    public ChatController(UserRepository userDao, RosterRepository rosterDao, LeaguesRepository leagueDao) {
+    public ChatController(UserRepository userDao, RosterRepository rosterDao, LeaguesRepository leagueDao, GameBarService gm) {
         this.userDao = userDao;
         this.rosterDao = rosterDao;
         this.leagueDao = leagueDao;
+        this.gm = gm;
     }
 
     @GetMapping("/chat/create")
@@ -52,6 +54,7 @@ public class ChatController {
         List<Roster> rosters = rosterDao.getByUserId(user);
         System.out.println(user.getUsername());
         model.addAttribute("user", user);
+        model.addAttribute("games", gm.getTodaysGames());
         model.addAttribute("rosters", rosters);
         return "chatPub";
     }
