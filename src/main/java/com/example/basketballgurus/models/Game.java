@@ -15,6 +15,10 @@ public class Game {
     @Getter @Setter
     private int id;
 
+    public Game(int id) {
+        this.id = id;
+    }
+
     @OneToOne
     @JoinColumn(name = "home_team_id", referencedColumnName = "id")
     @Getter @Setter
