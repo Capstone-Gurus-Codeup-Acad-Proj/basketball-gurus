@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,9 +31,10 @@ public class GameBar implements GameBarService {
         for(Game game : allGames){
             String pattern = "d";
             SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-            String gameDate =  sdf.format(game.getStartTime());
+            Date convDate = new Date( game.getStartTime().getTime() - 3600 * 6000);
+            String gameDate =  sdf.format(convDate);
             if (today.equals(gameDate)){
-                System.out.println(game.getStartTime());
+                System.out.println(convDate);
                 fiveGames.add(game);
             }
         }
