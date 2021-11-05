@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,9 @@ public class GameBar implements GameBarService {
         List<Game> allGames = gameDao.findAll();
         ArrayList<Game> fiveGames = new ArrayList<>();
         LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formatDateTime = date.format(formatter);
+        System.out.println(formatDateTime);
         String today = Integer.toString(date.getDayOfMonth());
         for(Game game : allGames){
             String pattern = "d";
