@@ -1,11 +1,12 @@
 package com.example.basketballgurus.controllers;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.text.MessageFormat;
 
-
+@Controller
 public class APIController {
 
     @Value("${NBA_API_KEY}")
