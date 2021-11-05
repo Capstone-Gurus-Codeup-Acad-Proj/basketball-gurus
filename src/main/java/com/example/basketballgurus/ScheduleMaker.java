@@ -25,7 +25,6 @@ import java.text.ParseException;
 import java.time.*;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @EnableScheduling
@@ -33,13 +32,15 @@ public class ScheduleMaker implements ScheduleMakerService {
 
     private final GameRepository gameDao;
     private final TeamRepository teamDao;
+    private final GameCompletion gameCompletion;
 
     @Value("${NBA_API_KEY}")
     private String apiKey;
 
-    public ScheduleMaker(GameRepository gameDao, TeamRepository teamDao) {
+    public ScheduleMaker(GameRepository gameDao, TeamRepository teamDao, GameCompletion gameCompletion) {
         this.gameDao = gameDao;
         this.teamDao = teamDao;
+        this.gameCompletion = gameCompletion;
     }
 
     public ArrayList<GameModel> getGames() throws IOException, ParseException {
@@ -141,26 +142,26 @@ public class ScheduleMaker implements ScheduleMakerService {
         }
     }
 
-    @Scheduled(cron = "0 */1 * * * *")
-    public void checkSchedule() throws IOException, ParseException {
-
-        List<Game> games = gameDao.findAll();
-
-        if (games.isEmpty()){
-            generateGames();
-        }
-
-        for(Game game : games){
-            if (!checkDate(game)){
-                generateGames();
-                break;
-            }
-        }
-
-    }
+//    @Scheduled(cron = "0 */1 * * * *")
+//    public void checkSchedule() throws IOException, ParseException {
+//
+//        List<Game> games = gameDao.findAll();
+//
+//        if (games.isEmpty()){
+//            generateGames();
+//        }
+//
+//        for(Game game : games){
+//            if (!checkDate(game)){
+//                generateGames();
+//                break;
+//            }
+//        }
+//
+//    }
 
     @Override
-    @Scheduled(cron = "0 0 0 * * MON", zone = "America/Chicago")
+    @Scheduled(cron = "0 */10 * * * *", zone = "America/Chicago")
     public void generateGames() throws IOException, ParseException {
 
         ArrayList<GameModel> arr = getGames();
@@ -177,6 +178,7 @@ public class ScheduleMaker implements ScheduleMakerService {
         }
 
         gameDao.saveAll(games);
+        gameCompletion.checkStatus(arr);
 
     }
 }
