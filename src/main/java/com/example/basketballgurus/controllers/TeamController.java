@@ -42,7 +42,7 @@ public class TeamController {
     }
 
     @RequestMapping(value = "/team/create", method = RequestMethod.POST)
-    public String getPlayerByName(@RequestParam(name = "delete") Boolean delete, @RequestParam(name = "isUpdate") Boolean update, @RequestParam(name = "playerId") int playerId, @RequestParam(name = "roster") int rosterId,@RequestParam(name = "search") String search, @RequestParam(name = "team") String team, @RequestParam(name = "leagueId") String leagueId, Model model) {
+    public String getPlayerByName(@RequestParam(name = "isAdd") Boolean add, @RequestParam(name = "delete") Boolean delete, @RequestParam(name = "isUpdate") Boolean update, @RequestParam(name = "playerId") int playerId, @RequestParam(name = "roster") int rosterId,@RequestParam(name = "search") String search, @RequestParam(name = "team") String team, @RequestParam(name = "leagueId") String leagueId, Model model) {
         Team teamFilter = teamDao.findTeamByFullName(team);
         List<Player> players = playerDao.findByTeamId(teamFilter);
 
@@ -75,6 +75,19 @@ public class TeamController {
         boolean alreadyAdded = rosterPlayerDao.getRosterPlayerByRosterIdAndPlayerId(roster, player) != null;
         boolean lessThanTen = rosterPlayerDao.getByRosterId(roster).size() < 10;
         RosterPlayer rosterPlayer = rosterPlayerDao.getRosterPlayerByRosterIdAndPlayerId(roster, player);
+
+        if(update && activeCount >= 5 && !rosterPlayer.getIsActive()){
+            model.addAttribute("moreThanFive", true);
+        } else if(add && alreadyAdded){
+            model.addAttribute("alreadyAdded", true);
+        } else if(add && !lessThanTen){
+            model.addAttribute("tooManyPlayers", true);
+        }
+
+        if(add &&valueTotal + player.getPrice() > Integer.parseInt(league.getLeagueDifficulty())){
+            model.addAttribute("maxPrice", true);
+        }
+
         if(playerId != 0 && rosterPlayer != null){
             System.out.println(roster);
             System.out.println(player);
@@ -88,8 +101,9 @@ public class TeamController {
 
 
         if (playerId != 0 && !update && !alreadyAdded && lessThanTen && valueTotal + player.getPrice() <= Integer.parseInt(league.getLeagueDifficulty())){
+            valueTotal += player.getPrice();
             rosterPlayerDao.save(rosterPlayer);
-        } else if(playerId != 0 && update && activeCount < 5 || rosterPlayer.getIsActive()){
+        } else if(playerId != 0 && update && activeCount < 5 || rosterPlayer.getIsActive() && !add){
 
             rosterPlayer.setIsActive(!rosterPlayer.getIsActive());
 
@@ -97,7 +111,7 @@ public class TeamController {
         }
 
         if (delete){
-
+            valueTotal -= player.getPrice();
             rosterPlayerDao.delete(rosterPlayer);
 
         }
@@ -165,4 +179,7 @@ public class TeamController {
         }
 
     }
+
+
+
 }
