@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Landing2</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"/>
+    />"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .banner {
+            background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("img/squad.jpeg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .card-img-top {
+            width: 100%;
+            height: 250px;
+        }
+        .ho:hover {
+            text-shadow: none !important;
+            box-sizing: border-box !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            -webkit-transform: scale(1.1) !important;
+            -ms-transform: scale(1.1) !important;
+            transform: scale(1.1) !important;
+            z-index: 2;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            top: 400px;
+        }
+        ul{
+            list-style-type: none;
+            margin:0;
+            padding:0;
+        }
+
+    </style>
+</head>
+<body class="banner">
+<nav th:replace="partials/game-bar.html :: gamebar"></nav>
+<nav th:replace="partials/navbar.html :: navbar"></nav>
+<div class="pt-5">
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-lg-4 pb-5 animate__fadeInLeft slow">
+                <div class="card ho">
+                    <div class="view overlay">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtuqRupM1lCOpXQiYtbOwZnRo_9ad2SN70BQ&usqp=CAU" alt="first pic" class="card-img-top"/>
+                        <a href="#!">
+                            <div class="mask rgba-white-light"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title display-4">Sign Up!</h5>
+                        <p class="card-text">Search from the entire roster of NBA superstars and build the dream team you've always
+                            wanted. Player stats are updated in real time with their in game results!
+                        </p>
+                        <hr class="my-4">
+                        <ul class="list-style-type">
+                            <li th:classappend="${module == 'Register' ? 'active' : ''}">
+                                <a class="btn" th:href="@{/sign-up}">Register</a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 pb-5 animate__fadeInDown slow">
+                <div class="card ho">
+                    <div class="view overlay">
+                        <img src="https://cyclonesidebar.files.wordpress.com/2015/10/nba-who-ya-got.jpg?w=1280&h=582" size="width: 100px; height:100px" alt="first pic" class="card-img-top"/>
+                        <a href="#!">
+                            <div class="mask rgba-white-light"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title display-4">Create!</h3>
+                        <p class="card-text">Search from the entire roster of NBA superstars and build the dream team you've always
+                            wanted. Player stats are updated in real time with their in game results!
+                        </p>
+                        <hr class="my-4">
+                        <ul class="list-style-type">
+                            <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">
+                                <a class="btn" th:href="@{/leagues}">Create</a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 pb-5">
+                <div class="card ho">
+                    <div class="view overlay">
+                        <img src="https://fadeawayworld.net/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_1024/MTgwOTU3OTg0MjA4MjAwNzky/181106571_1125947161207846_6205221713834714685_n.webp" alt="first pic" class="card-img-top"/>
+                        <a href="#!">
+                            <div class="mask rgba-white-light"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title display-4">Join!</h2>
+                        <p class="card-text">Search from the entire roster of NBA superstars and build the dream team you've always
+                            wanted. Player stats are updated in real time with their in game results!
+                        </p>
+                        <hr class="my-4">
+                        <ul class="list-style-type">
+                            <li>
+                                <a class="btn" th:href="@{/sign-up}">Register</a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!---JQUERY--->
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+            integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+            crossorigin="anonymous">
+    </script>
+    <!-- BOOTSTRAP TOOLTIPS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <!-- BOOTSTRAP core JS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"></script>
+    <!-- BOOTSTRAP MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.20.0/css/mdb.min.css"></script>
+    <script>
+        class WOW {
+            init() {
+
+            }
+        }
+        $(document).ready(function (){
+            new WOW().init();
+        });
+    </script>
+</body>
+</html>

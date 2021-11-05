@@ -25,13 +25,15 @@
     }
 
     a:hover {color: #2b2b2b;}
-
-
+    .logo{
+      height: 75px;
+      width: 100%;
+    }
   </style>
   <div class="container-fluid">
     <div sec:authorize="isAnonymous()">
     <div class="navbar-header">
-      <a class="navbar-brand" th:href="@{/home}">BasketBallGurus</a>
+      <img class="logo" src="user/img/FinalBBG.png" th:src="@{user/img/FinalBBG.png}" alt="logo"/><a class="navbar-brand" th:href="@{/home}">BasketBallGurus</a>
     </div>
     </div>
       <div sec:authorize="isAnonymous()">
