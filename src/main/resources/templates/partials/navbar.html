@@ -57,6 +57,9 @@
 
       <div sec:authorize="isAuthenticated()">
         <ul class="nav navbar-nav navbar-right ">
+          <li th:classappend="${module == 'Chat' ? 'active' : ''}">
+            <a class="btn" href="#" th:href="@{/chat}">Chat</a>
+          </li>
           <li th:classappend="${module == 'My Leagues' ? 'active' : ''}">
             <a class="btn" href="#" th:href="@{/leagues}">My Leagues</a>
           </li>
