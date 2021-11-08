@@ -101,36 +101,55 @@
     let channel = 'no-channel';
 
 
+      function formatPubnubTimetokenAsTimestamp(timeToken) {
+          // returns mm/dd/yyyy hh:mm:ss
+          const msgDate = new Date(timeToken / 10000);
+          return "|" +(msgDate.getMonth() + 1) + "/" + msgDate.getDate() + "/" + msgDate.getFullYear()
+              + " " + msgDate.getHours() + ":" + msgDate.getMinutes() + ":" + msgDate.getSeconds() + "|"
+      }
+
     pubnub.addListener({
       message: function(obj) {
         // console.log(obj);
-        if(obj.channel === channel) {
-          box.innerHTML = ('' + obj.message).replace(/[<>]/g, '') + '<br>' + box.innerHTML
-        }
+          if(obj.channel === channel) {
+              box.innerHTML = ('' + formatPubnubTimetokenAsTimestamp(obj.timetoken) + " " + obj.message).replace(/[<>]/g, '') + '<br>' + box.innerHTML
+          }
       }
     });
 
 
-    function changeChannel() {
-      pubnub.unsubscribe({
-        channels: [channel]
-      })
-      const targetChannel = $("#chat_target").val();
-      // console.log(targetChannel);
-
-      channel = targetChannel;
-      pubnub.subscribe({
-        channels: [channel],
-      });
-      box.innerHTML = "";
-    }
-
-
-    changeChannel();
-
-    $("#chat_target").change(() => {
+      function changeChannel() {
+          pubnub.unsubscribe({
+              channels: [channel]
+          })
+          const targetChannel = $("#chat_target").val();
+          // console.log(targetChannel);
+          channel = targetChannel;
+          pubnub.subscribe({
+              channels: [channel]
+          });
+          const now = new Date();
+          pubnub.fetchMessages(
+              {
+                  channels: [channel],
+                  end: now,
+                  count: 100
+              }, (status, response) => {
+                  console.log(response);
+                  // box.innerHTML = response;
+                  loadMessages(response.channels[channel]);
+              }
+          );
+      }
+      function loadMessages(messages) {
+          for (let i = 0; i < messages.length; i++) {
+              box.innerHTML = ('' + formatPubnubTimetokenAsTimestamp(messages[i].timetoken) + " " + messages[i].message).replace(/[<>]/g, '') + '<br>' + box.innerHTML;
+          }
+      }
       changeChannel();
-    });
+      $("#chat_target").change(() => {
+          changeChannel();
+      });
 
 
 
