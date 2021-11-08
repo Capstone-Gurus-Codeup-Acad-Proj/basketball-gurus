@@ -58,6 +58,8 @@ class ScoreMaker implements ScoreMakerService {
                 System.out.println("he lives");
                 PlayerScore scorecard = new PlayerScore(0, player.get(), generateFantasyPoints(stats), gameId, date);
                 scores.add(scorecard);
+                System.out.println(scorecard.getScore());
+                System.out.println(scorecard.getPlayerId());
             }else{
                 System.out.println("he dies");
             }

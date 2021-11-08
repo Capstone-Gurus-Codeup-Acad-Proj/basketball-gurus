@@ -17,7 +17,7 @@ public class LandingPageController {
         this.gm = gm;
     }
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String landingPage(Model model) {
         model.addAttribute("games", gm.getTodaysGames());
         return "landingPage";

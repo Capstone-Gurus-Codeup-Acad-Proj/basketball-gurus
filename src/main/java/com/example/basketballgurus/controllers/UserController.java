@@ -44,14 +44,14 @@ public class UserController {
         model.addAttribute("games", gm.getTodaysGames());
         User userInSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("userprofile", userInSession);
-        return "/profile";
+        return "user/profile";
     }
     @PostMapping("/profile/create")
     public String memberProfileSend(@ModelAttribute User user,Model model){
         model.addAttribute("games", gm.getTodaysGames());
         User currentUser =(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userDao.save(currentUser);
-        return "redirect:/user/profile";
+        return "redirect:/profile";
     }
 
     @GetMapping("/profile")
@@ -61,7 +61,7 @@ public class UserController {
         User user = userDao.findByUsername(principal.getName());
         System.out.println(user.getUsername());
         model.addAttribute("user", user);
-        return "/user/profile";
+        return "user/profile";
     }
     @GetMapping("/profile/edit/{id}")
     public String EditProfile(Model model, @PathVariable long id){
@@ -71,7 +71,7 @@ public class UserController {
         model.addAttribute("user", user.getProfilePicture());
         model.addAttribute("user", user.getBannerUrl());
         model.addAttribute("user", user.getBio());
-        return "/user/editProfile";
+        return "user/editProfile";
     }
 
     @PostMapping("/profile/edit/{id}")
