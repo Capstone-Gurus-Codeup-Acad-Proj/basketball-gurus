@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+    <title>Contributors</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Bellota+Text:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+    *
+    {
+        font-family: 'Bellota Text', cursive;
+    }
+    body
+    {
+
+        background: #f2f3f7;
+    }
+    .ignore-css{
+        all:unset;
+    }
+    .container
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .container .card
+    {
+        width: 330px;
+        height: 416px;
+        padding: 60px 30px;
+        margin: 20px;
+        background: #f2f3f7;
+        box-shadow: 0.6em 0.6em 1.2em #d2dce9,
+        -0.5em -0.5em 1em #ffffff;
+        border-radius: 20px;
+    }
+    .container .card .content
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .container .card .content .imgBx
+    {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        position: relative;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+    .container .card .content .imgBx img
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .container .card .content .contentBx h4
+    {
+        color: #36187d;
+        font-size: 1.7rem;
+        font-weight: bold;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+    .container .card .content .contentBx h5
+    {
+        color: #6c758f;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-align: center;
+    }
+    .container .card .content .sci
+    {
+        margin-top: 20px;
+    }
+    .container .card .content .sci a
+    {
+        text-decoration: none;
+        color: #6c758f;
+        font-size: 30px;
+        margin: 10px;
+        transition: color 0.4s;
+    }
+    .container .card .content .sci a:hover
+    {
+        color: #0196e3;
+    }
+    /*   colors
+            #f2f3f7
+            #d2dce9
+            #36187d
+            #6c758f
+            #0196e3
+     */
+
+</style>
+
+
+</head>
+<body>
+<nav th:replace="partials/game-bar.html :: gamebar"></nav>
+<nav th:replace="partials/navbar.html :: navbar"></nav>
+
+<div class="container">
+    <div class="card">
+        <div class="content">
+            <div class="imgBx">
+                <img src="https://avatars.githubusercontent.com/u/84743600?v=4" alt="">
+            </div>
+            <div class="contentBx">
+                <h4>Seth Gardner</h4>
+                <h5>Software Developer</h5>
+            </div>
+            <div class="sci">
+                <a href="https://github.com/Seth-Gardner"><i class="fa fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/gardner-seth/"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="content">
+            <div class="imgBx">
+                <img src="https://avatars.githubusercontent.com/u/84743610?v=4" alt="">
+            </div>
+            <div class="contentBx">
+                <h4>Allison Falls</h4>
+                <h5>Software Developer</h5>
+            </div>
+            <div class="sci">
+                <a href="https://github.com/Allison-Falls47"><i class="fa fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/allison-falls-/"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="content">
+            <div class="imgBx">
+                <img src="https://avatars.githubusercontent.com/u/51524423?s=400&u=fae31f1fdde00d18f788e544b9e7c6cb4feaefec&v=4" alt="">
+            </div>
+            <div class="contentBx">
+                <h4>Quentin Hewitt</h4>
+                <h5>Software Developer</h5>
+            </div>
+            <div class="sci">
+                <a href="https://github.com/qhewitt95"><i class="fa fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/quentin-hewit/"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="content">
+            <div class="imgBx">
+                <img src="https://avatars.githubusercontent.com/u/84743751?v=4" alt="">
+            </div>
+            <div class="contentBx">
+                <h4>Youssef Rivas</h4>
+                <h5>Software Developer</h5>
+            </div>
+            <div class="sci">
+                <a href="https://github.com/YoussefR90"><i class="fa fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/youssef-rivas/"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="content">
+            <div class="imgBx">
+                <img src="https://avatars.githubusercontent.com/u/84744693?v=4" alt="">
+            </div>
+            <div class="contentBx">
+                <h4>John McCloskey</h4>
+                <h5>Software Developer</h5>
+            </div>
+            <div class="sci">
+                <a href="https://github.com/jjmac7777777"><i class="fa fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+
