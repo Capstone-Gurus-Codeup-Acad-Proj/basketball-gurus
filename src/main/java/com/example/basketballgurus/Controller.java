@@ -1,6 +1,6 @@
 package com.example.basketballgurus;
 
-import com.example.basketballgurus.models.League;
+import com.example.basketballgurus.repositories.GameRepository;
 import com.example.basketballgurus.repositories.LeaguesRepository;
 import com.example.basketballgurus.repositories.RosterRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +30,6 @@ public class Controller {
     @GetMapping("/setPrice")
     @ResponseBody
     public String hello() throws IOException, ParseException {
-
         pp.createPlayerPrice();
 
 

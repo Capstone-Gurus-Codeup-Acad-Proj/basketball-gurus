@@ -24,6 +24,7 @@
                 <input name="playerId" type="hidden" th:value="${0}">
                 <input name="isUpdate" type="hidden" value="false">
                 <input name="delete" type="hidden" th:value="false">
+                <input name="isAdd" type="hidden" th:value="false">
                 <label for="team"></label>
                 <select id="team"  name="team" class="form-control" >
                     <option value="0">Select Team</option>
@@ -39,10 +40,11 @@
             <thead>
             <tr>
                 <th scope="col"></th>
-                <th scope="col">FirstName</th>
-                <th scope="col">LastName</th>
+                <th scope="col">Name</th>
                 <th scope="col">Team</th>
                 <th scope="col">Value</th>
+                <th scope="col">Details</th>
+                <th scope="col">Add</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -50,8 +52,7 @@
             <div th:each="player : ${players}">
                 <tr>
                     <td class = "headshot"> <img th:src="${player.headshotUrl}" alt="" style="width: 50px; height: 50px"> </td>
-                    <td th:text="${player.firstName}"></td>
-                    <td th:text="${player.lastName}"></td>
+                    <td><div><div th:text="${player.getFirstName()}"></div><div th:text="${player.getLastName()}"></div></div></td>
                     <td th:text="${player.teamId.fullName}"></td>
                     <td><div class="d-flex">$<div th:text="${player.getPrice()}"></div></div></td>
                     <td class = "detail">
@@ -99,8 +100,9 @@
                             <input name="playerId" type="hidden" th:value="${player.getId()}">
                             <input name="isUpdate" type="hidden" th:value="false">
                             <input name="delete" type="hidden" th:value="false">
-                            <button type="submit" class="btn btn-primary">
-                                Add Player
+                            <input name="isAdd" type="hidden" th:value="true">
+                            <button type="submit" class="btn btn-primary pl-3 pr-3">
+                                +
                             </button>
                         </form>
                     </td>
@@ -115,22 +117,18 @@
             <thead>
             <tr>
                 <th scope="col"></th>
-                <th scope="col">FirstName</th>
-                <th scope="col">LastName</th>
-                <th scope="col">Team</th>
+                <th scope="col">Name</th>
                 <th scope="col">Value</th>
                 <th scope="col">Activity</th>
-                <th scope="col">Delete</th>
-                <th scope="col"></th>
+                <th scope="col">Details</th>
+                <th scope="col">Remove</th>
             </tr>
             </thead>
             <tbody>
             <div th:each="player : ${rosterPlayers}">
                 <tr>
                     <td class = "headshot"> <img th:src="${player.getPlayerId.headshotUrl}" alt="" style="width: 50px; height: 50px"> </td>
-                    <td th:text="${player.getPlayerId.firstName}"></td>
-                    <td th:text="${player.getPlayerId.lastName}"></td>
-                    <td th:text="${player.getPlayerId.teamId.fullName}"></td>
+                    <td><div><div th:text="${player.getPlayerId().getFirstName()}"></div><div th:text="${player.getPlayerId().getLastName()}"></div></div></td>
                     <td><div class="d-flex">$<div th:text="${player.getPlayerId.getPrice()}"></div></div></td>
                     <td>
                         <div class="d-flex align-items-center">
@@ -144,6 +142,7 @@
                                 <input name="playerId" type="hidden" th:value="${player.getPlayerId().getId()}">
                                 <input name="isUpdate" type="hidden" th:value="true">
                                 <input name="delete" type="hidden" th:value="false">
+                                <input name="isAdd" type="hidden" th:value="false">
                                 <button type="submit" class="btn btn-primary">
                                     switch
                                 </button>
@@ -196,8 +195,9 @@
                                 <input name="playerId" type="hidden" th:value="${player.getPlayerId().getId()}">
                                 <input name="isUpdate" type="hidden" th:value="false">
                                 <input name="delete" type="hidden" th:value="true">
-                                <button type="submit" class="btn btn-primary">
-                                    delete
+                                <input name="isAdd" type="hidden" th:value="false">
+                                <button type="submit" class="btn btn-primary pl-3 pr-3">
+                                    -
                                 </button>
                             </form>
                         </div>
@@ -205,8 +205,12 @@
                 </tr>
             </div>
             <tr>
-                <td colspan="4"></td>
-                <td><div class="d-flex"><div th:text="${valueTotal}"></div> / <div th:text="${league.leagueDifficulty}"></div></div></td>
+                <td colspan="3" th:if="${moreThanFive != null}" style="color: red">You can't have more than five active players at a time!</td>
+                <td colspan="3" th:if="${alreadyAdded != null}" style="color: red">You can't have two of the same player!</td>
+                <td colspan="3" th:if="${tooManyPlayers != null}" style="color: red">You can only have ten players at a time</td>
+                <td colspan="3" th:if="${moreThanFive == null && alreadyAdded == null && tooManyPlayers == null}"></td>
+                <td th:if="${maxPrice != null}" style="color: red"><div class="d-flex"><div th:text="${valueTotal}"></div> / <div th:text="${league.leagueDifficulty}"></div></div></td>
+                <td th:if="${maxPrice == null}"><div class="d-flex"><div th:text="${valueTotal}"></div> / <div th:text="${league.leagueDifficulty}"></div></div></td>
                 <td colspan="3" style="text-align: center">SUBMIT ME</td>
 
             </tr>

@@ -15,6 +15,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,6 @@ import java.text.ParseException;
 import java.time.*;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @EnableScheduling
@@ -32,20 +32,24 @@ public class ScheduleMaker implements ScheduleMakerService {
 
     private final GameRepository gameDao;
     private final TeamRepository teamDao;
+    private final GameCompletion gameCompletion;
 
-    public ScheduleMaker(GameRepository gameDao, TeamRepository teamDao) {
+    @Value("${NBA_API_KEY}")
+    private String apiKey;
+
+    public ScheduleMaker(GameRepository gameDao, TeamRepository teamDao, GameCompletion gameCompletion) {
         this.gameDao = gameDao;
         this.teamDao = teamDao;
+        this.gameCompletion = gameCompletion;
     }
 
     public ArrayList<GameModel> getGames() throws IOException, ParseException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
-       Config config = new Config();
 
             HttpGet request = new HttpGet("https://api-nba-v1.p.rapidapi.com/games/league/standard/" + getSeasonYear());
 
         // add request headers
-        request.addHeader("x-rapidApi-key", config.getApiKey());
+        request.addHeader("x-rapidApi-key", apiKey);
         request.addHeader("x-rapidApi-host", "api-nba-v1.p.rapidApi.com");
 
         CloseableHttpResponse response = httpClient.execute(request);
@@ -138,26 +142,26 @@ public class ScheduleMaker implements ScheduleMakerService {
         }
     }
 
-    @Scheduled(cron = "0 */1 * * * *")
-    public void checkSchedule() throws IOException, ParseException {
-
-        List<Game> games = gameDao.findAll();
-
-        if (games.isEmpty()){
-            generateGames();
-        }
-
-        for(Game game : games){
-            if (!checkDate(game)){
-                generateGames();
-                break;
-            }
-        }
-
-    }
+//    @Scheduled(cron = "0 */1 * * * *")
+//    public void checkSchedule() throws IOException, ParseException {
+//
+//        List<Game> games = gameDao.findAll();
+//
+//        if (games.isEmpty()){
+//            generateGames();
+//        }
+//
+//        for(Game game : games){
+//            if (!checkDate(game)){
+//                generateGames();
+//                break;
+//            }
+//        }
+//
+//    }
 
     @Override
-    @Scheduled(cron = "0 0 0 * * MON", zone = "America/Chicago")
+    @Scheduled(cron = "0 */10 * * * *", zone = "America/Chicago")
     public void generateGames() throws IOException, ParseException {
 
         ArrayList<GameModel> arr = getGames();
@@ -174,6 +178,7 @@ public class ScheduleMaker implements ScheduleMakerService {
         }
 
         gameDao.saveAll(games);
+        gameCompletion.checkStatus(arr);
 
     }
 }

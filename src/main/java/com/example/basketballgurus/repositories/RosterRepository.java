@@ -15,6 +15,8 @@ public interface RosterRepository extends JpaRepository<Roster, Integer> {
 
     List<Roster> getByLeagueId(League leagueId);
 
+    List<Roster> getByUserId(User user);
+
     Optional<Roster> getRosterByLeagueIdAndUserId(League leagueId, User userId);
 
 
