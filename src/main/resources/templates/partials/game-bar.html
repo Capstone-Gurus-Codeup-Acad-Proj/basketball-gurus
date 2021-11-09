@@ -9,7 +9,7 @@
     <div style="background-color: white" class="d-flex">
         <div th:each="game : ${games}" class="d-block px-4 border-right border-dark game-div">
             <div class="d-flex align-items-center">
-                <div th:text="${game.getFormattedStartTime()}" class=""></div><div class="pl-1" style="font-size: 16px">PM <inline style="font-size: 10px">CST</inline></div>
+                <div th:text="${game.getFormattedStartTime}" class=""></div><div class="pl-1" style="font-size: 16px">PM <inline style="font-size: 10px">CST</inline></div>
             </div>
             <div class="d-flex mt-1 mb-1">
                 <img th:src="${game.getAwayTeamId.getLogoUrl}" alt="" style="width: 15px; height: auto">
