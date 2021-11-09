@@ -20,6 +20,6 @@ public class LandingPageController {
     @GetMapping("/")
     public String landingPage(Model model) {
         model.addAttribute("games", gm.getTodaysGames());
-        return "landingPage";
+        return "user/NewLanding";
     }
 }
