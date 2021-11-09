@@ -91,6 +91,8 @@ public class UserController {
     }
     @PostMapping("logout")
     public String logout(){
-        return "redirect/";
+
+        return "redirect/logout";
+
     }
 }
