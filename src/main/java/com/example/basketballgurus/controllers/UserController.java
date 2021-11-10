@@ -1,6 +1,8 @@
 package com.example.basketballgurus.controllers;
 
+import com.example.basketballgurus.models.Roster;
 import com.example.basketballgurus.models.User;
+import com.example.basketballgurus.repositories.RosterRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.example.basketballgurus.repositories.UserRepository;
@@ -10,17 +12,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class UserController {
     private final UserRepository userDao;
     private final GameBarService gm;
     private final PasswordEncoder passwordEncoder;
+    private final RosterRepository rosterDao;
 
-    public UserController(UserRepository userDao, GameBarService gm, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository userDao, GameBarService gm, PasswordEncoder passwordEncoder, RosterRepository rosterDao) {
         this.userDao = userDao;
         this.gm = gm;
         this.passwordEncoder = passwordEncoder;
+        this.rosterDao = rosterDao;
     }
     @GetMapping("/sign-up")
     public String showCreateForm(Model model) {
@@ -59,8 +64,9 @@ public class UserController {
         model.addAttribute("games", gm.getTodaysGames());
 //        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(principal.getName());
-        System.out.println(user.getUsername());
+        List<Roster> rosters = rosterDao.getByUserId(user);
         model.addAttribute("user", user);
+        model.addAttribute("rosters", rosters);
         return "user/profile";
     }
     @GetMapping("/profile/edit/{id}")
