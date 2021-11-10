@@ -40,12 +40,54 @@
 <div sec:authorize="isAnonymous()">
 
 
+    <div class="container">
+        <table class="table table-dark">
+
+
+
+            <thead>
+
+            <tr>
+                <th scope="col">League ID </th>
+                <th scope="col">League Name</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Team Cost</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>ID</td>
+                <td>Eastern Conference</td>
+                <td>TBD</td>
+                <td>TBD</td>
+                <td>3/15</td>
+                </td>
+
+            </tr>
+            <div th:each="league : ${leagues}">
+                <tr>
+                    <td th:text="${league.getId()}"></td>
+                    <td th:text="${league.getLeagueName()}"></td>
+                    <td th:text="${league.getStartDate()}"></td>
+                    <td th:text="${league.getEndDate()}"></td>
+                    <td th:text="${league.getUuid()}"></td>
+                    <td th:text="${league.getLeagueDifficulty()}"></td>
+                </tr>
+            </div>
+            </tbody>
+
+
+        </table>
+
+    </div>
 
 
 </div>
 
 
-
+<div sec:authorize="isAuthenticated()">
 <div sec:authorize="isAuthenticated()">
     <div class="container">
         <!-- Button trigger modal -->
@@ -145,6 +187,7 @@
 
 </table>
 
+</div>
 </div>
 
 
