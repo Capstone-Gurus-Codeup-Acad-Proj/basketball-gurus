@@ -31,7 +31,7 @@ public class GameBar implements GameBarService {
         for(Game game : allGames){
             String pattern = "d";
             SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-            Date convDate = new Date( game.getStartTime().getTime() - 3600 * 6000);
+            Date convDate = new Date(game.getStartTime().getTime() - 3600 * 6000);
             String gameDate =  sdf.format(convDate);
             if (today.equals(gameDate)){
                 System.out.println(convDate);

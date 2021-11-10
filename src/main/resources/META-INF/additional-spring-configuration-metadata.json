@@ -1,9 +1,15 @@
 {
   "properties": [
     {
+
+      "name": "environment",
+      "type": "java.lang.String",
+      "description": "Description for environment."
+
       "name": "SPRING_JPA_HIBERNATE_DDLAUTO",
       "type": "java.lang.String",
       "description": "Description for SPRING_JPA_HIBERNATE_DDLAUTO."
+
     },
     {
       "name": "dokku",
@@ -11,6 +17,11 @@
       "description": "Description for dokku."
     },
     {
+
+      "name": "APIKEY",
+      "type": "java.lang.String",
+      "description": "Description for APIKEY."
+
       "name": "environment",
       "type": "java.lang.String",
       "description": "Description for environment."
@@ -19,10 +30,12 @@
       "name": "enviroment",
       "type": "java.lang.String",
       "description": "Description for enviroment."
+
     },
     {
       "name": "NBA_API_KEY",
       "type": "java.lang.String",
       "description": "Description for NBA_API_KEY."
+
     }
   ] }
