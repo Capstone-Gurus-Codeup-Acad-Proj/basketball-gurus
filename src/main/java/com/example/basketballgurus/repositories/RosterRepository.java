@@ -19,5 +19,4 @@ public interface RosterRepository extends JpaRepository<Roster, Integer> {
 
     Optional<Roster> getRosterByLeagueIdAndUserId(League leagueId, User userId);
 
-
 }
