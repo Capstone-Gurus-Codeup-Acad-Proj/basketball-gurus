@@ -37,7 +37,7 @@ public class User {
     @Column
     @Getter @Setter
     private String profilePicture;
-    @Column
+    @Column()
     @Getter @Setter
     private String bannerUrl;
     @Column

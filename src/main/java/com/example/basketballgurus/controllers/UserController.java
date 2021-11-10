@@ -40,6 +40,8 @@ public class UserController {
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         user.setActive(user.isActive());
+        user.setProfilePicture("https://pbs.twimg.com/media/Efpe1GYX0AYHuoL.jpg");
+        user.setBannerUrl("https://cdn.kapwing.com/final_5dcc99aba3f32c0013ff8b46_45583.jpg");
         userDao.save(user);
         return "redirect:/login";
     }
@@ -69,30 +71,20 @@ public class UserController {
         model.addAttribute("rosters", rosters);
         return "user/profile";
     }
-    @GetMapping("/profile/edit/{id}")
-    public String EditProfile(Model model, @PathVariable long id){
-        User user = userDao.getById(id);
 
-        model.addAttribute("user", user.getUsername());
-        model.addAttribute("user", user.getProfilePicture());
-        model.addAttribute("user", user.getBannerUrl());
-        model.addAttribute("user", user.getBio());
-        return "user/profile";
-    }
+    @RequestMapping(value = "/profile/edit", method = RequestMethod.POST)
+    public String submitEdit(@RequestParam(value = "profilePicture") String profilePicture, @RequestParam(value = "bannerUrl") String bannerUrl, Principal principal) {
 
-    @PostMapping("/profile/edit/{id}")
-    public String submitEdit(
-            @PathVariable long id, @RequestParam(name = "username") String username,
-            @RequestParam (name = "profilePicture") String profilePicture,
-            @RequestParam (name = "Bio") String Bio,
-            @RequestParam (name = "BannerUrl") String BannerUrl){
+        User user = userDao.findByUsername(principal.getName());
+        if (!profilePicture.equals("")){
+            user.setProfilePicture(profilePicture);
+        }
+        if (!bannerUrl.equals("")){
+            user.setBannerUrl(bannerUrl);
+        }
+//        user.setBio(Bio);
 
-        User userEdited = userDao.getById(id);
-
-        userEdited.setUsername(username);
-        userEdited.setProfilePicture(profilePicture);
-        userEdited.setBio(Bio);
-        userEdited.setBannerUrl(BannerUrl);
+        userDao.save(user);
         return"redirect:/profile";
     }
     @PostMapping("logout")

@@ -61,6 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                        "/admin", //only admin users can edit/delete teams/leagues
 //                        "/admin/edit")
                 .authenticated();
+        http.csrf().disable();
 
     }
 }
