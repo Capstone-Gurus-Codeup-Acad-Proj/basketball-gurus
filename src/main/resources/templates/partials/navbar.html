@@ -34,7 +34,7 @@
     <div sec:authorize="isAnonymous()">
     <div class="navbar-header">
 
-      <img class="logo" src="FinalBBG.png" th:src="@{FinalBBG.png}" alt="logo"/><a class="navbar-brand" th:href="@{/}">BasketBallGurus</a>
+      <img class="logo" src="img/FinalBBG.jpeg" alt="logo"/><a class="navbar-brand" th:href="@{/}">BasketBallGurus</a>
 
     </div>
     </div>
@@ -54,6 +54,7 @@
     <div sec:authorize="isAuthenticated()">
     <div class="navbar-header">
       <a class="navbar-brand" th:href="@{/profile}">BasketBallGurus</a>
+
     </div>
     </div>
 
