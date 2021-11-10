@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>Landing2</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+        @media (min-width: 320px) {
         .banner {
             background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("img/squad.jpeg");
             background-size: cover;
@@ -31,16 +33,72 @@
             z-index: 2;
         }
         .container{
-            display: flex;
+            display: grid;
             flex-direction: column;
-            top: 400px;
+            top: 100px;
         }
         ul{
             list-style-type: none;
             margin:0;
             padding:0;
         }
+    }
+        @media (min-width: 576px) {
+            .banner {
+                background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("img/squad.jpeg");
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            .card-img-top {
+                width: 100%;
+                height: 250px;
+            }
+            .ho:hover {
+                text-shadow: none !important;
+                box-sizing: border-box !important;
+                cursor: pointer !important;
+                transition: all 0.3s ease !important;
+                -webkit-transform: scale(1.1) !important;
+                -ms-transform: scale(1.1) !important;
+                transform: scale(1.1) !important;
+                z-index: 2;
+            }
+            .container{
+                display: grid;
+                flex-direction: column;
+                top: 100px;
+            }
+            ul{
+                list-style-type: none;
+                margin:0;
+                padding:0;
+            }
+        }
 
+        /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+        @media (min-width: 768px) {
+            .banner {
+                background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("img/squad.jpeg");
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            .card-img-top {
+                width: 100%;
+                height: 300px;
+            }
+            .container{
+                display: grid;
+                flex-direction: row;
+                top: 200px;
+            }
+            ul{
+                list-style-type: none;
+                margin:0;
+                padding:0;
+            }
+        }
     </style>
 </head>
 <body class="banner">
@@ -115,6 +173,9 @@
         </div>
     </div>
 </div>
+
+<footer th:replace="partials/footer.html :: footer"></footer>
+
     <!---JQUERY--->
     <script
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
