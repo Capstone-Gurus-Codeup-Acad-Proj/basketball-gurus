@@ -31,51 +31,43 @@
     }
   </style>
   <div class="container-fluid">
-    <div sec:authorize="isAnonymous()">
-    <div class="navbar-header">
-
-      <img class="logo" src="img/FinalBBG.jpeg" alt="logo"/><a class="navbar-brand" th:href="@{/}">BasketBallGurus</a>
-
-    </div>
-    </div>
-      <div sec:authorize="isAnonymous()">
-    <ul class="nav navbar-nav navbar-right ">
-      <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">
-        <a class="btn" href="#" th:href="@{/leagues}">My Leagues</a>
-      </li>
-      <li th:classappend="${module == 'Register' ? 'active' : ''}">
-      <a class="btn" href="#" th:href="@{/sign-up}">Register</a>
-      </li>
-      <li th:classappend="${module == 'Login' ? 'active' : ''}">
-        <a class="btn" href="#" th:href="@{/login}">Login</a>
-      </li>
-        </ul>
-      </div>
-    <div sec:authorize="isAuthenticated()">
-    <div class="navbar-header">
-      <a class="navbar-brand" th:href="@{/profile}">BasketBallGurus</a>
-
-    </div>
+    <div class="navbar-header col-2">
+<!--       <img class="logo" src="img/FinalBBG.jpeg" alt="logo"/>-->
+      <a class="navbar-brand" th:href="@{/}">BasketBallGurus</a>
     </div>
 
-      <div sec:authorize="isAuthenticated()">
-        <ul class="nav navbar-nav navbar-right ">
-          <li th:classappend="${module == 'Chat' ? 'active' : ''}">
-            <a class="btn" href="#" th:href="@{/chat}">Chat</a>
-          </li>
-          <li th:classappend="${module == 'My Leagues' ? 'active' : ''}">
-            <a class="btn" href="#" th:href="@{/leagues}">My Leagues</a>
-          </li>
-          <li th:classappend="${module == 'My Profile' ? 'active' : ''}">
-            <a class="btn" href="#" th:href="@{/profile}">My Profile</a>
-          </li>
+    <div sec:authorize="isAnonymous()" class="col-8 justify-content-end">
+      <ul class="nav navbar-nav navbar-right justify-content-end" style="text-align: right">
+        <li th:classappend="${module == 'View Leagues' ? 'active' : ''}" class="justify-content-end">
+          <a class="btn" href="#" th:href="@{/leagues}">My Leagues</a>
+        </li>
+        <li th:classappend="${module == 'Register' ? 'active' : ''}" class="justify-content-end">
+          <a class="btn" href="#" th:href="@{/sign-up}">Register</a>
+        </li>
+        <li th:classappend="${module == 'Login' ? 'active' : ''}" class="justify-content-end">
+          <a class="btn" href="#" th:href="@{/login}">Login</a>
+        </li>
+      </ul>
+    </div>
+
+    <div sec:authorize="isAuthenticated()" class="col-10">
+      <ul class="nav navbar-nav navbar-right justify-content-end" style="text-align: right">
+        <li th:classappend="${module == 'Chat' ? 'active' : ''}">
+          <a class="btn" href="#" th:href="@{/chat}">Chat</a>
+        </li>
+        <li th:classappend="${module == 'My Leagues' ? 'active' : ''}">
+          <a class="btn" href="#" th:href="@{/leagues}">My Leagues</a>
+        </li>
+        <li th:classappend="${module == 'My Profile' ? 'active' : ''}">
+          <a class="btn" href="#" th:href="@{/profile}">My Profile</a>
+        </li>
         <li th:classappend="${module == 'Logout' ? 'active' : ''}">
           <form th:action="@{/logout}" th:method="post">
             <button class="btn-link btn" style="">Logout</button>
           </form>
         </li>
-        </ul>
-      </div>
+      </ul>
+    </div>
 
   </div>
 </nav>
