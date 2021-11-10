@@ -33,27 +33,30 @@
   <div class="container-fluid">
     <div sec:authorize="isAnonymous()">
     <div class="navbar-header">
+
       <img class="logo" src="img/FinalBBG.jpeg" alt="logo"/><a class="navbar-brand" th:href="@{/}">BasketBallGurus</a>
+
     </div>
     </div>
-<!--      <div sec:authorize="isAnonymous()">-->
-<!--    <ul class="nav navbar-nav navbar-right ">-->
-<!--      <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">-->
-<!--        <a class="btn" href="#" th:href="@{/leagues}">My Leagues</a>-->
-<!--      </li>-->
-<!--      <li th:classappend="${module == 'Register' ? 'active' : ''}">-->
-<!--      <a class="btn" href="#" th:href="@{/sign-up}">Register</a>-->
-<!--      </li>-->
-<!--      <li th:classappend="${module == 'Login' ? 'active' : ''}">-->
-<!--        <a class="btn" href="#" th:href="@{/login}">Login</a>-->
-<!--      </li>-->
-<!--        </ul>-->
-<!--      </div>-->
-<!--    <div sec:authorize="isAuthenticated()">-->
-<!--    <div class="navbar-header">-->
-<!--      <a class="navbar-brand" th:href="@{/profile}">BasketBallGurus</a>-->
-<!--    </div>-->
-<!--    </div>-->
+      <div sec:authorize="isAnonymous()">
+    <ul class="nav navbar-nav navbar-right ">
+      <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">
+        <a class="btn" href="#" th:href="@{/leagues}">My Leagues</a>
+      </li>
+      <li th:classappend="${module == 'Register' ? 'active' : ''}">
+      <a class="btn" href="#" th:href="@{/sign-up}">Register</a>
+      </li>
+      <li th:classappend="${module == 'Login' ? 'active' : ''}">
+        <a class="btn" href="#" th:href="@{/login}">Login</a>
+      </li>
+        </ul>
+      </div>
+    <div sec:authorize="isAuthenticated()">
+    <div class="navbar-header">
+      <a class="navbar-brand" th:href="@{/profile}">BasketBallGurus</a>
+
+    </div>
+    </div>
 
       <div sec:authorize="isAuthenticated()">
         <ul class="nav navbar-nav navbar-right ">
