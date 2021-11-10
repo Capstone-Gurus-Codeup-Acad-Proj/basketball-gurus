@@ -43,7 +43,7 @@ public class ChatController {
     public String memberChatSend(@ModelAttribute User user,Model model){
         User currentUser =(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userDao.save(currentUser);
-        return "redirect:/chatPub";
+        return "redirect:/";
     }
 
 

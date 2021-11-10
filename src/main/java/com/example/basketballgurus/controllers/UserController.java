@@ -71,7 +71,7 @@ public class UserController {
         model.addAttribute("user", user.getProfilePicture());
         model.addAttribute("user", user.getBannerUrl());
         model.addAttribute("user", user.getBio());
-        return "user/editProfile";
+        return "user/profile";
     }
 
     @PostMapping("/profile/edit/{id}")
@@ -92,7 +92,7 @@ public class UserController {
     @PostMapping("logout")
     public String logout(){
 
-        return "redirect/logout";
+        return "redirect:/login";
 
     }
 }
