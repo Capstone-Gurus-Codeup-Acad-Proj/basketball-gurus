@@ -160,24 +160,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>ID</td>
-        <td>Eastern Conference</td>
-        <td>TBD</td>
-        <td>TBD</td>
-        <td>3/15</td>
-        <td th:classappend="${module == 'Register' ? 'active' : ''}">
-        <a class="btn" th:href="@{/register}">Register</a>
-        </td>
-
-    </tr>
     <div th:each="league : ${leagues}">
         <tr>
             <td th:text="${league.getId()}"></td>
             <td th:text="${league.getLeagueName()}"></td>
-            <td th:text="${league.getStartDate()}"></td>
-            <td th:text="${league.getEndDate()}"></td>
-            <td th:text="${league.getUuid()}"></td>
+            <td th:text="${league.getFormattedStartDate()}"></td>
+            <td th:text="${league.getFormattedEndDate()}"></td>
             <td th:text="${league.getLeagueDifficulty()}"></td>
             <td th:classappend="${module == 'Register' ? 'active' : ''}">
             <a class="btn" th:href="@{/leagues/join/__${league.getId()}__}">Join League</a>

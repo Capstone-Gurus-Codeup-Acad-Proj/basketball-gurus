@@ -28,11 +28,16 @@ public class League {
     private Date startDate;
 
 
-    public String getFormattedStartDate() {
-        String pattern = "mm-d-yyyy";
+    public String getFormattedStartDate(){
+        String pattern = "MM-d-yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-        String date =  sdf.format(startDate);
-        return date;
+        return sdf.format(startDate);
+    }
+
+    public String getFormattedEndDate() {
+        String pattern = "MM-d-yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        return sdf.format(endDate);
     }
 
     @Column(nullable = false)
