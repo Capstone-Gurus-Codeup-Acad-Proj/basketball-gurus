@@ -33,9 +33,14 @@
     }
   </style>
   <div class="container-fluid">
-    <div class="navbar-header col-2">
+    <div sec:authorize="isAnonymous()" class="navbar-header col-2">
 <!--       <img class="logo" src="img/FinalBBG.jpeg" alt="logo"/>-->
       <a class="navbar-brand" th:href="@{/}">BasketBallGurus</a>
+    </div>
+
+    <div sec:authorize="isAuthenticated()" class="navbar-header col-2">
+      <!--       <img class="logo" src="img/FinalBBG.jpeg" alt="logo"/>-->
+      <a class="navbar-brand" th:href="@{/profile}">BasketBallGurus</a>
     </div>
 
     <div sec:authorize="isAnonymous()" class="col-8 justify-content-end">
