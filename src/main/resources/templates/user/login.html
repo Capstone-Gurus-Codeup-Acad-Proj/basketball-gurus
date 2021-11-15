@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5 ">
+
+
 <head>
     <meta charset="UTF-8" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
@@ -63,7 +68,8 @@
     </style>
 </head>
 <body>
-
+<div sec:authorize="isAuthenticated()"
+     Authenticated as><span sec:authentication="name"></span></div>
 <nav th:replace="partials/game-bar.html :: gamebar"></nav>
 <nav th:replace="partials/navbar.html :: navbar"></nav>
 

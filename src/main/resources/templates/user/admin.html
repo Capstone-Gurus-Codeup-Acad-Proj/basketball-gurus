@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5 ">
 
 <head>
-<meta charset="UTF-8" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<title>Admin Page for Basketball Gurus</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>ADMIN Page for Basketball Gurus</title>
 </head>
 
 <body>
 
-<!--<div sec:authorize="isAuthenticated()"-->
-<!--Authenticated as <span sec:authentication="name"></span></div>-->
+<div sec:authorize="isAuthenticated()"
+     Authenticated as><span sec:authentication="name"></span></div>
 <nav th:replace="partials/game-bar.html :: gamebar"></nav>
 <nav th:replace="partials/navbar.html :: navbar"></nav>
 
-<h1>ADMIN Login</h1>
+<h1>ADMIN LOGIN</h1>
 
 <form th:action="@{/login}" method="post">
     <label for="adminusername">Username</label>
-    <input id="adminusername" name="adminusername" type="text" />
+    <input id="adminusername" name="adminusername" type="text"/>
     <label for="adminpassword">Password</label>
-    <input id="adminpassword" name="adminpassword" type="password" />
-    <input type="submit" value="Log In" />
+    <input id="adminpassword" name="adminpassword" type="password"/>
+    <input type="submit" value="Log In"/>
+    <br>
+    <div th:classappend="${module == 'Register' ? 'active' : ''}">
+        <a class="newAdmin" th:href="@{/sign-up}">New ADMIN? Register here!</a>
+    </div>
     <br>
     <div th:if="${param.error}">
         Invalid Admin Username and Password..

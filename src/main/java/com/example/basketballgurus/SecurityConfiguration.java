@@ -58,8 +58,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                         "/profile", // only authenticated users can create teams/leagues
                         "/profile/edit")// only authenticated users can edit teams/leagues
-//                        "/admin", //only admin users can edit/delete teams/leagues
-//                        "/admin/edit")
                 .authenticated();
         http.csrf().disable();
 
