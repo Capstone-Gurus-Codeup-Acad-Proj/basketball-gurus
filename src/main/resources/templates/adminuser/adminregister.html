@@ -41,18 +41,38 @@
 <nav th:replace="partials/game-bar.html :: gamebar"></nav>
 <nav th:replace="partials/navbar.html :: navbar">
 </nav>
-<form th:action="@{sign-up}" th:method="post" th:object="${user}">
+
+<form th:action="@{/sign-up}" th:method="post" th:object="${admin}">
     <div class="form-group">
         <div class="card" style="width: 40rem;">
             <div class="card-body">
                 <div class="jumbotron">
-                    Username:
-                    <input th:field="*{username}" />
+                    ADMIN Username:
+                    <label>
+                        <input th:field="*{adminusername}"/>
+                    </label>
                     <br />
-                    Password:
-                    <input type="password" th:field="*{password}" />
+                    ADMIN Email:
+                    <label>
+                        <input th:field="*{email}"/>
+                    </label>
                     <br />
-                    <input type="submit" />
+                    ADMIN First Name:
+                    <label>
+                        <input th:field="*{firstName}"/>
+                    </label>
+                    <br />
+                    ADMIN Last Name:
+                    <label>
+                        <input th:field="*{lastName}"/>
+                    </label>
+                    <br />
+                    ADMIN Password:
+                    <label>
+                        <input type="password" th:field="*{adminpassword}"/>
+                    </label>
+                    <br />
+                    <input type="submit"/>
                 </div>
             </div>
         </div>

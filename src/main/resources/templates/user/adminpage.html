@@ -36,10 +36,7 @@
         padding: 15px;
         border-bottom: 2px solid grey;
     }
-
 </style>
-<!--<nav th:replace="partials/game-bar.html :: gamebar"></nav>-->
-<!--<nav th:replace="partials/navbar.html :: navbar"></nav>-->
 
 <h1>ADMIN Login</h1>
 
@@ -56,15 +53,14 @@
 <div id="header">
     <img src="img/BasketballGurus.png" alt="adminLogo">
 </div>
-<!--<div th:if="${param.error}">-->
-<!--    Invalid Admin Username and Password..-->
-<!--</div>-->
-<!--<div th:if="${param.logout}">-->
-<!--    Your Admin Account has been logged out.-->
-<!--</div>-->
-
     <div id="sidebar">
         <ul>
+            <div th:if="${param.error}">
+                Invalid Admin Username and Password..
+            </div>
+            <div th:if="${param.logout}">
+                Your Admin Account has been logged out
+            </div>
             <li>View All Fantasy Leagues</li>
             <li>View All Fantasy Teams</li>
             <li>View All Fantasy Members</li>
@@ -74,5 +70,6 @@
             <li>Remove chat privileges from Members</li>
         </ul>
     </div>
+
 </body>
 </html>

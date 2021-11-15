@@ -6,19 +6,20 @@ import javax.persistence.*;
 
 @Entity
 @ToString
-@Table(name="users")
+@Table(name="admin")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter
+    @Getter
+    @Setter
     private long id;
 
     @Column(nullable = false, length = 100)
     @Getter @Setter
-    private String username;
+    private String adminusername;
 
     @Column(nullable = false, length = 100)
     @Getter @Setter
@@ -34,19 +35,7 @@ public class User {
 
     @Column(nullable = false, length = 100)
     @Getter @Setter
-    private String password;
-
-    @Column
-    @Getter @Setter
-    private String profilePicture;
-
-    @Column
-    @Getter @Setter
-    private String bannerUrl;
-
-    @Column
-    @Getter @Setter
-    private String bio;
+    private String adminpassword;
 
     @Column
     @Getter @Setter
@@ -57,13 +46,15 @@ public class User {
     private boolean isActive;
 
 
-    public User(User copy) {
+    public Admin(Admin copy) {
         id = copy.id;
         email = copy.email;
-        username = copy.username;
-        password = copy.password;
         firstName = copy.firstName;
         lastName = copy.lastName;
+        adminusername = copy.adminusername;
+        adminpassword = copy.adminpassword;
+        role = copy.role;
+        isActive = copy.isActive;
 
     }
 }

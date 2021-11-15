@@ -51,7 +51,7 @@ public class UserController {
         model.addAttribute("games", gm.getTodaysGames());
         User currentUser =(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userDao.save(currentUser);
-        return "redirect:/profile";
+        return "redirect:/login";
     }
 
     @GetMapping("/profile")
@@ -87,7 +87,7 @@ public class UserController {
         userEdited.setProfilePicture(profilePicture);
         userEdited.setBio(Bio);
         userEdited.setBannerUrl(BannerUrl);
-        return"redirect:/profile";
+        return"redirect:/login";
     }
     @PostMapping("logout")
     public String logout(){
