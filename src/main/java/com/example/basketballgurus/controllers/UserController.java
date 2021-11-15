@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.sql.RowSet;
 import java.security.Principal;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class UserController {
     private final GameBarService gm;
     private final PasswordEncoder passwordEncoder;
     private final RosterRepository rosterDao;
+    private RowSet userEdited;
 
     public UserController(UserRepository userDao, GameBarService gm, PasswordEncoder passwordEncoder, RosterRepository rosterDao) {
         this.userDao = userDao;
@@ -83,17 +85,17 @@ public class UserController {
             user.setBannerUrl(bannerUrl);
         }
 //        user.setBio(Bio);
+//
+//
+//        userEdited.setUsername(username);
+//        userEdited.setProfilePicture(profilePicture);
+//        userEdited.setBio(Bio);
+//        userEdited.setBannerUrl(BannerUrl);
+//        return"redirect:/login";
 
-<<<<<<< HEAD
-        userEdited.setUsername(username);
-        userEdited.setProfilePicture(profilePicture);
-        userEdited.setBio(Bio);
-        userEdited.setBannerUrl(BannerUrl);
-        return"redirect:/login";
-=======
         userDao.save(user);
         return"redirect:/profile";
->>>>>>> 12cff3f637feb317163226bab761b2dc7789e0e2
+
     }
     @PostMapping("logout")
     public String logout(){
