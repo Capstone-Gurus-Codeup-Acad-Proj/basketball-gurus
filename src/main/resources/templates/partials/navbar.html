@@ -53,40 +53,23 @@
     <div class="navbar-header">
       <a class="navbar-brand" th:href="@{/profile}">BasketBallGurus</a>
 
-    <div sec:authorize="isAnonymous()" class="navbar-header col-2">
-      <a class="navbar-brand" th:href="@{/}">BasketBallGurus</a>
-    </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div sec:authorize="isAuthenticated()" class="navbar-header col-2">
-      <!--       <img class="logo" src="img/FinalBBG.jpeg" alt="logo"/>-->
-      <a class="navbar-brand" th:href="@{/profile}">BasketBallGurus</a>
-    </div>
-
-    <div sec:authorize="isAnonymous()" class="col-8 justify-content-end">
-      <ul class="nav navbar-nav navbar-right justify-content-end" style="text-align: right">
-        <li th:classappend="${module == 'View Leagues' ? 'active' : ''}" class="justify-content-end">
-          <a class="btn" href="#" th:href="@{/leagues}">My Leagues</a>
-        </li>
-        <li th:classappend="${module == 'Register' ? 'active' : ''}" class="justify-content-end">
-          <a class="btn" href="#" th:href="@{/sign-up}">Register</a>
-        </li>
-        <li th:classappend="${module == 'Login' ? 'active' : ''}" class="justify-content-end">
-          <a class="btn" href="#" th:href="@{/login}">Login</a>
-        </li>
-      </ul>
-    </div>
-    </div>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div sec:authorize="isAnonymous()" class="col-8 justify-content-end">
-      <ul class="nav navbar-nav navbar-right justify-content-end" style="text-align: right">
-        <li th:classappend="${module == 'View Leagues' ? 'active' : ''}" class="justify-content-end"> <div class="collapse navbar-collapse" id="navbarNav">
-      <div sec:authorize="isAuthenticated()">
+      <div sec:authorize="isAnonymous()" class="col-8 justify-content-end">
+       <ul class="nav navbar-nav navbar-right justify-content-end" style="text-align: right">
+          <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">
+      <div class="collapse navbar-collapse" id="navbarNav">
+      <div sec:authorize="isAuthenticated()" class="col-8 justify-content-end">
         <ul class="navbar-nav">
-          <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+          <li th:classappend="${module == 'Registe  r' ? 'active' : ''}">
+            <a class="btn" href="#" th:href="@{/sign-up}">Register</a>
+          </li>
+          <li th:classappend="${module == 'Login' ? 'active' : ''}">
+            <a class="btn" href="#" th:href="@{/login}">Login</a>
+          </li>
           <li th:classappend="${module == 'Chat' ? 'active' : ''}">
             <a class="btn" href="#" th:href="@{/chat}">Chat</a>
           </li>
@@ -101,10 +84,13 @@
             <button class="btn-link btn" style="margin-top: 8px">Logout</button>
       </form>
           </li>
-        </ul>
-        </ul>
+      </ul>
+      </ul>
+      </ul>
     </div>
     </div>
+    </div>
+  </div>
   </nav>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
