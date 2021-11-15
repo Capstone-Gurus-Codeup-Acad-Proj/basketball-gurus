@@ -36,7 +36,7 @@
       flex-direction: column;
       align-items: center;
       background: rgba(239, 113, 11, 0.91);
-      font-family: Impact;
+      font-family: "Gujarati Sangam MN";
       font-size: 20px;
     }
 
@@ -44,6 +44,15 @@
         display: flex;
         flex-direction: row;
     }
+
+    input{
+        margin: .5em;
+    }
+
+    select{
+        margin: .5em;
+    }
+
 
   </style>
 </head>
@@ -55,7 +64,7 @@
   <div class="card" style="width: 40rem;">
     <div class="card-body">
       <div class="jumbotron">
-<h1>League Chat</h1>
+<h1> <b>League Chat</b></h1>
 
 <!--          THIS IS HOW YOU PUT THE WORDS NEXT TO EACH OTHER VVVVV-->
         <div class ="hello">
@@ -64,17 +73,17 @@
         </div>
 <!--^^^^^^^^-->
 
-<h4>Chat in which League:</h4>
+<h4><b> Chat in which League: </b></h4>
 <select id="chat_target">
   <div th:each="roster : ${rosters}">
   <option th:text="${roster.leagueId.getLeagueName()}"></option>
   </div>
 </select>
-<h4>Enter Chat and press enter:</h4>
+<h4><b> Enter Chat and press enter: </b></h4>
 <div>
   <input id=input placeholder="message" />
 </div>
-        <h4>Chat Output:</h4>
+        <h4><b> Chat Output: </b></h4>
         <div id=box>
         </div>
       </div>
@@ -105,10 +114,9 @@
       function formatPubnubTimetokenAsTimestamp(timeToken) {
           // returns mm/dd/yyyy hh:mm:ss
           const msgDate = new Date(timeToken / 10000);
-          return "|" +(msgDate.getMonth() + 1) + "/" + msgDate.getDate() + "/" + msgDate.getFullYear()
-              + " " + msgDate.getHours() + ":" + msgDate.getMinutes() + ":" + msgDate.getSeconds() + "|"
+          return " | " + " " + (msgDate.getMonth() + 1) + "/" + msgDate.getDate() + "/" + msgDate.getFullYear()
+            + " " + " " + "(" + msgDate.getHours() + ":" + msgDate.getMinutes() + ":" + msgDate.getSeconds() + ")" + "  | "
       }
-
     pubnub.addListener({
       message: function(obj) {
         // console.log(obj);
@@ -144,7 +152,7 @@
       }
       function loadMessages(messages) {
           for (let i = 0; i < messages.length; i++) {
-              box.innerHTML = ('' + formatPubnubTimetokenAsTimestamp(messages[i].timetoken) + " " + messages[i].message).replace(/[<>]/g, '') + '<br>' + box.innerHTML;
+              box.innerHTML =  ('' + formatPubnubTimetokenAsTimestamp(messages[i].timetoken) + " " + messages[i].message).replace(/[<>]/g, '') + '<br>' + box.innerHTML;
           }
       }
       changeChannel();
@@ -158,7 +166,7 @@
       const keyPressed = event.key;
       if (keyPressed === "Enter") {
         let sourceUser = $("#chat_source").text();
-        const messageText = sourceUser + " : " + input.value;
+        const messageText  = sourceUser + " : " + input.value;
         pubnub.publish({
           channel: channel,
           message: messageText,
