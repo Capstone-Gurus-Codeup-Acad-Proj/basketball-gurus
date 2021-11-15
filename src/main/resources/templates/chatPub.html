@@ -53,6 +53,7 @@
         margin: .5em;
     }
 
+
   </style>
 </head>
 <body>
@@ -113,8 +114,8 @@
       function formatPubnubTimetokenAsTimestamp(timeToken) {
           // returns mm/dd/yyyy hh:mm:ss
           const msgDate = new Date(timeToken / 10000);
-          return "| " +(msgDate.getMonth() + 1) + "/" + msgDate.getDate() + "/" + msgDate.getFullYear()
-              + "\n" + "(" + msgDate.getHours() + ":" + msgDate.getMinutes() + ":" + msgDate.getSeconds() + ")" + " |"
+          return " | " + " " + (msgDate.getMonth() + 1) + "/" + msgDate.getDate() + "/" + msgDate.getFullYear()
+            + " " + " " + "(" + msgDate.getHours() + ":" + msgDate.getMinutes() + ":" + msgDate.getSeconds() + ")" + "  | "
       }
     pubnub.addListener({
       message: function(obj) {
@@ -151,7 +152,7 @@
       }
       function loadMessages(messages) {
           for (let i = 0; i < messages.length; i++) {
-              box.innerHTML = ('' + formatPubnubTimetokenAsTimestamp(messages[i].timetoken) + " " + messages[i].message).replace(/[<>]/g, '') + '<br>' + box.innerHTML;
+              box.innerHTML =  ('' + formatPubnubTimetokenAsTimestamp(messages[i].timetoken) + " " + messages[i].message).replace(/[<>]/g, '') + '<br>' + box.innerHTML;
           }
       }
       changeChannel();
@@ -165,7 +166,7 @@
       const keyPressed = event.key;
       if (keyPressed === "Enter") {
         let sourceUser = $("#chat_source").text();
-        const messageText =  sourceUser + " : " + input.value;
+        const messageText  = sourceUser + " : " + input.value;
         pubnub.publish({
           channel: channel,
           message: messageText,
