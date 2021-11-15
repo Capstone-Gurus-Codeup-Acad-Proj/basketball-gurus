@@ -38,12 +38,6 @@
                 font-size: 20px;
             }
 
-        footer {
-            margin: 50px 0 0 0; /* or just use:  margin-top: 50px;*/
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
 
             .newUser {
                 margin: 10px;
@@ -60,6 +54,11 @@
             input{
                 margin: .5em;
             }
+
+            .logout{
+                margin-top: 1em;
+            }
+
     </style>
 </head>
 <body>
@@ -85,7 +84,7 @@
                     <div th:if="${param.error}">
                         Invalid Username and Password.
                     </div>
-                    <div th:if="${param.logout}">
+                    <div class ="logout" th:if="${param.logout}">
                         You have been logged out.
                     </div>
                 </div>

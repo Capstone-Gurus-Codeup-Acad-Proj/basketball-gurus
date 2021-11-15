@@ -84,6 +84,7 @@
   <input id=input placeholder="message" />
 </div>
         <h4><b> Chat Output: </b></h4>
+          <p id="date"></p>
         <div id=box>
         </div>
       </div>
@@ -104,6 +105,7 @@
       publishKey: 'pub-c-4cbe0f24-e11e-417b-be30-ad52854e40e5',
       subscribeKey: 'sub-c-78b3fd40-3b2b-11ec-b2c1-a25c7fcd9558'
     });
+
 
     const box = $("#box")[0],
             input = $("#input")[0];
@@ -167,7 +169,7 @@
       if (keyPressed === "Enter") {
         let sourceUser = $("#chat_source").text();
         const messageText  = sourceUser + " : " + input.value;
-        pubnub.publish({
+          pubnub.publish({
           channel: channel,
           message: messageText,
           x: (input.value = '')
