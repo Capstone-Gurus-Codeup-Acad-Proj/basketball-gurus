@@ -9,13 +9,24 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
 
     <style th:style="inline">
 
         body{
-            background-image: url("user/img/squad.jpeg");
+            background-image: url("/img/squad.jpeg");
             background-size: cover;
             background-repeat: no-repeat;
+            background-position: center;
+        }
+        .modal-header{
+            background-color: #edeef0;
+        }
+        .modal-footer{
+            background-color: #edeef0;
+        }
+        .modal-body{
+            background-color:#edeef0;
         }
 
     </style>
@@ -107,8 +118,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body">
-                <form th:action="@{/leagues/create}" th:method="league" th:object="${League}">
+                <form class="col-lg-4 col-lg-offset-4" th:action="@{/leagues/create}" th:method="league" th:object="${League}">
                     League PFP URL
                     <input th:field="*{leaguePfp}" />
                     <br />
@@ -130,13 +142,9 @@
                     <br />
                     Password:
                     <input th:field="*{password}" />
-                    <br />
-                    <input type="submit" />
+                    <br>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -159,24 +167,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>ID</td>
-        <td>Eastern Conference</td>
-        <td>TBD</td>
-        <td>TBD</td>
-        <td>3/15</td>
-        <td th:classappend="${module == 'Register' ? 'active' : ''}">
-        <a class="btn" th:href="@{/register}">Register</a>
-        </td>
-
-    </tr>
     <div th:each="league : ${leagues}">
         <tr>
             <td th:text="${league.getId()}"></td>
             <td th:text="${league.getLeagueName()}"></td>
-            <td th:text="${league.getStartDate()}"></td>
-            <td th:text="${league.getEndDate()}"></td>
-            <td th:text="${league.getUuid()}"></td>
+            <td th:text="${league.getFormattedStartDate()}"></td>
+            <td th:text="${league.getFormattedEndDate()}"></td>
             <td th:text="${league.getLeagueDifficulty()}"></td>
             <td th:classappend="${module == 'Register' ? 'active' : ''}">
             <a class="btn" th:href="@{/leagues/join/__${league.getId()}__}">Join League</a>
@@ -190,10 +186,7 @@
 </div>
 </div>
 
-
-
-
-
+<footer th:replace="partials/footer.html :: footer"></footer>
 
 </body>
 </html>

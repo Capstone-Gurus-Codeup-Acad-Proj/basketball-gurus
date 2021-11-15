@@ -59,6 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/profile", // only authenticated users can create teams/leagues
                         "/profile/edit")// only authenticated users can edit teams/leagues
                 .authenticated();
+        http.csrf().disable();
 
     }
 }

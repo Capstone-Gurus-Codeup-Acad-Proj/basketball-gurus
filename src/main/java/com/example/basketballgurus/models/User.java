@@ -39,8 +39,12 @@ public class User {
     @Column
     @Getter @Setter
     private String profilePicture;
+<<<<<<< HEAD
 
     @Column
+=======
+    @Column()
+>>>>>>> 12cff3f637feb317163226bab761b2dc7789e0e2
     @Getter @Setter
     private String bannerUrl;
 

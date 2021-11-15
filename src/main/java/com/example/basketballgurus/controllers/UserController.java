@@ -1,6 +1,8 @@
 package com.example.basketballgurus.controllers;
 
+import com.example.basketballgurus.models.Roster;
 import com.example.basketballgurus.models.User;
+import com.example.basketballgurus.repositories.RosterRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.example.basketballgurus.repositories.UserRepository;
@@ -10,17 +12,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class UserController {
     private final UserRepository userDao;
     private final GameBarService gm;
     private final PasswordEncoder passwordEncoder;
+    private final RosterRepository rosterDao;
 
-    public UserController(UserRepository userDao, GameBarService gm, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository userDao, GameBarService gm, PasswordEncoder passwordEncoder, RosterRepository rosterDao) {
         this.userDao = userDao;
         this.gm = gm;
         this.passwordEncoder = passwordEncoder;
+        this.rosterDao = rosterDao;
     }
     @GetMapping("/sign-up")
     public String showCreateForm(Model model) {
@@ -35,6 +40,8 @@ public class UserController {
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         user.setActive(user.isActive());
+        user.setProfilePicture("https://pbs.twimg.com/media/Efpe1GYX0AYHuoL.jpg");
+        user.setBannerUrl("https://cdn.kapwing.com/final_5dcc99aba3f32c0013ff8b46_45583.jpg");
         userDao.save(user);
         return "redirect:/login";
     }
@@ -59,35 +66,34 @@ public class UserController {
         model.addAttribute("games", gm.getTodaysGames());
 //        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(principal.getName());
-        System.out.println(user.getUsername());
+        List<Roster> rosters = rosterDao.getByUserId(user);
         model.addAttribute("user", user);
-        return "user/profile";
-    }
-    @GetMapping("/profile/edit/{id}")
-    public String EditProfile(Model model, @PathVariable long id){
-        User user = userDao.getById(id);
-
-        model.addAttribute("user", user.getUsername());
-        model.addAttribute("user", user.getProfilePicture());
-        model.addAttribute("user", user.getBannerUrl());
-        model.addAttribute("user", user.getBio());
+        model.addAttribute("rosters", rosters);
         return "user/profile";
     }
 
-    @PostMapping("/profile/edit/{id}")
-    public String submitEdit(
-            @PathVariable long id, @RequestParam(name = "username") String username,
-            @RequestParam (name = "profilePicture") String profilePicture,
-            @RequestParam (name = "Bio") String Bio,
-            @RequestParam (name = "BannerUrl") String BannerUrl){
+    @RequestMapping(value = "/profile/edit", method = RequestMethod.POST)
+    public String submitEdit(@RequestParam(value = "profilePicture") String profilePicture, @RequestParam(value = "bannerUrl") String bannerUrl, Principal principal) {
 
-        User userEdited = userDao.getById(id);
+        User user = userDao.findByUsername(principal.getName());
+        if (!profilePicture.equals("")){
+            user.setProfilePicture(profilePicture);
+        }
+        if (!bannerUrl.equals("")){
+            user.setBannerUrl(bannerUrl);
+        }
+//        user.setBio(Bio);
 
+<<<<<<< HEAD
         userEdited.setUsername(username);
         userEdited.setProfilePicture(profilePicture);
         userEdited.setBio(Bio);
         userEdited.setBannerUrl(BannerUrl);
         return"redirect:/login";
+=======
+        userDao.save(user);
+        return"redirect:/profile";
+>>>>>>> 12cff3f637feb317163226bab761b2dc7789e0e2
     }
     @PostMapping("logout")
     public String logout(){
