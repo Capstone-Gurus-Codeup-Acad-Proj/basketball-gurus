@@ -9,6 +9,7 @@ import com.example.basketballgurus.repositories.LeaguesRepository;
 import com.example.basketballgurus.repositories.RosterPlayerRepository;
 import com.example.basketballgurus.repositories.ScoreRepository;
 import com.example.basketballgurus.services.RosterScoreService;
+import org.apache.http.client.utils.DateUtils;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.PushBuilder;
@@ -60,7 +61,16 @@ public class RosterScoreCalculator implements RosterScoreService {
 
     public HashMap<Date,Integer> getScore(Roster roster, java.util.Date startDate, java.util.Date endDate) {
 
-        HashMap<Date, Integer> scoreMap = seedHashMap(startDate, endDate);
+        java.util.Date offsetStartDate = new java.util.Date(startDate.getTime() + 3600000 * 7);
+
+        java.util.Date offsetEndDate = new java.util.Date(endDate.getTime() + 3600000 * 7);
+
+
+        HashMap<Date, Integer> scoreMap = seedHashMap(offsetStartDate, offsetEndDate);
+
+        System.out.println(scoreMap);
+        System.out.println(offsetStartDate);
+        System.out.println(offsetEndDate);
 
         List<RosterPlayer> rp = rosterPlayerDao.getByRosterId(roster);
 
@@ -78,7 +88,11 @@ public class RosterScoreCalculator implements RosterScoreService {
                             weekTotal += score.getScore();
                         }
                     }
-                    Date weekDate = new Date(history.getWeekDate().getTime());
+                    Date weekDate = new Date(history.getWeekDate().getTime() + 3600000 * 7);
+                    System.out.println(weekDate);
+                    System.out.println(weekTotal);
+                    System.out.println(scoreMap);
+                    System.out.println(scoreMap.get(weekDate));
                     scoreMap.put(weekDate, scoreMap.get(weekDate) + weekTotal);
                 }
             }
