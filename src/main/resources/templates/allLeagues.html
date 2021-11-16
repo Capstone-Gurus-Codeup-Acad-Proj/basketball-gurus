@@ -81,9 +81,8 @@
                 <tr>
                     <td th:text="${league.getId()}"></td>
                     <td th:text="${league.getLeagueName()}"></td>
-                    <td th:text="${league.getStartDate()}"></td>
-                    <td th:text="${league.getEndDate()}"></td>
-                    <td th:text="${league.getUuid()}"></td>
+                    <td th:text="${league.getFormattedStartDate()}"></td>
+                    <td th:text="${league.getFormattedEndDate()}"></td>
                     <td th:text="${league.getLeagueDifficulty()}"></td>
                 </tr>
             </div>
@@ -102,7 +101,7 @@
 <div sec:authorize="isAuthenticated()">
     <div class="container">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
             Create a League
         </button>
     </div>
