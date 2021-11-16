@@ -44,20 +44,27 @@
       <img class="logo" src="img/FinalBBG.jpeg" alt="logo"/>
     </div>
     </div>
+    </div>
 
     <div sec:authorize="isAnonymous()">
     </div>
     <div sec:authorize="isAuthenticated()">
     <div class="navbar-header">
       <a class="navbar-brand" th:href="@{/profile}">BasketBallGurus</a>
+      </div>
+      </div>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
       <div sec:authorize="isAnonymous()" class="col-8 justify-content-end">
        <ul class="nav navbar-nav navbar-right justify-content-end" style="text-align: right">
-          <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">
+         <li th:classappend="${module == 'View Leagues' ? 'active' : ''}">
+         </li>
+       </ul>
+        </div>
+
       <div class="collapse navbar-collapse" id="navbarNav">
       <div sec:authorize="isAuthenticated()" class="col-8 justify-content-end">
         <ul class="navbar-nav">
@@ -84,9 +91,6 @@
           </li>
       </ul>
       </ul>
-      </ul>
-  </div>
-  </div>
   </div>
   </div>
 </nav>
