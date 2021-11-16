@@ -37,7 +37,7 @@ public class PlayerActivity {
     }
 
 
-    @Scheduled(cron = "0 */3 * * * ?")
+//    @Scheduled(cron = "0 */3 * * * ?")
     public void checkStatus() throws ParseException {
 
         List<League> leagues = leagueDao.findAll();
@@ -97,7 +97,7 @@ public class PlayerActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date convertedMonday = formatter.parse(monday.getDayOfMonth() + "-" + monday.getMonthValue() + "-" + monday.getYear());
 
-        Date offsetConvertedMonday = new java.util.Date(convertedMonday.getTime() - 3600000 * 6);
+        Date offsetConvertedMonday = new java.util.Date(convertedMonday.getTime());
 
         return historyDao.getByWeekDateAndRosterPlayerId(offsetConvertedMonday, rp);
 
