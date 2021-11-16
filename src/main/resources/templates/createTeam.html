@@ -211,7 +211,9 @@
                 <td colspan="3" th:if="${moreThanFive == null && alreadyAdded == null && tooManyPlayers == null}"></td>
                 <td th:if="${maxPrice != null}" style="color: red"><div class="d-flex"><div th:text="${valueTotal}"></div> / <div th:text="${league.leagueDifficulty}"></div></div></td>
                 <td th:if="${maxPrice == null}"><div class="d-flex"><div th:text="${valueTotal}"></div> / <div th:text="${league.leagueDifficulty}"></div></div></td>
-                <td colspan="3" style="text-align: center">SUBMIT ME</td>
+                <td colspan="3" style="text-align: center">
+                    <a class="btn" href="#" th:href="@{/leagues/{uuid}(uuid=${league.getUuid()})}">Finalize Team</a>
+                </td>
 
             </tr>
             </tbody>
