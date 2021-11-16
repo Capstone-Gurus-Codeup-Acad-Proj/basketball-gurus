@@ -35,13 +35,35 @@ public class PlayerActivity {
         this.rosterDao = rosterDao;
         this.rosterPlayerDao = rosterPlayerDao;
     }
+
+
     @Scheduled(cron = "0 */3 * * * ?")
     public void checkStatus() throws ParseException {
 
-        List<History> currentWeeksHistory = getWeeksScore();
+        List<League> leagues = leagueDao.findAll();
 
-        if (currentWeeksHistory.size() == 0){
-            createHistories();
+        for(League league : leagues){
+
+            List<Roster> rosters = rosterDao.getByLeagueId(league);
+
+            for(Roster roster : rosters){
+
+                List<RosterPlayer> rosterPlayers = rosterPlayerDao.getByRosterId(roster);
+
+                for(RosterPlayer rp : rosterPlayers){
+
+                    List<History> histories = getWeeksScore(rp);
+
+                    if (histories.isEmpty()){
+
+                        saveHistoriesForRosterPlayer(rp);
+
+                    }
+
+                }
+
+            }
+
         }
 
     }
@@ -63,7 +85,21 @@ public class PlayerActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date convertedMonday = formatter.parse(monday.getDayOfMonth() + "-" + monday.getMonthValue() + "-" + monday.getYear());
 
-        return historyDao.getByWeekDate(convertedMonday);
+        Date offsetConvertedMonday = new java.util.Date(convertedMonday.getTime() - 3600000 * 6);
+
+        return historyDao.getByWeekDate(offsetConvertedMonday);
+
+    }
+
+    public List<History> getWeeksScore(RosterPlayer rp) throws ParseException {
+
+        LocalDate monday = LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        Date convertedMonday = formatter.parse(monday.getDayOfMonth() + "-" + monday.getMonthValue() + "-" + monday.getYear());
+
+        Date offsetConvertedMonday = new java.util.Date(convertedMonday.getTime() - 3600000 * 6);
+
+        return historyDao.getByWeekDateAndRosterPlayerId(offsetConvertedMonday, rp);
 
     }
 
@@ -76,6 +112,8 @@ public class PlayerActivity {
             LocalDate monday = LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             Date convertedMonday = formatter.parse(monday.getDayOfMonth() + "-" + monday.getMonthValue() + "-" + monday.getYear());
+
+            convertedMonday = new java.util.Date(convertedMonday.getTime() - 3600000 * 6);
 
             if (league.getEndDate().after(convertedMonday) || league.getEndDate().equals(convertedMonday)){
 
@@ -96,4 +134,23 @@ public class PlayerActivity {
             }
         }
     }
+
+    public void saveHistoriesForRosterPlayer(RosterPlayer rp) throws ParseException {
+
+        LocalDate monday = LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        Date convertedMonday = formatter.parse(monday.getDayOfMonth() + "-" + monday.getMonthValue() + "-" + monday.getYear());
+
+        convertedMonday = new java.util.Date(convertedMonday.getTime() - 3600000 * 6);
+
+        if(rp.getIsActive()){
+
+            History history = new History(0, rp, convertedMonday, true);
+            historyDao.save(history);
+
+
+        }
+
+    }
+
 }
