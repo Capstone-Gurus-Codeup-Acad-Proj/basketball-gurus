@@ -13,4 +13,6 @@ public interface HistoryRepository extends JpaRepository<History, Integer> {
 
     List<History> getByWeekDate(Date date);
 
+    List<History> getByWeekDateAndRosterPlayerId(Date weekDate, RosterPlayer rosterPlayerId);
+
 }
